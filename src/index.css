@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
+
+html,
+body {
+  height: 100%
+}
+
+body {
+	/* background-color: #bdbdbd!important; */
+  /* background-image: url("back.jpg"); */
+  /* background-image: ur("batongleba.jpg"); */
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+.card-footer {
+  /* min-height: 50px; */
+  /* margin-top: 1em; */
+	/* todo make padding through inheritance */
+	/* padding-left: calc(1.5 * var(--bs-gutter-x)) !important; */
+	padding-left: 26px; 
+  font-size: smaller;
+  font-style: italic;
+  vertical-align: center;
+	height: 90px;
+	background-color: rgb(33,37,41)!important;
+}
+
+.card {
+  max-width: 620px !important;
+  margin-left: auto;
+  margin-right: auto;
+	/* margin-top: 40px; */
+}
+
+.card .container {
+	margin-top: 0px!important;
+}
+
+.container {
+	background-color: white;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.footer-warning {
+	color: #747373;
+}

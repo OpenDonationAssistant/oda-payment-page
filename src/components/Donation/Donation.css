@@ -1,0 +1,253 @@
+.material-symbols-outlined.currency {
+  font-size: 19px;
+  vertical-align: text-bottom;
+}
+
+.invalid-feedback {
+  display: inline !important;
+}
+
+.input-group.col-9 {
+  width: 75%;
+  padding-left: 0px;
+  margin-right: 7px;
+}
+
+.currency-selector {
+  max-width: 107px !important;
+}
+
+#pay-button {
+  background-color: rgb(33, 37, 41);
+  width: unset;
+  font-size: 20px;
+}
+
+.container {
+  max-width: 620px !important;
+  margin-top: 40px !important;
+  padding-left: calc(1.5 * var(--bs-gutter-x)) !important;
+  padding-right: 1em !important;
+  padding-top: 1.5em !important;
+  padding-bottom: 1.5em !important;
+}
+
+.page-header {
+  font-weight: bolder;
+  font-size: larger;
+}
+
+.preview-image {
+  width: 115px !important;
+  height: 70px !important;
+}
+
+.remove-media-button {
+  background-color: white;
+  border: none;
+  padding: 0px !important;
+  margin: 2px 2px !important;
+  font-size: 18px;
+}
+
+.media-url-input {
+  margin-left: calc(-0.5 * var(--bs-gutter-x)) !important;
+}
+
+#agreement-link {
+  color: #525151;
+}
+
+.footer-copyright {
+  color: #525151;
+  margin-right: 18px;
+}
+
+.media-header {
+  padding-left: 5px;
+  border-bottom: thin solid gray;
+}
+
+#payment-form {
+  padding-top: 30px;
+}
+
+#donation-title {
+  font-size: 41px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+@media (max-width: 575.98px) {
+  #donation-title {
+    width: 100%;
+  }
+}
+
+#currency-sign {
+  font-size: 41px;
+}
+
+::placeholder {
+  color: #b6b6b6 !important;
+}
+
+.media {
+  margin-top: 5px;
+  margin-left: -10px;
+}
+
+#amount-input {
+  color: #718cd0;
+  width: 140px;
+  font-size: 37px;
+  background-clip: padding-box;
+  background-color: rgb(33, 37, 41);
+  border: none;
+  margin-left: 0px !important;
+}
+
+#amount-input:focus {
+  outline: none;
+}
+
+#currency-sign {
+  font-size: 34px;
+  border-radius: 0px;
+  padding-bottom: 1px;
+  border-color: #a8a8a8;
+}
+
+#page-card {
+  max-width: 550px !important;
+  border-color: rgb(33, 37, 41);
+  background-color: rgb(33, 37, 41);
+}
+
+.card .container {
+  background-color: #f1f1f1;
+}
+
+#recipient-title {
+  color: #747373;
+}
+
+#min-sum-title {
+  color: #747373;
+}
+
+#amount-input.is-invalid {
+  color: red;
+}
+
+#confirmation-text {
+  color: #939393;
+  font-size: 13px;
+}
+
+#confirmation-text div {
+  word-wrap: break-word;
+}
+
+#min-sum-button {
+  color: #718cd0;
+  text-decoration-style: dashed;
+  text-underline-offset: 3px;
+  padding-left: 4px !important;
+  margin-top: -5px;
+}
+
+#media-url-input {
+  width: 100%;
+}
+
+#media-url-button {
+  width: 18%;
+  margin-left: auto;
+  background-color: #718cd0;
+}
+
+.name-buttons {
+  margin-top: -8px;
+  margin-left: -17px;
+}
+
+.name-buttons .btn {
+  color: #718cd0;
+  font-size: 13px;
+  text-decoration-style: dashed;
+  text-underline-offset: 3px;
+}
+
+#description-input {
+  resize: none;
+}
+:root {
+  --rt-color-white: #fff;
+  --rt-color-dark: #222;
+  --rt-color-success: #8dc572;
+  --rt-color-error: #be6464;
+  --rt-color-warning: #f0ad4e;
+  --rt-color-info: #337ab7;
+  --rt-opacity: 0.9;
+}
+
+.media-container {
+  position: relative;
+}
+
+.media-container .media-suggestions-popup {
+  position: absolute;
+  background-color: white;
+  top: 40px;
+  padding-left: 0px;
+	z-index: 2;
+}
+
+.media-suggestions-item {
+  width: 100%;
+  text-align: left;
+  border: none;
+  margin-bottom: 5px;
+  margin-top: 2px;
+}
+
+.media-suggestions-item:nth-child(even) {
+  background-color: white;
+}
+
+.media-suggestions-description {
+  display: inline-block;
+  width: 80%;
+}
+
+.media-suggestions-channel {
+  font-size: 0.8em;
+  color: gray;
+  padding-left: 10px;
+}
+
+.media-suggestions-item img {
+  display: inline-block;
+  width: 15%;
+  vertical-align: bottom;
+}
+
+.media-suggestions-title {
+  display: inline-block;
+  white-space: nowrap;
+  width: 80%;
+  overflow-x: hidden;
+  margin-left: 10px;
+}
+
+@media (min-width: 575.98px) {
+  #media-tooltip {
+    max-width: 350px;
+  }
+}
+@media (max-width: 575.98px) {
+  #media-tooltip {
+    max-width: 100%;
+  }
+}

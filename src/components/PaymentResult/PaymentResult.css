@@ -1,0 +1,12 @@
+#paymentResultContainer {
+  padding-right: 1.5em!important;
+}
+
+#heart {
+  max-height: 300px;
+  max-width: 300px;
+}
+
+.result-page {
+	background-color: #F1F1F1;
+}

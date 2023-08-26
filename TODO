@@ -1,0 +1,5 @@
+TODO typescript вместо js
+TODO обработка ошибок
+TODO привести в порядок css
+TODO почистить картинки, как-то их адекватно сложить (CDN?)
+TODO сборка на github actions
