@@ -8,7 +8,7 @@ import PaymentInfo from "../PaymentInfo/PaymentInfo";
 
 export async function loader({ params }) {
   let payment = await API.get(`payment/${params.paymentId}`).then((json) => {
-    return json.data;
+    return json.data[0];
   });
 
   return { payment };
@@ -40,7 +40,7 @@ export default function Payment() {
   }, [payment]);
 
   return (
-    <div class="h-100 d-flex align-items-center justify-content-center">
+    <div className="h-100 d-flex align-items-center justify-content-center">
       <div className="card shadow-lg rounded">
         <div className="payment-page card-header pb-4 pt-4 ps-4 align-middle">
           <div id="payment-container">

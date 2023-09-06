@@ -35,7 +35,7 @@ root.render(
   <React.StrictMode>
     <style
       dangerouslySetInnerHTML={{
-        __html: `html, body {background-image: url("${process.env.REACT_APP_RECIPIENT_ID}.jpg")}`,
+        __html: `html, body {background-image: url("${process.env.PUBLIC_URL}/${process.env.REACT_APP_RECIPIENT_ID}.jpg")}`,
       }}
     />
     <RouterProvider router={router} />

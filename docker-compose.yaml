@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+
+  rabbit:
+    container_name: rabbit
+    image: ghcr.io/stcarolas/rabbitmq:latest
+    expose:
+      - 15672
+      - 15674
+      - 61613
+    ports:
+      - "15672:15672"
+      - "15674:15674"
+      - "61613:61613"
+
+  backend:
+    container_name: payment-backend
+    image: ghcr.io/stcarolas/oda:latest
+    depends_on:
+      - mongo
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/
+      STOMP_ENDPOINT: rabbit
+    expose:
+      - 8080
+    ports:
+      - "8080:8080"
