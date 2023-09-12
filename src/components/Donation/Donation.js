@@ -29,6 +29,7 @@ export default function Donation() {
   const navigate = useNavigate();
   const [mediaSuggestions, setMediaSuggestions] = useState([]);
   const [showMediaAutocomplete, setShowMediaAutocomplete] = useState(false);
+  const [textCounter, setTextCounter] = useState(0);
 
   useEffect(() => {
     const timeOutId = setTimeout(() => handleMediaQuery(newMedia), 250);
@@ -193,83 +194,138 @@ export default function Donation() {
         </div>
 
         <div className="container rounded-bottom-0 rounded-4">
-          <div className="row col-12 input-group">
-            <input
-              className="form-control"
-              value={nickname}
-              placeholder="Аноним"
-              type=""
-              autoComplete="off"
-              onChange={(e) => {
-                setNickname(e.target.value);
-                localStorage.setItem("nickname", e.target.value);
-              }}
-            />
+          <div className="col-12 mt-2 position-relative">
+            <div className="row col-12">
+              <input
+                className="form-control"
+                value={nickname}
+                placeholder="Аноним"
+                type=""
+                autoComplete="off"
+                onChange={(e) => {
+                  setNickname(e.target.value);
+                  localStorage.setItem("nickname", e.target.value);
+                }}
+              />
+            </div>
+            <span className="material-symbols-sharp media-info-icon" data-tooltip-id="nickname-gif-tooltip">
+              info
+            </span>
+              <Tooltip
+                id="nickname-gif-tooltip"
+                place="right"
+                variant="info"
+                content={
+                  <>
+                  <div>
+                    <div className="mt-2 nickname-gif-container">
+                      <img src='/nickname-gif-info.gif' className="media-gif" height={200} width={250}></img>
+                    </div>
+                    <div className="mt-2 media-gif-text">
+                      Отображение nickname на стриме.
+                    </div>
+                  </div>
+                  </>
+                }
+                className="nickname-gif-tooltip"
+              />
           </div>
-          <div className="row col-12 mt-2">
+          <div className="row col-12 mt-2 position-relative">
             <textarea
               id="description-input"
               className="form-control"
               value={description}
               rows={6}
               placeholder="Ваше сообщение"
-              onChange={(e) => setDescription(e.target.value.slice(0, 300))}
+              onChange={(e) =>
+                {
+                 let newValue = e.target.value.slice(0, 300);
+                 setDescription(newValue);
+                 setTextCounter(newValue.length)}
+              }
             />
+            <div className="counter-text">
+              {textCounter} / 300
+            </div>
           </div>
-          <div className="row col-12 mt-4 media-container">
-            <input
-              id="media-url-input"
-              hidden={attachments.length >= 12 ? true : false}
-              className={
-                incorrectMediaError ? "form-control is-invalid" : "form-control"
-              }
-              value={newMedia}
-              onFocus={() => {
-                setIncorrectMediaError(null);
-              }}
-              onChange={(e) => {
-                setNewMedia(e.target.value);
-              }}
-              autoComplete="off"
-              placeholder={
-                attachments.length === 0
-                  ? "Введите название видео или вставьте ссылку на youtube"
-                  : "Можете добавить еще видео. Максимум 12 штук"
-              }
-              data-tooltip-id="media-tooltip"
-            />
-            <Tooltip
-              id="media-tooltip"
-              place="top"
-              variant="info"
-              content="инстасамку/мейбибейби/гаязов за 10000, но как вы понимаете, лучше вообще без них"
-              className="tooltip"
-            />
-            {showMediaAutocomplete && (
-              <div className="media-suggestions-popup">
-                {mediaSuggestions.map((data, number) => {
-                  return (
-                    <button
-                      key={number}
-                      className="media-suggestions-item"
-                      onClick={() =>
-                        addMedia(`https://youtube.com/watch?v=${data.id}`)
-                      }
-                    >
-                      <img src={data.snippet.thumbnails.default.url} />
-                      <div className="media-suggestions-description">
-                        <div className="media-suggestions-title">
-                          {data.snippet.title}
+          <div className="col-12 mt-2 position-relative">
+            <div className="row col-12 mt-2 media-container">
+              <input
+                id="media-url-input"
+                hidden={attachments.length >= 12 ? true : false}
+                className={
+                  incorrectMediaError ? "form-control is-invalid" : "form-control"
+                }
+                value={newMedia}
+                onFocus={() => {
+                  setIncorrectMediaError(null);
+                }}
+                onChange={(e) => {
+                  setNewMedia(e.target.value);
+                }}
+                autoComplete="off"
+                placeholder={
+                  attachments.length === 0
+                    ? "Введите название видео или вставьте ссылку на youtube"
+                    : "Можете добавить еще видео. Максимум 12 штук"
+                }
+                data-tooltip-id="media-tooltip"
+              />
+              <Tooltip
+                id="media-tooltip"
+                place="top"
+                variant="info"
+                content="инстасамку/мейбибейби/гаязов за 10000, но как вы понимаете, лучше вообще без них"
+                className="tooltip"
+              />
+              {showMediaAutocomplete && (
+                <div className="media-suggestions-popup">
+                  {mediaSuggestions.map((data, number) => {
+                    return (
+                      <button
+                        key={number}
+                        className="media-suggestions-item"
+                        onClick={() =>
+                          addMedia(`https://youtube.com/watch?v=${data.id}`)
+                        }
+                      >
+                        <img src={data.snippet.thumbnails.default.url} />
+                        <div className="media-suggestions-description">
+                          <div className="media-suggestions-title">
+                            {data.snippet.title}
+                          </div>
+                          <div className="media-suggestions-channel">
+                            {data.snippet.channelTitle}
+                          </div>
                         </div>
-                        <div className="media-suggestions-channel">
-                          {data.snippet.channelTitle}
-                        </div>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+            <span className="material-symbols-sharp media-info-icon" data-tooltip-id="media-gif-tooltip">
+              info
+            </span>
+              <Tooltip
+                id="media-gif-tooltip"
+                place="right"
+                variant="info"
+                content={
+                  <>
+                  <div>
+                    <div className="mt-2 media-gif-container">
+                      <img src='/media-gif-info.gif' className="media-gif" height={200} width={250}></img>
+                    </div>
+                    <div className="mt-2 media-gif-text">
+                      Так отображается трек(-и) на видеотрансляции,
+                      который(-е) вы закажите.
+                    </div>
+                  </div>
+                  </>
+                }
+                className="media-gif-tooltip"
+              />
           </div>
           <div className="invalid-feedback">{incorrectMediaError}</div>
           <div className="media">
