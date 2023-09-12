@@ -251,3 +251,38 @@
     max-width: 100%;
   }
 }
+.media-info-icon {
+  position: absolute;
+  right: 20px;
+  top: 6px;
+}
+.media-gif-text {
+  display: block;
+  text-align: center;
+  width: 250px;
+}
+.media-gif-container {
+  display: block;
+}
+.counter-text {
+  position: absolute;
+  text-align: right;
+  color: rgb(112, 116, 120);
+  width: 100px;
+  right: 5px;
+  bottom: 10px;
+}
+.media-gif-tooltip {
+  background-color: rgb(33, 37, 41)!important;
+  border-radius: 5px;
+  margin-left: 30px;
+  opacity: 1!important;
+}
+.nickname-gif-tooltip {
+  background-color: rgb(33, 37, 41)!important;
+  margin-left: 30px;
+  opacity: 1!important;
+}
+.media-gif {
+  border: 2px solid #fff;
+}
