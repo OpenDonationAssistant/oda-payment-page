@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import Donation from "./components/Donation/Donation";
+import Donation, {
+  loader as settingsLoader,
+} from "./components/Donation/Donation";
 import PaymentResult, {
   loader as paymentUpdater,
 } from "./components/PaymentResult/PaymentResult";
@@ -13,6 +15,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Donation />,
+    loader: settingsLoader,
   },
   {
     path: "/payment/:paymentId",
