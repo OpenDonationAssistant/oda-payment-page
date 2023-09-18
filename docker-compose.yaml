@@ -6,6 +6,12 @@ services:
     container_name: mongo
     image: mongo:latest
 
+  postgres:
+    container_name: postgres
+    image: docker.io/library/postgres:latest
+    environment:
+      POSTGRES_PASSWORD: postgres
+
   rabbit:
     container_name: rabbit
     image: ghcr.io/stcarolas/rabbitmq:latest
@@ -30,3 +36,15 @@ services:
       - 8080
     ports:
       - "8080:8080"
+
+  config-service:
+    container_name: config-service
+    image: ghcr.io/stcarolas/oda-config-server:latest
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres/postgres
+    expose:
+      - 8080
+    ports:
+      - "8081:8080"
