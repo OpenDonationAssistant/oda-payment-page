@@ -132,6 +132,7 @@ export default function Donation() {
       updateAmountError(treshold);
       return;
     }
+    window.gtag("event", "init_payment");
     try {
       let response = await API.put("payment", {
         id: uuidv4(),
