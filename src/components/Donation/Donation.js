@@ -23,8 +23,6 @@ export async function loader() {
     .then((json) => {
       return json.data[0].value === "true";
     });
-  console.log("mediaRequestsEnabled: " + mediaRequestsEnabled);
-
   return { mediaRequestsEnabled };
 }
 
@@ -156,8 +154,8 @@ export default function Donation() {
 
   return (
     <div className="h-100 d-flex align-items-center justify-content-center">
-      <div id="page-card" className="card shadow-lg rounded">
-        <div className="card-header pb-4 pt-4 ps-4 text-bg-dark align-middle">
+      <div id="page-card" className="rounded-4 card shadow-lg">
+        <div className="rounded-4 card-header pb-4 pt-4 ps-4 text-bg-dark align-middle">
           <div className="row">
             <div className="d-none d-md-block col-3">
               <img
@@ -209,7 +207,7 @@ export default function Donation() {
           </div>
         </div>
 
-        <div className="container rounded-bottom-0 rounded-4">
+        <div className="container rounded-bottom-0 rounded-3">
           <div className="col-12 mt-2 position-relative">
             <div className="row col-12">
               <input
@@ -270,6 +268,13 @@ export default function Donation() {
             />
             <div className="counter-text">{textCounter} / 300</div>
           </div>
+          {!mediaRequestsEnabled && (
+            <>
+              <div className="col-12  row mt-2 alert alert-warning">
+                Заказы музыки временно приостановлены.
+              </div>
+            </>
+          )}
           {mediaRequestsEnabled && (
             <div className="col-12 mt-2 position-relative">
               <div className="row col-12 mt-2 media-container">
