@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { NavLink, useLoaderData } from "react-router-dom";
 import "./PaymentResult.css";
 import API from "../../api";
+import { useEffect } from "react";
 
 export async function loader({ params }) {
   let payment = await API.patch(`payment/${params.paymentId}`).then((json) => {
@@ -58,6 +59,11 @@ function failure() {
 
 export default function PaymentResult() {
   const { payment } = useLoaderData();
+
+  useEffect(() => {
+    window.gtag("event", "payment_finished");
+  });
+
   return (
     <div className="h-100 d-flex align-items-center justify-content-center">
       <div className="card shadow-lg rounded">
