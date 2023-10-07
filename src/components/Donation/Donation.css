@@ -286,3 +286,7 @@
 .media-gif {
   border: 2px solid #fff;
 }
+
+#nickname-gif-tooltip {
+	z-index: 3;
+}
