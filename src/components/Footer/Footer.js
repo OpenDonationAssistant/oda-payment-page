@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-export default function Footer() {
+export default function Footer({ nickname }) {
   return (
     <div className="card-footer">
       <div className="footer-warning">
-        {process.env.REACT_APP_RECIPIENT_NAME} - российский игровой стример. Эта
-        страница для сбора пожертвований на развитие и поддержку канала
+        {nickname} - российский игровой стример. Эта страница для сбора
+        пожертвований на развитие и поддержку канала
       </div>
       <div className="mt-2 hstack gap-2">
         <Link to="/offer" className="footer-link">

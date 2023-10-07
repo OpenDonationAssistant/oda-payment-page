@@ -1,25 +1,49 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+
 import Donation, {
   loader as settingsLoader,
 } from "./components/Donation/Donation";
+
 import PaymentResult, {
   loader as paymentUpdater,
 } from "./components/PaymentResult/PaymentResult";
+
 import Offer from "./components/Offer/Offer";
 import Payment, { loader as paymentLoader } from "./components/Payment/Payment";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import axios from "axios";
+
+const recipientId = window.location.hostname.substring(
+  0,
+  window.location.hostname.indexOf(".")
+);
+
+const config = await axios
+  .get(
+    `${process.env.REACT_APP_CONFIG_API_ENDPOINT}/config/paymentpage?ownerId=${recipientId}`
+  )
+  .then((json) => {
+    return json.data;
+  });
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Donation />,
-    loader: settingsLoader,
+    element: (
+      <Donation
+        recipientId={recipientId}
+        mediaRequestsEnabled={config.value["media.requests.enabled"]}
+        streamerName={config.value.nickname}
+      />
+    ),
   },
   {
     path: "/payment/:paymentId",
-    element: <Payment />,
+    element: (
+      <Payment recipientId={recipientId} nickname={config.value.nickname} />
+    ),
     loader: paymentLoader,
   },
   {
@@ -29,7 +53,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/offer",
-    element: <Offer />,
+    element: (
+      <Offer
+        recipientId={recipientId}
+        nickname={config.value.nickname}
+        fio={config.value.fio}
+        inn={config.value.inn}
+        email={config.value.email}
+      />
+    ),
   },
 ]);
 
@@ -38,7 +70,7 @@ root.render(
   <React.StrictMode>
     <style
       dangerouslySetInnerHTML={{
-        __html: `html, body {background-image: url("${process.env.PUBLIC_URL}/${process.env.REACT_APP_RECIPIENT_ID}.jpg")}`,
+        __html: `html, body {background-image: url("${process.env.PUBLIC_URL}/${recipientId}.jpg")}`,
       }}
     />
     <RouterProvider router={router} />

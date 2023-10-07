@@ -14,7 +14,7 @@ export async function loader({ params }) {
   return { payment };
 }
 
-export default function Payment() {
+export default function Payment({ recipientId, nickname }) {
   const { payment } = useLoaderData();
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function Payment() {
         if (!inited) {
           let paymentForm = new window.YooMoneyCheckoutWidget({
             confirmation_token: payment.confirmationToken,
-            return_url: `${process.env.REACT_APP_ROOT}/payment/${payment.id}/result`,
+            return_url: `https://${recipientId}.oda.digital/payment/${payment.id}/result`,
             error_callback: function (error) {
               console.error(error);
             },
@@ -47,6 +47,7 @@ export default function Payment() {
             <PaymentInfo
               amount={payment.amount.amount}
               currency={payment.amount.currency}
+              nickname={nickname}
             />
             <div id="payment-form"></div>
           </div>

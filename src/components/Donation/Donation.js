@@ -9,25 +9,16 @@ import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-import axios from "axios";
 
 var expression =
   /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
 var urlRegex = new RegExp(expression);
 
-export async function loader() {
-  let mediaRequestsEnabled = await axios
-    .get(
-      `${process.env.REACT_APP_CONFIG_API_ENDPOINT}/config/media.requests.enabled`
-    )
-    .then((json) => {
-      return json.data[0].value === "true";
-    });
-  return { mediaRequestsEnabled };
-}
-
-export default function Donation() {
-  const { mediaRequestsEnabled } = useLoaderData();
+export default function Donation({
+  recipientId,
+  mediaRequestsEnabled,
+  streamerName,
+}) {
   const [treshold, setTreshold] = useState(40);
   const [amount, setAmount] = useState(treshold);
   const [incorrectAmountError, setIncorrectAmountError] = useState(null);
@@ -86,7 +77,7 @@ export default function Donation() {
     setShowMediaAutocomplete(false);
     API.put("media", {
       url: url,
-      recipientId: process.env.REACT_APP_RECIPIENT_ID,
+      recipientId: recipientId,
     })
       .then((json) => {
         let updated = [...attachments, json.data];
@@ -143,7 +134,7 @@ export default function Donation() {
           currency: "RUB",
         },
         attachments: addedMedia,
-        recipientId: process.env.REACT_APP_RECIPIENT_ID,
+        recipientId: recipientId,
       });
       navigate(`/payment/${response.data.id}`);
     } catch (err) {
@@ -160,15 +151,14 @@ export default function Donation() {
           <div className="row">
             <div className="d-none d-md-block col-3">
               <img
-                src={`${process.env.REACT_APP_RECIPIENT_ID}.png`}
+                src={`${recipientId}.png`}
                 className="logo img-fluid rounded-2"
                 alt="Streamer logo"
               />
             </div>
             <div className="row col-sm-9">
               <div id="recipient-title">
-                Для <span>{process.env.REACT_APP_RECIPIENT_NAME}</span> на
-                развитие канала
+                Для <span>{streamerName}</span> на развитие канала
               </div>
               <div>
                 <span id="donation-title">Донат </span>
@@ -196,7 +186,7 @@ export default function Donation() {
                   id="min-sum-button"
                   className="btn btn-link"
                   tabIndex="-1"
-                  onClick={(e) => {
+                  onClick={() => {
                     setIncorrectAmountError(null);
                     setAmount(treshold);
                   }}
@@ -424,7 +414,7 @@ export default function Donation() {
           </div>
         </div>
 
-        <Footer />
+        <Footer nickname={streamerName} />
       </div>
     </div>
   );

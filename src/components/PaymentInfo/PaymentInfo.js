@@ -1,4 +1,4 @@
-export default function PaymentInfo({ amount, currency }) {
+export default function PaymentInfo({ nickname, amount, currency }) {
   return (
     <div>
       <h5 id="payment-title" className="text-center">
@@ -7,9 +7,7 @@ export default function PaymentInfo({ amount, currency }) {
       <div id="payment-info" className="row font-monospace ">
         <div className="col-sm-11 hstack gap-2 ps-4">
           <div className="fw-bold"> Получатель: </div>
-          <div className="text-end ms-auto">
-            {process.env.REACT_APP_RECIPIENT_NAME}
-          </div>
+          <div className="text-end ms-auto">{nickname}</div>
         </div>
         <div className="col-sm-11 hstack gap-2 ps-4">
           <div className="col-4 fw-bold"> Сумма: </div>
