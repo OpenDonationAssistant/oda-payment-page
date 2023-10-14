@@ -1,5 +1,5 @@
+import React from "react";
 import { useState, useEffect } from "react";
-import { useLoaderData } from "react-router-dom";
 import Media from "../Media/Media";
 import Footer from "../Footer/Footer";
 import "./Donation.css";
@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
+import CookieConsent from "react-cookie-consent";
 
 var expression =
   /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
@@ -70,7 +71,7 @@ export default function Donation({
   function addMedia(url) {
     if (url === null || url === "") {
       setIncorrectMediaError(
-        "Для добавления трека нужна корректная ссылка на Youtube видео"
+        "Для добавления трека нужна корректная ссылка на Youtube видео",
       );
       return;
     }
@@ -94,7 +95,7 @@ export default function Donation({
           setIncorrectMediaError(message);
         } else {
           setIncorrectMediaError(
-            "Для добавления трека нужна корректная ссылка на Youtube видео"
+            "Для добавления трека нужна корректная ссылка на Youtube видео",
           );
         }
       });
@@ -102,7 +103,7 @@ export default function Donation({
 
   function updateAmountError(treshold) {
     setIncorrectAmountError(
-      `Сумма доната должна быть больше минимальной: \u20BD${treshold}`
+      `Сумма доната должна быть больше минимальной: \u20BD${treshold}`,
     );
   }
 
@@ -415,6 +416,16 @@ export default function Donation({
         </div>
 
         <Footer nickname={streamerName} />
+        <CookieConsent
+          location="bottom"
+          buttonText="Sure man!!"
+          cookieName="oda-cookie-consent"
+          style={{ background: "#2B373B" }}
+          buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
+          expires={150}
+        >
+          This website uses cookies to enhance the user experience.{" "}
+        </CookieConsent>
       </div>
     </div>
   );

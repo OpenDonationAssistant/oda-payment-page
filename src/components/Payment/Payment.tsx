@@ -1,3 +1,4 @@
+import React from "react";
 import scriptjs from "scriptjs";
 import "./Payment.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -5,6 +6,11 @@ import { useLoaderData } from "react-router-dom";
 import { useEffect } from "react";
 import API from "../../api";
 import PaymentInfo from "../PaymentInfo/PaymentInfo";
+
+interface PaymentProps {
+	recipientId: string;
+	nickname: string;
+}
 
 export async function loader({ params }) {
   let payment = await API.get(`payment/${params.paymentId}`).then((json) => {
@@ -14,7 +20,7 @@ export async function loader({ params }) {
   return { payment };
 }
 
-export default function Payment({ recipientId, nickname }) {
+export default function Payment({ recipientId, nickname }: PaymentProps) {
   const { payment } = useLoaderData();
 
   useEffect(() => {

@@ -1,5 +1,11 @@
+import React from "react";
 import { Link } from "react-router-dom";
-export default function Footer({ nickname }) {
+
+interface FooterProps {
+  nickname: string;
+}
+
+export default function Footer({ nickname }: FooterProps) {
   return (
     <div className="card-footer">
       <div className="footer-warning">

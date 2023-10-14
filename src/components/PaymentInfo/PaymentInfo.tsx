@@ -1,4 +1,12 @@
-export default function PaymentInfo({ nickname, amount, currency }) {
+import React from "react";
+
+interface PaymentInfoProps {
+  nickname: string;
+  amount: string;
+  currency: string;
+}
+
+export default function PaymentInfo({ nickname, amount, currency }: PaymentInfoProps) {
   return (
     <div>
       <h5 id="payment-title" className="text-center">

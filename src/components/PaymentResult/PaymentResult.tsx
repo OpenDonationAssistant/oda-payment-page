@@ -1,3 +1,4 @@
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavLink, useLoaderData } from "react-router-dom";
 import "./PaymentResult.css";

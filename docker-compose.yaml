@@ -11,6 +11,8 @@ services:
     image: docker.io/library/postgres:latest
     environment:
       POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./data:/var/lib/postgresql/data:z
     ports:
       - "5432:5432"
 

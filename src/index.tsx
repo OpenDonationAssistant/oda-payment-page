@@ -2,9 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
-import Donation, {
-  loader as settingsLoader,
-} from "./components/Donation/Donation";
+import Donation from "./components/Donation/Donation";
 
 import PaymentResult, {
   loader as paymentUpdater,
@@ -17,12 +15,12 @@ import axios from "axios";
 
 const recipientId = window.location.hostname.substring(
   0,
-  window.location.hostname.indexOf(".")
+  window.location.hostname.indexOf("."),
 );
 
 const config = await axios
   .get(
-    `${process.env.REACT_APP_CONFIG_API_ENDPOINT}/config/paymentpage?ownerId=${recipientId}`
+    `${process.env.REACT_APP_CONFIG_API_ENDPOINT}/config/paymentpage?ownerId=${recipientId}`,
   )
   .then((json) => {
     return json.data;
@@ -74,5 +72,5 @@ root.render(
       }}
     />
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </React.StrictMode>,
 );

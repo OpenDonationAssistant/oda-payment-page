@@ -1,4 +1,14 @@
-export default function Offer({ recipientId, nickname, fio, inn, email }) {
+import React from "react";
+
+interface OfferProps{
+	recipientId: string;
+	nickname: string;
+	fio: string;
+	inn: string;
+	email: string;
+}
+
+export default function Offer({ recipientId, nickname, fio, inn, email }: OfferProps) {
   return (
     <div className="h-100 d-flex align-items-center justify-content-center">
       <div className="card shadow-lg rounded">

@@ -3,7 +3,7 @@ WORKDIR /build
 
 COPY package.json package.json
 COPY package-lock.json package-lock.json
-RUN npm ci
+RUN npm ci --legacy-peer-deps
 
 COPY .env.production .env.production
 COPY public/ public
