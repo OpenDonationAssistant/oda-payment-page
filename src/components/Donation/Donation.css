@@ -21,6 +21,7 @@
   background-color: rgb(33, 37, 41);
   width: unset;
   font-size: 20px;
+  flex-grow: 1;
 }
 
 .container {
@@ -55,12 +56,13 @@
 }
 
 .footer-link {
-	color: #747373;
+  color: #747373;
 }
 
 .footer-copyright {
-	color: #747373;
-  margin-right: 18px;
+  color: #747373;
+  flex-basis: 200px;
+  text-align: right;
 }
 
 .media-header {
@@ -143,10 +145,18 @@
 #confirmation-text {
   color: #939393;
   font-size: 13px;
+  flex-basis: 300px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #confirmation-text div {
   word-wrap: break-word;
+}
+
+.confirmation-text-part {
+  flex-grow: 1;
+  padding-top: 4px;
 }
 
 #min-sum-button {
@@ -159,7 +169,7 @@
 
 #media-url-input {
   width: 100%;
-	padding-right: 50px;
+  padding-right: 50px;
 }
 
 #media-url-button {
@@ -202,7 +212,7 @@
   background-color: white;
   top: 40px;
   padding-left: 0px;
-	z-index: 2;
+  z-index: 2;
 }
 
 .media-suggestions-item {
@@ -274,20 +284,27 @@
   bottom: 10px;
 }
 .media-gif-tooltip {
-  background-color: rgb(33, 37, 41)!important;
+  background-color: rgb(33, 37, 41) !important;
   border-radius: 5px;
   margin-left: 30px;
-  opacity: 1!important;
+  opacity: 1 !important;
+  z-index: 1;
 }
 .nickname-gif-tooltip {
-  background-color: rgb(33, 37, 41)!important;
+  background-color: rgb(33, 37, 41) !important;
   margin-left: 30px;
-  opacity: 1!important;
+  opacity: 1 !important;
 }
 .media-gif {
   border: 2px solid #fff;
 }
 
 #nickname-gif-tooltip {
-	z-index: 3;
+  z-index: 3;
+}
+
+.info-urls {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  padding-right: 18px;
 }

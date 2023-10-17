@@ -7,12 +7,12 @@ interface FooterProps {
 
 export default function Footer({ nickname }: FooterProps) {
   return (
-    <div className="card-footer">
+    <div className="card-footer rounded-4">
       <div className="footer-warning">
         {nickname} - российский игровой стример. Эта страница для сбора
         пожертвований на развитие и поддержку канала
       </div>
-      <div className="mt-2 hstack gap-2">
+      <div className="mt-2 hstack info-urls">
         <Link to="/offer" className="footer-link">
           Пользовательское соглашение
         </Link>

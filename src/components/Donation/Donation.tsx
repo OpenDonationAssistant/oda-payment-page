@@ -59,7 +59,10 @@ export default function Donation({
       return;
     }
     console.log("Started handleMedia");
-    axios.get(`${process.env.REACT_APP_API_ENDPOINT}/media/available?query=${query}`)
+    axios
+      .get(
+        `${process.env.REACT_APP_API_ENDPOINT}/media/available?query=${query}`,
+      )
       .then((response) => response.data)
       .then((data) => {
         console.log(data);
@@ -76,10 +79,11 @@ export default function Donation({
       return;
     }
     setShowMediaAutocomplete(false);
-    axios.put(`${process.env.REACT_APP_API_ENDPOINT}/media`, {
-      url: url,
-      recipientId: recipientId,
-    })
+    axios
+      .put(`${process.env.REACT_APP_API_ENDPOINT}/media`, {
+        url: url,
+        recipientId: recipientId,
+      })
       .then((json) => {
         let updated = [...attachments, json.data];
         setAttachments(updated);
@@ -126,17 +130,20 @@ export default function Donation({
     }
     window.gtag("event", "init_payment");
     try {
-      let response = await axios.put(`${process.env.REACT_APP_API_ENDPOINT}/payment`, {
-        id: uuidv4(),
-        senderName: nickname,
-        message: description,
-        amount: {
-          amount: amount,
-          currency: "RUB",
+      let response = await axios.put(
+        `${process.env.REACT_APP_API_ENDPOINT}/payment`,
+        {
+          id: uuidv4(),
+          senderName: nickname,
+          message: description,
+          amount: {
+            amount: amount,
+            currency: "RUB",
+          },
+          attachments: addedMedia,
+          recipientId: recipientId,
         },
-        attachments: addedMedia,
-        recipientId: recipientId,
-      });
+      );
       navigate(`/payment/${response.data.id}`);
     } catch (err) {
       // setIncorrectMediaError(
@@ -383,7 +390,7 @@ export default function Donation({
                 );
               })}
           </div>
-          <div className="row mt-3">
+          <div className="row col-12 mt-3" style={{ rowGap: "10px" }}>
             <button
               id="pay-button"
               className="btn btn-dark"
@@ -393,14 +400,12 @@ export default function Donation({
               Задонатить &#x20BD;{amount ? amount : 0}
             </button>
             <div id="confirmation-text" className="col">
-              <div>
+              <div className="confirmation-text-part">
                 {incorrectAmountError
                   ? incorrectAmountError
                   : `Вы отправляете донат как ${
                       nickname ? nickname : "Аноним"
-                    }${description && attachments.length > 0 ? "" : ","}`}
-              </div>
-              <span>
+                    }${description && attachments.length > 0 ? "" : ", "}`}
                 {incorrectAmountError
                   ? ""
                   : `${description ? "" : "без сообщения"} ${
@@ -410,7 +415,7 @@ export default function Donation({
                         ? ""
                         : "без"
                     } ${attachments.length > 0 ? "" : "треков"} `}
-              </span>
+              </div>
             </div>
           </div>
         </div>
