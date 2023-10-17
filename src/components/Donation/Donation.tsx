@@ -418,9 +418,9 @@ export default function Donation({
         <Footer nickname={streamerName} />
         <CookieConsent
           location="bottom"
-          buttonText="Sure man!!"
+          buttonText="Accept"
           cookieName="oda-cookie-consent"
-          style={{ background: "#2B373B" }}
+          style={{ background: "rgb(33, 37, 41)" }}
           buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
           expires={150}
         >
