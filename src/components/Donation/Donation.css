@@ -159,6 +159,7 @@
 
 #media-url-input {
   width: 100%;
+	padding-right: 50px;
 }
 
 #media-url-button {
