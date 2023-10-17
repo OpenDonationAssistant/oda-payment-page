@@ -2,13 +2,15 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavLink, useLoaderData } from "react-router-dom";
 import "./PaymentResult.css";
-import API from "../../api";
 import { useEffect } from "react";
+import axios from "axios";
 
 export async function loader({ params }) {
-  let payment = await API.patch(`payment/${params.paymentId}`).then((json) => {
-    return json.data;
-  });
+  let payment = await axios
+    .patch(`${process.env.REACT_APP_API_ENDPOINT}/payment/${params.paymentId}`)
+    .then((json) => {
+      return json.data;
+    });
 
   return { payment };
 }

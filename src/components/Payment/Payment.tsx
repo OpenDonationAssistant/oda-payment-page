@@ -4,18 +4,20 @@ import "./Payment.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useLoaderData } from "react-router-dom";
 import { useEffect } from "react";
-import API from "../../api";
 import PaymentInfo from "../PaymentInfo/PaymentInfo";
+import axios from "axios";
 
 interface PaymentProps {
-	recipientId: string;
-	nickname: string;
+  recipientId: string;
+  nickname: string;
 }
 
 export async function loader({ params }) {
-  let payment = await API.get(`payment/${params.paymentId}`).then((json) => {
-    return json.data[0];
-  });
+  let payment = await axios
+    .get(`${process.env.REACT_APP_API_ENDPOINT}/payment/${params.paymentId}`)
+    .then((json) => {
+      return json.data[0];
+    });
 
   return { payment };
 }
@@ -38,7 +40,7 @@ export default function Payment({ recipientId, nickname }: PaymentProps) {
           });
           paymentForm.render("payment-form");
         }
-      }
+      },
     );
     return () => {
       inited = true;

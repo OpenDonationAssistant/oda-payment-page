@@ -4,12 +4,12 @@ import Media from "../Media/Media";
 import Footer from "../Footer/Footer";
 import "./Donation.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import API from "../../api";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import CookieConsent from "react-cookie-consent";
+import axios from "axios";
 
 var expression =
   /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
@@ -59,7 +59,7 @@ export default function Donation({
       return;
     }
     console.log("Started handleMedia");
-    API.get(`media/available?query=${query}`)
+    axios.get(`${process.env.REACT_APP_API_ENDPOINT}/media/available?query=${query}`)
       .then((response) => response.data)
       .then((data) => {
         console.log(data);
@@ -76,7 +76,7 @@ export default function Donation({
       return;
     }
     setShowMediaAutocomplete(false);
-    API.put("media", {
+    axios.put(`${process.env.REACT_APP_API_ENDPOINT}/media`, {
       url: url,
       recipientId: recipientId,
     })
@@ -126,7 +126,7 @@ export default function Donation({
     }
     window.gtag("event", "init_payment");
     try {
-      let response = await API.put("payment", {
+      let response = await axios.put(`${process.env.REACT_APP_API_ENDPOINT}/payment`, {
         id: uuidv4(),
         senderName: nickname,
         message: description,
