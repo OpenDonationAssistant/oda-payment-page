@@ -7,7 +7,7 @@ interface FooterProps {
 
 export default function Footer({ nickname }: FooterProps) {
   return (
-    <div className="card-footer rounded-4">
+    <div className="card-footer">
       <div className="footer-warning">
         {nickname} - российский игровой стример. Эта страница для сбора
         пожертвований на развитие и поддержку канала

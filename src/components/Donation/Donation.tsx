@@ -153,8 +153,8 @@ export default function Donation({
   }
 
   return (
-    <div className="h-100 d-flex align-items-center justify-content-center">
-      <div id="page-card" className="rounded-4 card shadow-lg">
+    <div className="page-content-container h-100 d-flex align-items-center justify-content-center">
+      <div id="page-card" className="rounded-top-4 card shadow-lg">
         <div className="rounded-4 card-header pb-4 pt-4 ps-4 text-bg-dark align-middle">
           <div className="row">
             <div className="d-none d-md-block col-3">
@@ -206,7 +206,7 @@ export default function Donation({
           </div>
         </div>
 
-        <div className="container rounded-bottom-0 rounded-3">
+        <div id="data-panel" className="container rounded-bottom-0 rounded-3">
           <div className="col-12 mt-2 position-relative">
             <div className="row col-12">
               <input
@@ -295,7 +295,7 @@ export default function Donation({
                   autoComplete="off"
                   placeholder={
                     attachments.length === 0
-                      ? "Можно добавить ссылку на youtube видео с музыкой"
+                      ? "Ссылка на YouTube"
                       : // ? "Введите название видео или вставьте ссылку на youtube"
                         "Можете добавить еще видео. Максимум 12 штук"
                   }
@@ -356,8 +356,9 @@ export default function Donation({
                         ></img>
                       </div>
                       <div className="mt-2 media-gif-text">
-                        Стример по желанию может включить заказанную музыку, она
-                        проиграет на стриме. И отобразится, как показано на гиф.
+                        Если вы добавите ссылки на музыку с YouTube, стример по
+                        желанию может включить заказанную музыку, она проиграет
+                        на стриме. И отобразится, как показано на гиф.
                       </div>
                     </div>
                   </>
