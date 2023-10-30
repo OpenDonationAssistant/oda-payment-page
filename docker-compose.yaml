@@ -6,13 +6,25 @@ services:
     container_name: mongo
     image: mongo:latest
 
+  minio:
+    container_name: minio
+    image: docker.io/bitnami/minio:latest
+    volumes:
+      - ./minio:/bitnami/minio/data:z
+    environment:
+      MINIO_ROOT_USER: minio_user
+      MINIO_ROOT_PASSWORD: minio_password
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+
   postgres:
     container_name: postgres
     image: docker.io/library/postgres:latest
     environment:
       POSTGRES_PASSWORD: postgres
     volumes:
-      - ./data:/var/lib/postgresql/data:z
+      - ./postgres:/var/lib/postgresql/data:z
     ports:
       - "5432:5432"
 

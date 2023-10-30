@@ -156,20 +156,19 @@ export default function Donation({
     <div className="page-content-container h-100 d-flex align-items-center justify-content-center">
       <div id="page-card" className="rounded-top-4 card shadow-lg">
         <div className="rounded-4 card-header pb-4 pt-4 ps-4 text-bg-dark align-middle">
-          <div className="row">
-            <div className="d-none d-md-block col-3">
-              <img
-                src={`${recipientId}.png`}
-                className="logo img-fluid rounded-2"
-                alt="Streamer logo"
-              />
-            </div>
-            <div className="row col-sm-9">
-              <div id="recipient-title">
-                Для <span>{streamerName}</span> на развитие канала
-              </div>
+          <div id="recipient-title">
+            Для <span>{streamerName}</span> на развитие канала
+          </div>
+          <div style={{ display: "flex" }}>
+            <img
+              id="streamer-logo"
+              src={`${recipientId}.png`}
+              className="logo img-fluid rounded-2"
+              alt="Streamer logo"
+            />
+            <div id="amount-container">
+              <span id="donation-title">Донат </span>
               <div>
-                <span id="donation-title">Донат </span>
                 <span id="currency-sign">{`\u20BD`}</span>
                 <input
                   id="amount-input"
@@ -188,21 +187,21 @@ export default function Donation({
                   }}
                 />
               </div>
-              <div id="min-sum-title">
-                <span className="no-wrap">Минимальная сумма:</span>{" "}
-                <button
-                  id="min-sum-button"
-                  className="btn btn-link"
-                  tabIndex="-1"
-                  onClick={() => {
-                    setIncorrectAmountError(null);
-                    setAmount(treshold);
-                  }}
-                >
-                  {`\u20BD${treshold}`}
-                </button>
-              </div>
             </div>
+          </div>
+          <div id="min-sum-title">
+            <span className="no-wrap">Минимальная сумма:</span>{" "}
+            <button
+              id="min-sum-button"
+              className="btn btn-link"
+              tabIndex="-1"
+              onClick={() => {
+                setIncorrectAmountError(null);
+                setAmount(treshold);
+              }}
+            >
+              {`\u20BD${treshold}`}
+            </button>
           </div>
         </div>
 
@@ -401,22 +400,20 @@ export default function Donation({
               Задонатить &#x20BD;{amount ? amount : 0}
             </button>
             <div id="confirmation-text" className="col">
-              <div className="confirmation-text-part">
-                {incorrectAmountError
-                  ? incorrectAmountError
-                  : `Вы отправляете донат как ${
-                      nickname ? nickname : "Аноним"
-                    }${description && attachments.length > 0 ? "" : ", "}`}
-                {incorrectAmountError
-                  ? ""
-                  : `${description ? "" : "без сообщения"} ${
-                      !description && attachments.length === 0
-                        ? "и"
-                        : attachments.length > 0
-                        ? ""
-                        : "без"
-                    } ${attachments.length > 0 ? "" : "треков"} `}
-              </div>
+              {incorrectAmountError
+                ? incorrectAmountError
+                : `Вы отправляете донат как ${nickname ? nickname : "Аноним"}${
+                    description && attachments.length > 0 ? "" : ", "
+                  }`}
+              {incorrectAmountError
+                ? ""
+                : `${description ? "" : "без сообщения"} ${
+                    !description && attachments.length === 0
+                      ? "и"
+                      : attachments.length > 0
+                      ? ""
+                      : "без"
+                  } ${attachments.length > 0 ? "" : "треков"} `}
             </div>
           </div>
         </div>

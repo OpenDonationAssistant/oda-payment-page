@@ -36,7 +36,7 @@ input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
 
-.card-footer {
+#page-card .card-footer {
 	/* todo make padding through inheritance */
 	/* padding-left: calc(1.5 * var(--bs-gutter-x)) !important; */
 	padding-left: 26px; 

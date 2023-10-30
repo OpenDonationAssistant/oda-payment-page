@@ -18,7 +18,7 @@ export default function Footer({ nickname }: FooterProps) {
         </Link>
         <div className="footer-copyright ms-auto">
           <a className="footer-link" href="https://oda.digital/">
-            Uses ODA
+            Использует ODA
           </a>
         </div>
       </div>

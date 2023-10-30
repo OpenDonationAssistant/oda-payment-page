@@ -38,6 +38,49 @@
   font-size: larger;
 }
 
+#page-card .card-header {
+  display: flex;
+  flex-wrap: wrap;
+  /* align-items: center; */
+  /* justify-content: flex-start; */
+  /* column-gap: 20px; */
+}
+
+.recipient-title-container {
+  display: inline-block;
+}
+
+#streamer-logo {
+  width: 110px;
+  height: 110px;
+  display: inline-block;
+  margin-top: -26px;
+}
+
+#recipient-title {
+  color: #747373;
+  padding-left: 130px;
+}
+
+#donation-title {
+  font-size: 41px;
+  display: inline-block;
+  margin-top: -3px;
+  margin-right: 10px;
+}
+
+#min-sum-title {
+  color: #747373;
+  margin-left: 130px;
+  margin-top: -32px;
+}
+
+#amount-container {
+  margin-top: -5px;
+	display: flex;
+	margin-left: 20px;
+}
+
 .preview-image {
   width: 115px !important;
   height: 70px !important;
@@ -72,18 +115,6 @@
 
 #payment-form {
   padding-top: 30px;
-}
-
-#donation-title {
-  font-size: 41px;
-  display: inline-block;
-  margin-right: 10px;
-}
-
-@media (max-width: 575.98px) {
-  #donation-title {
-    width: 100%;
-  }
 }
 
 #currency-sign {
@@ -131,14 +162,6 @@
   background-color: #f1f1f1;
 }
 
-#recipient-title {
-  color: #747373;
-}
-
-#min-sum-title {
-  color: #747373;
-}
-
 #amount-input.is-invalid {
   color: red;
 }
@@ -146,18 +169,13 @@
 #confirmation-text {
   color: #939393;
   font-size: 13px;
-  flex-basis: 300px;
-  display: flex;
-  flex-wrap: wrap;
+  flex-basis: 250px;
+  flex-grow: 1;
+  padding-top: 4px;
 }
 
 #confirmation-text div {
   word-wrap: break-word;
-}
-
-.confirmation-text-part {
-  flex-grow: 1;
-  padding-top: 4px;
 }
 
 #min-sum-button {
@@ -257,11 +275,36 @@
   max-width: 100%;
 }
 
-@media (max-width: 575.98px) {
+/* @media (max-width: 575.98px) { */
+@media (max-width: 540px) {
   html,
   body {
     background-image: none !important;
     background-color: rgb(33, 37, 41) !important;
+  }
+
+  #recipient-title {
+    padding-left: 0px;
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  #streamer-logo {
+    margin-top: 0px;
+  }
+  #donation-title {
+    margin-top: 0px;
+    display: inline-block;
+  }
+
+  #min-sum-title {
+    color: #747373;
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+  #amount-container {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
   }
   #data-panel {
     border-top-right-radius: 0px !important;
@@ -273,6 +316,8 @@
   #page-card {
     border-right: none !important;
     border-left: none !important;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
   }
 }
 .media-info-icon {
