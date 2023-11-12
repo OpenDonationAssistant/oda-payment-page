@@ -146,9 +146,6 @@ export default function Donation({
       );
       navigate(`/payment/${response.data.id}`);
     } catch (err) {
-      // setIncorrectMediaError(
-      //   "Для добавления трека нужна корректная ссылка на Youtube видео"
-      // );
     }
   }
 
@@ -298,14 +295,6 @@ export default function Donation({
                       : // ? "Введите название видео или вставьте ссылку на youtube"
                         "Можете добавить еще видео. Максимум 12 штук"
                   }
-                  data-tooltip-id="media-tooltip"
-                />
-                <Tooltip
-                  id="media-tooltip"
-                  place="top"
-                  variant="info"
-                  content="инстасамку/мейбибейби/гаязов за 10000, но как вы понимаете, лучше вообще без них"
-                  className="tooltip"
                 />
                 {showMediaAutocomplete && (
                   <div className="media-suggestions-popup">

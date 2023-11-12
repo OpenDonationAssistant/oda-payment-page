@@ -13,10 +13,14 @@ import Payment, { loader as paymentLoader } from "./components/Payment/Payment";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import axios from "axios";
 
-const recipientId = window.location.hostname.substring(
+let recipientId = window.location.hostname.substring(
   0,
   window.location.hostname.indexOf("."),
 );
+
+if (!recipientId) {
+		recipientId = "testuser";
+}
 
 const config = await axios
   .get(
