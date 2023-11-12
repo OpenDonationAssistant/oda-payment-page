@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState, useEffect } from "react";
 import Media from "../Media/Media";
 import Footer from "../Footer/Footer";
@@ -36,6 +36,19 @@ export default function Donation({
   const [mediaSuggestions, setMediaSuggestions] = useState([]);
   const [showMediaAutocomplete, setShowMediaAutocomplete] = useState(false);
   const [textCounter, setTextCounter] = useState(0);
+	const mediaSuggestionsRef = useRef();
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (mediaSuggestionsRef.current && !mediaSuggestionsRef.current.contains(event.target)) {
+				setShowMediaAutocomplete(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [mediaSuggestionsRef]);
 
   useEffect(() => {
     const timeOutId = setTimeout(() => handleMediaQuery(newMedia), 250);
@@ -52,10 +65,16 @@ export default function Donation({
 
   function handleMediaQuery(query) {
     if (query === null || query === "") {
+      setShowMediaAutocomplete(false);
       return;
     }
     if (query.match(urlRegex)) {
+      setShowMediaAutocomplete(false);
       addMedia(query);
+      return;
+    }
+    if (query.length < 5) {
+      setShowMediaAutocomplete(false);
       return;
     }
     console.log("Started handleMedia");
@@ -145,8 +164,7 @@ export default function Donation({
         },
       );
       navigate(`/payment/${response.data.id}`);
-    } catch (err) {
-    }
+    } catch (err) {}
   }
 
   return (
@@ -291,13 +309,12 @@ export default function Donation({
                   autoComplete="off"
                   placeholder={
                     attachments.length === 0
-                      ? "Ссылка на YouTube"
-                      : // ? "Введите название видео или вставьте ссылку на youtube"
-                        "Можете добавить еще видео. Максимум 12 штук"
+                      ? "Введите название видео или ссылку на youtube"
+                      : "Можете добавить еще видео. Максимум 12 штук"
                   }
                 />
                 {showMediaAutocomplete && (
-                  <div className="media-suggestions-popup">
+                  <div ref={mediaSuggestionsRef} className="media-suggestions-popup">
                     {mediaSuggestions.map((data, number) => {
                       return (
                         <button
