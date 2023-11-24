@@ -5,7 +5,7 @@ import Footer from "../Footer/Footer";
 import "./Donation.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { v4 as uuidv4 } from "uuid";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import CookieConsent from "react-cookie-consent";
@@ -36,12 +36,15 @@ export default function Donation({
   const [mediaSuggestions, setMediaSuggestions] = useState([]);
   const [showMediaAutocomplete, setShowMediaAutocomplete] = useState(false);
   const [textCounter, setTextCounter] = useState(0);
-	const mediaSuggestionsRef = useRef();
+  const mediaSuggestionsRef = useRef();
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (mediaSuggestionsRef.current && !mediaSuggestionsRef.current.contains(event.target)) {
-				setShowMediaAutocomplete(false);
+      if (
+        mediaSuggestionsRef.current &&
+        !mediaSuggestionsRef.current.contains(event.target)
+      ) {
+        setShowMediaAutocomplete(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -314,7 +317,10 @@ export default function Donation({
                   }
                 />
                 {showMediaAutocomplete && (
-                  <div ref={mediaSuggestionsRef} className="media-suggestions-popup">
+                  <div
+                    ref={mediaSuggestionsRef}
+                    className="media-suggestions-popup"
+                  >
                     {mediaSuggestions.map((data, number) => {
                       return (
                         <button
@@ -419,7 +425,15 @@ export default function Donation({
                       : attachments.length > 0
                       ? ""
                       : "без"
-                  } ${attachments.length > 0 ? "" : "треков"} `}
+                  } ${attachments.length > 0 ? "" : "треков"}`}
+              {!incorrectAmountError && (
+                <>
+                  {", соглашаясь с "}
+                  <Link to="/offer" className="footer-link">
+                    Пользовательским соглашением
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -433,7 +447,10 @@ export default function Donation({
           buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
           expires={150}
         >
-          This website uses cookies to enhance the user experience.{" "}
+          This website uses cookies to enhance the user experience and for
+          analytics. Also by using this site you agree with{" "}
+          <a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a>
+          .
         </CookieConsent>
       </div>
     </div>

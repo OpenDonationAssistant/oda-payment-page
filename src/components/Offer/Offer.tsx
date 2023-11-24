@@ -1,14 +1,20 @@
 import React from "react";
 
-interface OfferProps{
-	recipientId: string;
-	nickname: string;
-	fio: string;
-	inn: string;
-	email: string;
+interface OfferProps {
+  recipientId: string;
+  nickname: string;
+  fio: string;
+  inn: string;
+  email: string;
 }
 
-export default function Offer({ recipientId, nickname, fio, inn, email }: OfferProps) {
+export default function Offer({
+  recipientId,
+  nickname,
+  fio,
+  inn,
+  email,
+}: OfferProps) {
   return (
     <div className="h-100 d-flex align-items-center justify-content-center">
       <div className="card shadow-lg rounded">
@@ -56,6 +62,50 @@ export default function Offer({ recipientId, nickname, fio, inn, email }: OfferP
                 <div>E-mail: {email}</div>
               </div>
             </ol>
+          </div>
+          <h2>Условия использования сайта {recipientId}.oda.digital</h2>
+          <ol>
+            <li>
+              {recipientId}.oda.digital использует YouTube API и Google
+              Analytics. Используя и взаимодействуя с сайтом {recipientId}
+              .oda.digital пользователь соглашается с условиями использования
+              YouTube API Services (
+              <a href="https://www.youtube.com/t/terms">
+                https://www.youtube.com/t/terms
+              </a>
+              ) и Google Privacy Policy (
+              <a href="https://policies.google.com/privacy?hl=ru">
+                https://policies.google.com/privacy?hl=ru
+              </a>
+              ).
+            </li>
+            <li>
+              Данные, полученные с помощью YouTube API (идентификатор контента,
+              его содержимое, статистика и ограничения), используются для показа
+              контента с платформы YouTube на стриме, проводимом {nickname} и
+              хранятся на сервере в обезличенном виде, т.е. без связи с
+              конкретным пользователем.
+            </li>
+            <li>
+              Сайт не собирает никаких данных пользователей, относящихся к
+              YouTube, кроме поискового запроса, вводимого в явном виде в форму
+              на сайте, и полученного с его помощью идентификатора контента.
+            </li>
+            <li>
+              Сайт использует cookie для хранения прежде введеной пользователем
+              информации (nickname в донате), что повышает удобство сайта для
+              пользователя, и для работы сервиса Google Analytics (см Google
+              Privacy Policy -{" "}
+              <a href="https://policies.google.com/privacy?hl=ru">
+                https://policies.google.com/privacy?hl=ru
+              </a>
+              ), что позволяет проводить аналитику по дальнейшему улучшению
+              сервиса.
+            </li>
+          </ol>
+          <div className="mt-4">
+            <div>Контактные данные по техническим вопросам</div>
+            <div>E-mail: stcarolas@gmail.com</div>
           </div>
         </div>
       </div>
