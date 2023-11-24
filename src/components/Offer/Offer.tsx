@@ -17,9 +17,13 @@ export default function Offer({
 }: OfferProps) {
   return (
     <div className="h-100 d-flex align-items-center justify-content-center">
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `.card.rounded {max-width: 1200px!important;}`,
+        }}
+      />
       <div
         className="card shadow-lg rounded"
-        style={{ maxWidth: "1200px!important" }}
       >
         <div className="card-header pb-4 pt-4 ps-4 align-middle">
           <div>
