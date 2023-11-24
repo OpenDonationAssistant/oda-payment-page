@@ -447,8 +447,13 @@ export default function Donation({
           buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
           expires={150}
         >
-          This website uses cookies to enhance the user experience and for
-          analytics. Also by using this site you agree with{" "}
+          Сайт использует cookie для улучшения пользовательского опыта и для
+          сбора обезличенных данных для аналитики (см.{" "}
+          <a href="https://policies.google.com/privacy?hl=ru">
+            Google Privacy Policy
+          </a>
+          ). Используя сайт, вы соглашаетесь с{" "}
+          <Link to="/offer">Пользовательским соглашением</Link>, а также с{" "}
           <a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a>
           .
         </CookieConsent>
