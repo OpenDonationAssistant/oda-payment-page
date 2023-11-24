@@ -17,7 +17,10 @@ export default function Offer({
 }: OfferProps) {
   return (
     <div className="h-100 d-flex align-items-center justify-content-center">
-      <div className="card shadow-lg rounded" style={{maxWidth: "1200px"}}>
+      <div
+        className="card shadow-lg rounded"
+        style={{ maxWidth: "1200px!important" }}
+      >
         <div className="card-header pb-4 pt-4 ps-4 align-middle">
           <div>
             <h2>Оферта о договоре пожертвования</h2>
@@ -99,7 +102,7 @@ export default function Offer({
               <a href="https://policies.google.com/privacy?hl=ru">
                 https://policies.google.com/privacy?hl=ru
               </a>
-              ), что позволяет проводить аналитику по дальнейшему улучшению
+              ), что позволяет проводить аналитику для дальнейшего улучшения
               сервиса.
             </li>
           </ol>
