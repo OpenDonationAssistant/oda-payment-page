@@ -17,7 +17,7 @@ export default function Offer({
 }: OfferProps) {
   return (
     <div className="h-100 d-flex align-items-center justify-content-center">
-      <div className="card shadow-lg rounded">
+      <div className="card shadow-lg rounded" style={{maxWidth: "1200px"}}>
         <div className="card-header pb-4 pt-4 ps-4 align-middle">
           <div>
             <h2>Оферта о договоре пожертвования</h2>
