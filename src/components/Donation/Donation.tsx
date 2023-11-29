@@ -83,7 +83,7 @@ export default function Donation({
     console.log("Started handleMedia");
     axios
       .get(
-        `${process.env.REACT_APP_API_ENDPOINT}/media/available?query=${query}`,
+        `${process.env.REACT_APP_MEDIA_API_ENDPOINT}/media/available?query=${query}`,
       )
       .then((response) => response.data)
       .then((data) => {
@@ -94,12 +94,6 @@ export default function Donation({
   }
 
   function addMedia(url) {
-    if (url === null || url === "") {
-      setIncorrectMediaError(
-        "Для добавления трека нужна корректная ссылка на Youtube видео",
-      );
-      return;
-    }
     setShowMediaAutocomplete(false);
     axios
       .put(`${process.env.REACT_APP_API_ENDPOINT}/media`, {

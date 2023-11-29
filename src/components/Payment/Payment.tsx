@@ -2,17 +2,16 @@ import React from "react";
 import scriptjs from "scriptjs";
 import "./Payment.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useLoaderData } from "react-router-dom";
+import { Params, useLoaderData } from "react-router-dom";
 import { useEffect } from "react";
 import PaymentInfo from "../PaymentInfo/PaymentInfo";
 import axios from "axios";
 
 interface PaymentProps {
-  recipientId: string;
   nickname: string;
 }
 
-export async function loader({ params }) {
+export async function loader({ params }: { params: Params<"paymentId"> }) {
   let payment = await axios
     .get(`${process.env.REACT_APP_API_ENDPOINT}/payment/${params.paymentId}`)
     .then((json) => {
@@ -22,7 +21,7 @@ export async function loader({ params }) {
   return { payment };
 }
 
-export default function Payment({ recipientId, nickname }: PaymentProps) {
+export default function Payment({ nickname }: PaymentProps) {
   const { payment } = useLoaderData();
 
   useEffect(() => {
@@ -33,7 +32,7 @@ export default function Payment({ recipientId, nickname }: PaymentProps) {
         if (!inited) {
           let paymentForm = new window.YooMoneyCheckoutWidget({
             confirmation_token: payment.confirmationToken,
-            return_url: `https://${recipientId}.oda.digital/payment/${payment.id}/result`,
+            return_url: `${window.location.href}/result`,
             error_callback: function (error) {
               console.error(error);
             },

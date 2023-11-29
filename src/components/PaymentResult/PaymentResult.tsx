@@ -1,11 +1,11 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { NavLink, useLoaderData } from "react-router-dom";
+import { NavLink, Params, useLoaderData } from "react-router-dom";
 import "./PaymentResult.css";
 import { useEffect } from "react";
 import axios from "axios";
 
-export async function loader({ params }) {
+export async function loader({ params }: { params: Params<"paymentId"> }) {
   let payment = await axios
     .patch(`${process.env.REACT_APP_API_ENDPOINT}/payment/${params.paymentId}`)
     .then((json) => {

@@ -44,7 +44,7 @@ const router = createBrowserRouter([
   {
     path: "/payment/:paymentId",
     element: (
-      <Payment recipientId={recipientId} nickname={config.value.nickname} />
+      <Payment nickname={config.value.nickname} />
     ),
     loader: paymentLoader,
   },

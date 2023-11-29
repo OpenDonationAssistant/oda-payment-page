@@ -6,7 +6,11 @@ interface PaymentInfoProps {
   currency: string;
 }
 
-export default function PaymentInfo({ nickname, amount, currency }: PaymentInfoProps) {
+export default function PaymentInfo({
+  nickname,
+  amount,
+  currency,
+}: PaymentInfoProps) {
   return (
     <div>
       <h5 id="payment-title" className="text-center">
