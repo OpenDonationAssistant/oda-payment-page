@@ -185,7 +185,7 @@
 
 #page-card {
   max-width: 550px !important;
-  min-width: 360px;
+  min-width: 330px;
   border-color: rgb(33, 37, 41);
   background-color: rgb(33, 37, 41);
 }
