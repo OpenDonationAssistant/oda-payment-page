@@ -108,6 +108,10 @@
 	height: 25px;
 }
 
+.preview-container {
+	width: 100%;
+}
+
 .preview-container:hover .button-overlay {
 	display: initial;
 }
@@ -148,8 +152,14 @@
 }
 
 .media {
+	display: flex;
+	flex-wrap: wrap;
   margin-top: 5px;
   margin-left: -10px;
+}
+
+.media iframe {
+	width: 95%;
 }
 
 #amount-input {
@@ -301,6 +311,10 @@
 
 #media-tooltip {
   max-width: 100%;
+}
+
+.page-content-container {
+	padding-top: 5%;
 }
 
 /* @media (max-width: 575.98px) { */

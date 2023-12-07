@@ -1,6 +1,7 @@
 import React from "react";
 
 interface MediaData {
+  originId: string;
   thumbnail: string;
 }
 
@@ -12,7 +13,7 @@ interface MediaProps {
 export default function Media({ data, deleteHandler }: MediaProps) {
   return (
     <div className="preview-container position-relative d-inline-block me-2 mt-2">
-      <img src={data.thumbnail} className="rounded rounded-2 preview-image" />
+      <iframe height="200" src={`https://www.youtube.com/embed/${data.originId}?autoplay=0`}/>
       <div className="button-overlay">
         <button
           className="remove-media-button material-symbols-sharp"

@@ -165,7 +165,7 @@ export default function Donation({
   }
 
   return (
-    <div className="page-content-container h-100 d-flex align-items-center justify-content-center">
+    <div className="page-content-container h-100 align-items-center">
       <div id="page-card" className="rounded-top-4 card shadow-lg">
         <div className="rounded-4 card-header pb-4 pt-4 ps-4 text-bg-dark align-middle">
           <div id="recipient-title">
