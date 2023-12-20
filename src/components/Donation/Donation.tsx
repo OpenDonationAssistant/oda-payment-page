@@ -174,7 +174,7 @@ export default function Donation({
           <div style={{ display: "flex" }}>
             <img
               id="streamer-logo"
-              src={`${recipientId}.png`}
+              src={`${process.env.REACT_APP_CDN_ENDPOINT}/logo-${recipientId}.png`}
               className="logo img-fluid rounded-2"
               alt="Streamer logo"
             />

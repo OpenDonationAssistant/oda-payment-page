@@ -15,13 +15,21 @@ export async function loader({ params }: { params: Params<"paymentId"> }) {
   return { payment };
 }
 
-function success() {
+function success(recipientId: string) {
   return (
     <div id="paymentResultContainer">
-      <div className="row mt-4 justify-content-center">
-        <img id="heart" src="/4cbKRjrzi.png" />
-      </div>
+      {recipientId !== "tabularussia" && (
+        <div className="row mt-4 justify-content-center">
+          <img id="heart" src="/4cbKRjrzi.png" />
+        </div>
+      )}
       <div className="mt-4 justify-content-center">
+        {recipientId === "tabularussia" && (
+          <img
+            className="grateful-image"
+            src={`${process.env.REACT_APP_CDN_ENDPOINT}/${recipientId}/20230217_232515.gif`}
+          />
+        )}
         <div className="text-center mt-4">Спасибо за вашу поддержку!</div>
         <div className="text-center mb-5">
           Ваш перевод прошел успешно, ждите алерт на стриме!
@@ -60,7 +68,11 @@ function failure() {
   );
 }
 
-export default function PaymentResult() {
+export default function PaymentResult({
+  recipientId,
+}: {
+  recipientId: string;
+}) {
   const { payment } = useLoaderData();
 
   useEffect(() => {
@@ -71,7 +83,7 @@ export default function PaymentResult() {
     <div className="h-100 d-flex align-items-center justify-content-center">
       <div className="card shadow-lg rounded">
         <div className="result-page card-header pb-4 pt-4 ps-4 align-middle">
-          {payment.status == "PAID" ? success() : failure()}
+          {payment.status == "PAID" ? success(recipientId) : failure()}
         </div>
       </div>
     </div>

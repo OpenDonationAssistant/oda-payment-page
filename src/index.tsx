@@ -50,7 +50,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/payment/:paymentId/result",
-    element: <PaymentResult />,
+    element: <PaymentResult recipientId={recipientId}/>,
     loader: paymentUpdater,
   },
   {
@@ -72,7 +72,7 @@ root.render(
   <React.StrictMode>
     <style
       dangerouslySetInnerHTML={{
-        __html: `html, body {background-image: url("${process.env.PUBLIC_URL}/${recipientId}.jpg")}`,
+        __html: `html, body {background-image: url("${process.env.REACT_APP_CDN_ENDPOINT}/back-${recipientId}.jpg")}`,
       }}
     />
     <RouterProvider router={router} />
