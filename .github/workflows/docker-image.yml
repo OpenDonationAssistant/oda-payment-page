@@ -26,4 +26,4 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: ghcr.io/opendonationassistent/oda-payment-page:latest
+        tags: ghcr.io/opendonationassistant/oda-payment-page:latest
