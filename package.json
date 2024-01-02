@@ -11,6 +11,7 @@
     "@types/node": "^20.8.3",
     "@types/react": "^18.2.25",
     "@types/react-dom": "^18.2.11",
+    "@types/uuid": "^9.0.7",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.1",
     "link-preview-js": "^3.0.4",

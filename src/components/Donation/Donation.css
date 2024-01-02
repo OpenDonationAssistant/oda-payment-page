@@ -77,8 +77,8 @@
 
 #amount-container {
   margin-top: -5px;
-	display: flex;
-	margin-left: 20px;
+  display: flex;
+  margin-left: 20px;
 }
 
 .preview-image {
@@ -87,37 +87,37 @@
 }
 
 .preview-image:hover {
-	box-shadow: 3px 3px 10px #6495ED;
+  box-shadow: 3px 3px 10px #6495ed;
 }
 
 .button-overlay {
-	position: absolute;
-	display: none;
-	z-index: 1;
+  position: absolute;
+  display: none;
+  z-index: 1;
 }
 
 .remove-media-button {
   background-color: rgb(33, 37, 41);
-	color: white;
+  color: white;
   border: 1px solid black;
-	border-radius: 2px;
+  border-radius: 2px;
   padding: 0px !important;
   margin: 0px 1px !important;
   font-size: 18px;
-	width: 25px;
-	height: 25px;
+  width: 25px;
+  height: 25px;
 }
 
 .preview-container {
-	width: 100%;
+  width: 100%;
 }
 
 .preview-container:hover .button-overlay {
-	display: initial;
+  display: initial;
 }
 
 .button-overlay:hover {
-	display: initial;
+  display: initial;
 }
 
 .media-url-input {
@@ -152,28 +152,33 @@
 }
 
 .media {
-	display: flex;
-	flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
   margin-top: 5px;
   margin-left: -10px;
 }
 
 .media iframe {
-	width: 95%;
+  width: 95%;
 }
 
 #amount-input {
   color: #718cd0;
-  width: 140px;
   font-size: 37px;
+  font-weight: bolder;
   background-clip: padding-box;
   background-color: rgb(33, 37, 41);
-  border: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  text-align: center;
+  line-height: 0;
   margin-left: 0px !important;
 }
 
 #amount-input:focus {
   outline: none;
+  border-color: #718cd0;
 }
 
 #currency-sign {
@@ -269,19 +274,19 @@
 .media-suggestions-item {
   width: 100%;
   text-align: left;
-  border: 2px solid rgb(239,239,239);
+  border: 2px solid rgb(239, 239, 239);
   margin-bottom: 5px;
   margin-top: 2px;
 }
 
 .media-suggestions-item:hover {
-	border: 2px solid #212529!important;
-	border-radius: 2px;
+  border: 2px solid #212529 !important;
+  border-radius: 2px;
 }
 
 .media-suggestions-item:nth-child(even) {
   background-color: white;
-	border-color: white;
+  border-color: white;
 }
 
 .media-suggestions-description {
@@ -314,7 +319,7 @@
 }
 
 .page-content-container {
-	padding-top: 5%;
+  padding-top: 5%;
 }
 
 /* @media (max-width: 575.98px) { */
@@ -344,9 +349,9 @@
     margin-top: 0px;
   }
   #amount-container {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
   }
   #data-panel {
     border-top-right-radius: 0px !important;

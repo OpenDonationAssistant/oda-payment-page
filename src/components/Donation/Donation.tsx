@@ -19,6 +19,10 @@ export default function Donation({
   recipientId,
   mediaRequestsEnabled,
   streamerName,
+}: {
+  recipientId: string;
+  mediaRequestsEnabled: boolean;
+  streamerName: string;
 }) {
   const [treshold, setTreshold] = useState(40);
   const [amount, setAmount] = useState(treshold);
@@ -37,6 +41,7 @@ export default function Donation({
   const [showMediaAutocomplete, setShowMediaAutocomplete] = useState(false);
   const [textCounter, setTextCounter] = useState(0);
   const mediaSuggestionsRef = useRef();
+  const [amountInputWidth, setAmountInputWidth] = useState(140);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -179,25 +184,37 @@ export default function Donation({
               alt="Streamer logo"
             />
             <div id="amount-container">
-              <span id="donation-title">Донат </span>
+              <span id="donation-title">Донат</span>
               <div>
-                <span id="currency-sign">{`\u20BD`}</span>
                 <input
                   id="amount-input"
                   autoFocus={true}
-                  className={`text-start  ms-2 fw-bolder ${
-                    incorrectAmountError ? "is-invalid" : ""
-                  }`}
+                  className={incorrectAmountError ? "is-invalid" : ""}
+                  style={{ width: `${amountInputWidth}px` }}
                   value={amount}
                   type="number"
                   placeholder="0"
                   autoComplete="off"
                   onChange={(e) => {
-                    let value = e.target.value;
+                    let value = Number(e.target.value);
                     setAmount(value);
+                    setAmountInputWidth(140);
+                    if (value >= 1000) {
+                      setAmountInputWidth(160);
+                    }
+                    if (value >= 10000) {
+                      setAmountInputWidth(180);
+                    }
+                    if (value >= 100000) {
+                      setAmountInputWidth(200);
+                    }
+                    if (value >= 1000000) {
+                      setAmountInputWidth(220);
+                    }
                     validateAmount(attachments, value);
                   }}
                 />
+                <span id="currency-sign">{`\u20BD`}</span>
               </div>
             </div>
           </div>
@@ -403,7 +420,7 @@ export default function Donation({
               disabled={incorrectAmountError != null}
               onClick={pay}
             >
-              Задонатить &#x20BD;{amount ? amount : 0}
+              Задонатить {amount ? amount : 0}&#x20BD;
             </button>
             <div id="confirmation-text" className="col">
               {incorrectAmountError
