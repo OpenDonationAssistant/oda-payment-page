@@ -37,6 +37,8 @@ const router = createBrowserRouter([
       <Donation
         recipientId={recipientId}
         mediaRequestsEnabled={config.value["media.requests.enabled"]}
+				mediaRequestsDisabledPermanently={config.value["media.requests.disabled.permanently"]}
+				mediaRequestCost={config.value["media.requests.cost"]}
         streamerName={config.value.nickname}
       />
     ),

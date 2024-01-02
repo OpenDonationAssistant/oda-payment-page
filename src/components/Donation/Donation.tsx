@@ -18,12 +18,11 @@ var urlRegex = new RegExp(expression);
 export default function Donation({
   recipientId,
   mediaRequestsEnabled,
+  mediaRequestsDisabledPermanently,
+  mediaRequestCost,
   streamerName,
-}: {
-  recipientId: string;
-  mediaRequestsEnabled: boolean;
-  streamerName: string;
-}) {
+}
+) {
   const [treshold, setTreshold] = useState(40);
   const [amount, setAmount] = useState(treshold);
   const [incorrectAmountError, setIncorrectAmountError] = useState(null);
@@ -64,7 +63,7 @@ export default function Donation({
   }, [newMedia]);
 
   function checkAmount(size, amount) {
-    let paymentForAttachments = size * 100;
+    let paymentForAttachments = size * mediaRequestCost;
     let treshold = 40 > paymentForAttachments ? 40 : paymentForAttachments;
     let isIncorrect = amount < treshold;
     setTreshold(treshold);
@@ -295,99 +294,106 @@ export default function Donation({
             />
             <div className="counter-text">{textCounter} / 300</div>
           </div>
-          {!mediaRequestsEnabled && (
+          {!mediaRequestsDisabledPermanently && (
             <>
-              <div className="col-12  row mt-2 alert alert-warning">
-                Заказы музыки временно приостановлены.
-              </div>
-            </>
-          )}
-          {mediaRequestsEnabled && (
-            <div className="col-12 mt-2 position-relative">
-              <div className="row col-12 mt-2 media-container">
-                <input
-                  id="media-url-input"
-                  hidden={attachments.length >= 12 ? true : false}
-                  className={
-                    incorrectMediaError
-                      ? "form-control is-invalid"
-                      : "form-control"
-                  }
-                  value={newMedia}
-                  onFocus={() => {
-                    setIncorrectMediaError(null);
-                  }}
-                  onChange={(e) => {
-                    setNewMedia(e.target.value);
-                  }}
-                  autoComplete="off"
-                  placeholder={
-                    attachments.length === 0
-                      ? "Введите название видео или ссылку на youtube"
-                      : "Можете добавить еще видео. Максимум 12 штук"
-                  }
-                />
-                {showMediaAutocomplete && (
-                  <div
-                    ref={mediaSuggestionsRef}
-                    className="media-suggestions-popup"
-                  >
-                    {mediaSuggestions.map((data, number) => {
-                      return (
-                        <button
-                          key={number}
-                          className="media-suggestions-item"
-                          onClick={() =>
-                            addMedia(`https://youtube.com/watch?v=${data.id}`)
-                          }
-                        >
-                          <img src={data.snippet.thumbnails.default.url} />
-                          <div className="media-suggestions-description">
-                            <div className="media-suggestions-title">
-                              {data.snippet.title}
-                            </div>
-                            <div className="media-suggestions-channel">
-                              {data.snippet.channelTitle}
-                            </div>
-                          </div>
-                        </button>
-                      );
-                    })}
+              {!mediaRequestsEnabled && (
+                <>
+                  <div className="col-12  row mt-2 alert alert-warning">
+                    Заказы музыки временно приостановлены.
                   </div>
-                )}
-              </div>
-              <span
-                className="material-symbols-sharp media-info-icon"
-                data-tooltip-id="media-gif-tooltip"
-              >
-                info
-              </span>
-              <Tooltip
-                id="media-gif-tooltip"
-                place="right"
-                variant="info"
-                content={
-                  <>
-                    <div>
-                      <div className="mt-2 media-gif-container">
-                        <img
-                          src="/media-gif-info.gif"
-                          className="media-gif"
-                          height={200}
-                          width={250}
-                        ></img>
+                </>
+              )}
+              {mediaRequestsEnabled && (
+                <div className="col-12 mt-2 position-relative">
+                  <div className="row col-12 mt-2 media-container">
+                    <input
+                      id="media-url-input"
+                      hidden={attachments.length >= 12 ? true : false}
+                      className={
+                        incorrectMediaError
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
+                      value={newMedia}
+                      onFocus={() => {
+                        setIncorrectMediaError(null);
+                      }}
+                      onChange={(e) => {
+                        setNewMedia(e.target.value);
+                      }}
+                      autoComplete="off"
+                      placeholder={
+                        attachments.length === 0
+                          ? "Введите название видео или ссылку на youtube"
+                          : "Можете добавить еще видео. Максимум 12 штук"
+                      }
+                    />
+                    {showMediaAutocomplete && (
+                      <div
+                        ref={mediaSuggestionsRef}
+                        className="media-suggestions-popup"
+                      >
+                        {mediaSuggestions.map((data, number) => {
+                          return (
+                            <button
+                              key={number}
+                              className="media-suggestions-item"
+                              onClick={() =>
+                                addMedia(
+                                  `https://youtube.com/watch?v=${data.id}`,
+                                )
+                              }
+                            >
+                              <img src={data.snippet.thumbnails.default.url} />
+                              <div className="media-suggestions-description">
+                                <div className="media-suggestions-title">
+                                  {data.snippet.title}
+                                </div>
+                                <div className="media-suggestions-channel">
+                                  {data.snippet.channelTitle}
+                                </div>
+                              </div>
+                            </button>
+                          );
+                        })}
                       </div>
-                      <div className="mt-2 media-gif-text">
-                        Если вы добавите ссылки на музыку с YouTube, стример по
-                        желанию может включить заказанную музыку, она проиграет
-                        на стриме. И отобразится, как показано на гиф.
-                      </div>
-                    </div>
-                  </>
-                }
-                className="media-gif-tooltip"
-              />
-            </div>
+                    )}
+                  </div>
+                  <span
+                    className="material-symbols-sharp media-info-icon"
+                    data-tooltip-id="media-gif-tooltip"
+                  >
+                    info
+                  </span>
+                  <Tooltip
+                    id="media-gif-tooltip"
+                    place="right"
+                    variant="info"
+                    content={
+                      <>
+                        <div>
+                          <div className="mt-2 media-gif-container">
+                            <img
+                              src="/media-gif-info.gif"
+                              className="media-gif"
+                              height={200}
+                              width={250}
+                            ></img>
+                          </div>
+                          <div className="mt-2 media-gif-text">
+                            Если вы добавите ссылки на музыку с YouTube, стример
+                            по желанию может включить заказанную музыку, она
+                            проиграет на стриме. И отобразится, как показано на
+                            гиф.
+                          </div>
+                        </div>
+                      </>
+                    }
+                    className="media-gif-tooltip"
+                  />
+                </div>
+              )}
+            </>
           )}
           <div className="invalid-feedback">{incorrectMediaError}</div>
           <div className="media">
