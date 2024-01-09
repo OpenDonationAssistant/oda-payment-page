@@ -27,6 +27,8 @@ export default function Donation({
   paymentController: PaymentController;
   assistController: AssistController;
 }) {
+
+
   return (
     <div className="page-content-container h-100 align-items-center">
       <div id="page-card" className="rounded-top-4 card shadow-lg">
