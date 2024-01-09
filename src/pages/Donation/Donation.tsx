@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import Footer from "./sections/Footer/Footer";
 import "./Donation.css";
 import "bootstrap/dist/css/bootstrap.min.css";
