@@ -128,8 +128,14 @@
   font-size: 20px;
 }
 
+.footer-links {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .footer-link {
-  color: #747373;
+  color: #949393;
 }
 
 .footer-copyright {

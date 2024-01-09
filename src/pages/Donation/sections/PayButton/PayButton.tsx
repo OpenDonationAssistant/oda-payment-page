@@ -56,14 +56,6 @@ export default function PayButton({
                   ? ""
                   : "без"
               } ${attachments.length > 0 ? "" : "треков"}`}
-          {!error && (
-            <>
-              {", соглашаясь с "}
-              <Link to="/offer" className="footer-link">
-                Пользовательским соглашением
-              </Link>
-            </>
-          )}
         </div>
       </div>
     </>
