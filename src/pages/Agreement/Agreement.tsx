@@ -1,6 +1,6 @@
 import React from "react";
 
-interface OfferProps {
+interface AgreementProps {
   recipientId: string;
   nickname: string;
   fio: string;
@@ -8,13 +8,13 @@ interface OfferProps {
   email: string;
 }
 
-export default function Offer({
+export default function Agreement({
   recipientId,
   nickname,
   fio,
   inn,
   email,
-}: OfferProps) {
+}: AgreementProps) {
   return (
     <div className="h-100 d-flex align-items-center justify-content-center">
       <style

@@ -4,7 +4,7 @@ import "./Payment.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Params, useLoaderData } from "react-router-dom";
 import { useEffect } from "react";
-import PaymentInfo from "../PaymentInfo/PaymentInfo";
+import PaymentInfo from "./sections/PaymentInfo/PaymentInfo";
 import axios from "axios";
 
 interface PaymentProps {

@@ -11,7 +11,6 @@ interface MediaProps {
 }
 
 export default function Media({ data, deleteHandler }: MediaProps) {
-console.log(data);
   return (
     <div className="preview-container position-relative d-inline-block me-2 mt-2">
       <iframe height="200" src={`https://www.youtube.com/embed/${data.originId}?autoplay=0`}/>
