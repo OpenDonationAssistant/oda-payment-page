@@ -88,7 +88,7 @@ export default function AmountInput({
               paymentController.amount = treshold;
             }}
           >
-            {`\u20BD${treshold}`}
+            {`${treshold}\u20BD`}
           </button>
         </div>
       </div>
