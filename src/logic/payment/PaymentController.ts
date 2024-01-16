@@ -65,12 +65,12 @@ export class PaymentController {
       return Promise.resolve({});
     }
     const attachmentIds = this.attachments.map(attach => attach.id);
-    return axios.put(`${process.env.REACT_APP_API_ENDPOINT}/payment`, {
+    return axios.put(`${process.env.REACT_APP_API_ENDPOINT}/commands/payment/create`, {
       id: uuidv4(),
-      senderName: this.nickname,
+      nickname: this.nickname,
       message: this.text,
       amount: {
-        amount: this.amount,
+        major: this.amount,
         currency: "RUB",
       },
       attachments: attachmentIds,

@@ -13,10 +13,11 @@ interface PaymentProps {
 
 export async function loader({ params }: { params: Params<"paymentId"> }) {
   let payment = await axios
-    .get(`${process.env.REACT_APP_API_ENDPOINT}/payment/${params.paymentId}`)
+    .get(`${process.env.REACT_APP_API_ENDPOINT}/payments/${params.paymentId}`)
     .then((json) => {
-      return json.data[0];
+      return json.data;
     });
+  console.log(payment);
 
   return { payment };
 }
@@ -31,7 +32,7 @@ export default function Payment({ nickname }: PaymentProps) {
       function () {
         if (!inited) {
           let paymentForm = new window.YooMoneyCheckoutWidget({
-            confirmation_token: payment.confirmationToken,
+            confirmation_token: payment.confirmation,
             return_url: `${window.location.href}/result`,
             error_callback: function (error) {
               console.error(error);
@@ -52,7 +53,7 @@ export default function Payment({ nickname }: PaymentProps) {
         <div className="payment-page card-header pb-4 pt-4 ps-4 align-middle">
           <div id="payment-container">
             <PaymentInfo
-              amount={payment.amount.amount}
+              amount={payment.amount.major}
               currency={payment.amount.currency}
               nickname={nickname}
             />
