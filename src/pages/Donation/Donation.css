@@ -456,10 +456,8 @@
 @media (max-width: 830px) {
   .arbitrary-text-container {
     order: 1 !important;
-    width: 100% !important;
+    width: initial !important;
     max-width: 550px!important;
-  }
-  .page-content-container {
-    flex-direction: column;
+    margin-top: 20px;
   }
 }

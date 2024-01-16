@@ -13,14 +13,6 @@ import MediaInput from "./sections/MediaInput/MediaInput";
 import ArbitraryTextPanel from "./sections/ArbitraryTextPanel/ArbitraryTextPanel";
 import { PaymentPageConfig } from "../../logic/PaymentPageConfig";
 
-const text = `**При донате указывайте свой никнейм.**  
-Если не ответила на донат, пишите в дискорд канал (или телеграм).  
-  
-Оповещения:  
-100+ Genshtaker  
-500+ Bubble dance  
-1000+ Дакимакура мейби бейби`;
-
 export default function Donation({
   pageConfig,
   recipientId,
