@@ -21,7 +21,7 @@ export default function ArbitraryTextPanel({
           <Markdown className={`${collapsed ? classes.collapsed : ""}`}>
             {text}
           </Markdown>
-          <div className={classes.overflowTextShadow}></div>
+          {collapsed && <div className={classes.overflowTextShadow}></div>}
         </div>
         {collapsed && (
           <button
