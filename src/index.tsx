@@ -14,6 +14,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import axios from "axios";
 import { PaymentController } from "./logic/payment/PaymentController";
 import { AssistController } from "./logic/AssistController";
+import { PaymentPageConfig } from "./logic/PaymentPageConfig";
 
 let recipientId = window.location.hostname.substring(
   0,
@@ -32,6 +33,8 @@ const config = await axios
     return json.data;
   });
 
+const pageConfig = new PaymentPageConfig(config);
+
 const paymentController = new PaymentController(
   recipientId,
   config.value["media.requests.cost"],
@@ -45,6 +48,7 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <Donation
+        pageConfig={pageConfig}
         recipientId={recipientId}
         mediaRequestsEnabled={config.value["media.requests.enabled"]}
         mediaRequestsDisabledPermanently={
@@ -52,7 +56,6 @@ const router = createBrowserRouter([
         }
         streamerName={config.value.nickname}
         paymentController={paymentController}
-        assistController={assistController}
       />
     ),
   },

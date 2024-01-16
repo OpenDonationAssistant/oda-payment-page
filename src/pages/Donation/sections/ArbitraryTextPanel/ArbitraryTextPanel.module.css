@@ -1,0 +1,32 @@
+.text {
+  color: black;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 10px;
+  background-color: #f1f1f1;
+  margin-bottom: 3px;
+  display: flex;
+  flex-direction: row;
+}
+
+.text pre {
+  text-wrap: pretty;
+}
+
+.collapsed {
+  overflow-y: hidden;
+  max-height: 50px;
+}
+
+.collapseButton {
+  border: none;
+}
+
+.overflowTextShadow {
+  width: 100%;
+  background-color: rgb(255,255,255,0.3);
+  height: 20px;
+  margin-top: -20px;
+}
