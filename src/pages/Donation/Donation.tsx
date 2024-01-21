@@ -12,6 +12,7 @@ import AmountInput from "./sections/AmountInput/AmountInput";
 import MediaInput from "./sections/MediaInput/MediaInput";
 import ArbitraryTextPanel from "./sections/ArbitraryTextPanel/ArbitraryTextPanel";
 import { PaymentPageConfig } from "../../logic/PaymentPageConfig";
+import ODALogo from "../../components/ODALogo/ODALogo";
 
 export default function Donation({
   pageConfig,
@@ -19,44 +20,52 @@ export default function Donation({
   mediaRequestsEnabled,
   mediaRequestsDisabledPermanently,
   streamerName,
-  paymentController
+  paymentController,
 }: {
-  pageConfig: PaymentPageConfig,
+  pageConfig: PaymentPageConfig;
   recipientId: string;
   mediaRequestsEnabled: boolean;
   mediaRequestsDisabledPermanently: boolean;
   streamerName: string;
   paymentController: PaymentController;
 }) {
-
-
   return (
-    <div className="page-content-container h-100 align-items-center">
-      <div id="page-card" className="rounded-top-4 shadow-lg">
-        <AmountInput
-          recipientId={recipientId}
-          streamerName={streamerName}
-          paymentController={paymentController}
-        />
-
-        <div id="data-panel" className="container rounded-bottom-0 rounded-3">
-          <NicknameInput paymentController={paymentController} />
-          <MessageInput paymentController={paymentController} />
-          <MediaInput
+    <>
+      <ODALogo />
+      <div className="page-content-container">
+        <div id="page-card" className="rounded-top-4 shadow-lg">
+          <AmountInput
             recipientId={recipientId}
-            mediaRequestsDisabledPermanently={mediaRequestsDisabledPermanently}
-            mediaRequestsEnabled={mediaRequestsEnabled}
+            streamerName={streamerName}
             paymentController={paymentController}
           />
-          <PayButton paymentController={paymentController} />
-        </div>
 
-        <Footer nickname={streamerName} />
-        <CookiePopup />
+          <div id="data-panel" className="container rounded-bottom-0 rounded-3">
+            <NicknameInput paymentController={paymentController} />
+            <MessageInput paymentController={paymentController} />
+            <MediaInput
+              recipientId={recipientId}
+              mediaRequestsDisabledPermanently={
+                mediaRequestsDisabledPermanently
+              }
+              mediaRequestsEnabled={mediaRequestsEnabled}
+              paymentController={paymentController}
+            />
+            <PayButton paymentController={paymentController} />
+          </div>
+
+          <Footer nickname={streamerName} />
+          <CookiePopup />
+        </div>
+        <div className="arbitrary-text-container">
+          {pageConfig.arbitraryText && (
+            <ArbitraryTextPanel
+              collapse={false}
+              text={pageConfig.arbitraryText}
+            />
+          )}
+        </div>
       </div>
-      <div className="arbitrary-text-container">
-        {pageConfig.arbitraryText && <ArbitraryTextPanel collapse={false} text={pageConfig.arbitraryText}/>}
-      </div>
-    </div>
+    </>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PaymentController } from "../../../../logic/payment/PaymentController";
+import ODALogo from "../../../../components/ODALogo/ODALogo";
 
 export default function AmountInput({
   streamerName,
