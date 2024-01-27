@@ -78,9 +78,8 @@ export default function MediaInput({
   function addMedia(url: string) {
     setShowMediaAutocomplete(false);
     axios
-      .put(`${process.env.REACT_APP_API_ENDPOINT}/media`, {
-        url: url,
-        recipientId: recipientId,
+      .put(`${process.env.REACT_APP_MEDIA_API_ENDPOINT}/media/prepared/video`, {
+        url: url
       })
       .then((json) => {
         let updated = [...attachments, json.data];
