@@ -14,7 +14,7 @@
   flex-direction: row;
 }
 
-@media (max-width: 830px) {
+@media (max-width: 1000px) {
   .text {
     margin-top: 0px !important;
     border-bottom-right-radius: 8px !important;
