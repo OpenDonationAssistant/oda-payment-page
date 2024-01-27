@@ -450,12 +450,12 @@
 }
 
 .arbitrary-text-container {
-  max-width: 250px;
+  max-width: 400px;
   margin-left: 20px;
   margin-right: 20px;
   order: 10;
 }
-@media (max-width: 830px) {
+@media (max-width: 1000px) {
   .arbitrary-text-container {
     order: 1 !important;
     width: initial !important;
