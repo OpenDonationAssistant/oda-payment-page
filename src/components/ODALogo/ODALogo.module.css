@@ -8,3 +8,8 @@
     display: none;
   }
 }
+@media (max-width: 1000px) {
+  .logo {
+    padding-bottom: 0px!important;
+  }
+}

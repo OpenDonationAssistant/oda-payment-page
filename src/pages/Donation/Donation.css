@@ -455,6 +455,7 @@
   margin-right: 20px;
   order: 10;
 }
+
 @media (max-width: 1000px) {
   .arbitrary-text-container {
     order: 1 !important;
