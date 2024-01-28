@@ -33,7 +33,7 @@ export default function Donation({
     <>
       <ODALogo />
       <div className="page-content-container">
-        <div id="page-card" className="rounded-top-4">
+        <div id="page-card">
           <AmountInput
             recipientId={recipientId}
             streamerName={streamerName}
