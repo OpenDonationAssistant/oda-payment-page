@@ -204,6 +204,7 @@
   border-color: rgb(33, 37, 41);
   background-color: rgb(33, 37, 41);
   order: 5;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 }
 
 .card .container {
@@ -347,7 +348,6 @@
   background-color: #f1f1f1;
 }
 
-/* @media (max-width: 575.98px) { */
 @media (max-width: 540px) {
   html,
   body {
@@ -462,5 +462,8 @@
     width: initial !important;
     max-width: 550px!important;
     margin-top: 20px;
+  }
+  #page-card {
+    box-shadow: none;
   }
 }
