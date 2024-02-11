@@ -16,9 +16,6 @@ export default function Footer({ nickname }: FooterProps) {
         <Link to="/offer" className="footer-link">
           Пользовательское соглашение
         </Link>
-        <a href="https://oda.digital" className="footer-link" style={{ paddingRight: "1em"}}>
-          ODA
-        </a>
       </div>
     </div>
   );

@@ -1,0 +1,15 @@
+.logo {
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+@media (max-width: 540px) {
+  .logo {
+    display: none;
+  }
+}
+@media (max-width: 1000px) {
+  .logo {
+    padding-bottom: 0px!important;
+  }
+}

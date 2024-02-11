@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PaymentController } from "../../../../logic/payment/PaymentController";
+import ODALogo from "../../../../components/ODALogo/ODALogo";
 
 export default function AmountInput({
   streamerName,
@@ -63,12 +64,12 @@ export default function AmountInput({
                 autoFocus={true}
                 className={error ? "is-invalid" : ""}
                 style={{ width: `${amountInputWidth}px` }}
-                value={amount}
+                value={String(amount).replace(/^0+/, "")}
                 type="number"
-                placeholder="0"
                 autoComplete="off"
                 onChange={(e) => {
                   let value = Number(e.target.value);
+                  console.log(`amount value: ${value}`);
                   paymentController.amount = value;
                   updateAmountInputWidth(value);
                 }}
