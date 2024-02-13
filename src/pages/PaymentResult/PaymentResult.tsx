@@ -7,7 +7,9 @@ import axios from "axios";
 
 export async function loader({ params }: { params: Params<"paymentId"> }) {
   let payment = await axios
-    .put(`${process.env.REACT_APP_API_ENDPOINT}/commands/payment/complete`,{paymentId: params.paymentId})
+    .put(`${process.env.REACT_APP_API_ENDPOINT}/commands/payment/complete`, {
+      paymentId: params.paymentId,
+    })
     .then((json) => {
       return json.data;
     });
@@ -83,7 +85,7 @@ export default function PaymentResult({
     <div className="h-100 d-flex align-items-center justify-content-center">
       <div className="card shadow-lg rounded">
         <div className="result-page card-header pb-4 pt-4 ps-4 align-middle">
-          {payment.failed == false ? success(recipientId) : failure()}
+          {payment.status === "completed" ? success(recipientId) : failure()}
         </div>
       </div>
     </div>
