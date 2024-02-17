@@ -39,8 +39,8 @@ input[type=number] {
   font-size: smaller;
   font-style: italic;
 	background-color: rgb(33,37,41)!important;
-	border-bottom-right-radius: 7px!important;
-	border-bottom-left-radius: 7px!important;
+	border-bottom-right-radius: 8px!important;
+	border-bottom-left-radius: 8px!important;
   padding-top: 10px;
   padding-bottom: 10px;
 }

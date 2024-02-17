@@ -78,7 +78,7 @@ export default function MediaInput({
   function addMedia(url: string) {
     setShowMediaAutocomplete(false);
     axios
-      .put(`${process.env.REACT_APP_MEDIA_API_ENDPOINT}/media/prepared/video`, {
+      .put(`${process.env.REACT_APP_MEDIA_API_ENDPOINT}/media/video`, {
         url: url
       })
       .then((json) => {
