@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { PaymentController } from "../../../../logic/payment/PaymentController";
-import ODALogo from "../../../../components/ODALogo/ODALogo";
 
 export default function AmountInput({
   streamerName,
@@ -45,7 +44,7 @@ export default function AmountInput({
 
   return (
     <>
-      <div className="rounded-4 card-header pb-4 pt-4 ps-4 text-bg-dark align-middle">
+      <div className="card-header pb-4 pt-4 ps-4 text-bg-dark align-middle">
         <div id="recipient-title">
           Для <span>{streamerName}</span> на развитие канала
         </div>

@@ -24,6 +24,12 @@
   flex-grow: 1;
 }
 
+.clickable-button:hover,
+.clickable-button:focus {
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 8px 8px -6.4px;
+  transform: translateY(-1px);
+}
+
 .container {
   max-width: 620px !important;
   padding-left: calc(1.5 * var(--bs-gutter-x)) !important;
@@ -37,12 +43,15 @@
   font-size: larger;
 }
 
-#page-card .card-header {
+.page-content-container .card-header {
   display: flex;
   flex-wrap: wrap;
-  /* align-items: center; */
-  /* justify-content: flex-start; */
-  /* column-gap: 20px; */
+  max-width: 550px;
+  min-width: 330px;
+  border-top-left-radius: 16px !important;
+  border-top-right-radius: 16px !important;
+  grid-column: 2;
+  justify-self: end;
 }
 
 .recipient-title-container {
@@ -204,11 +213,12 @@
   border-color: rgb(33, 37, 41);
   background-color: rgb(33, 37, 41);
   order: 5;
+  z-index: 10;
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
   border-top-left-radius: 14px;
   border-top-right-radius: 14px;
   border-bottom-right-radius: 8px;
-	border-bottom-left-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 
 .card .container {
@@ -341,61 +351,22 @@
 }
 
 .page-content-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: auto 550px auto;
 }
 
-#data-panel {
+#data-panel.container {
   background-color: #f1f1f1;
-}
-
-@media (max-width: 540px) {
-  html,
-  body {
-    background-image: none !important;
-    background-color: rgb(33, 37, 41) !important;
-  }
-
-  #recipient-title {
-    padding-left: 0px;
-    width: 100%;
-    margin-bottom: 5px;
-  }
-  #streamer-logo {
-    margin-top: 0px;
-  }
-  #donation-title {
-    margin-top: 0px;
-    display: inline-block;
-  }
-
-  #min-sum-title {
-    color: #747373;
-    margin-left: 0px;
-    margin-top: 0px;
-  }
-  #amount-container {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  #data-panel {
-    border-top-right-radius: 0px !important;
-    border-top-left-radius: 0px !important;
-  }
-  .align-items-center.page-content-container {
-    align-items: initial !important;
-  }
-  #page-card {
-    width: 100%!important;
-    border-right: none !important;
-    border-left: none !important;
-    margin-left: 0px !important;
-    margin-right: 0px !important;
-  }
+  max-width: 550px !important;
+  min-width: 330px;
+  padding-top: 12px !important;
+  padding-bottom: 18px !important;
+  grid-column: 2;
+  justify-self: end;
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 0px 10px 0px;
+  z-index: 10;
 }
 
 #nickname-input {
@@ -455,19 +426,71 @@
 
 .arbitrary-text-container {
   max-width: 400px;
-  margin-left: 20px;
   margin-right: 20px;
-  order: 10;
+  grid-column: 3;
+  grid-row: 2;
 }
 
 @media (max-width: 1000px) {
   .arbitrary-text-container {
-    order: 1 !important;
-    width: initial !important;
-    max-width: 550px!important;
+    max-width: 550px !important;
     margin-top: 20px;
+    margin-right: 20px;
+    grid-column: 2;
+    grid-row: 1;
   }
   #page-card {
     box-shadow: none;
+  }
+}
+
+@media (max-width: 540px) {
+  html,
+  body {
+    background-image: none !important;
+    background-color: rgb(33, 37, 41) !important;
+  }
+
+  #recipient-title {
+    padding-left: 0px;
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  #streamer-logo {
+    margin-top: 0px;
+  }
+  #donation-title {
+    margin-top: 0px;
+    display: inline-block;
+  }
+
+  #min-sum-title {
+    color: #747373;
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+  #amount-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  #data-panel {
+    border-top-right-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+  }
+  .align-items-center.page-content-container {
+    align-items: initial !important;
+  }
+  #page-card {
+    width: 100% !important;
+    border-right: none !important;
+    border-left: none !important;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
+  .arbitrary-text-container {
+    margin-left: 24px;
+    grid-column: 2;
+    grid-row: 1;
   }
 }

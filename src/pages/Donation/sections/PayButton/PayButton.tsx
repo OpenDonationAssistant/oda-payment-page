@@ -32,7 +32,7 @@ export default function PayButton({
       <div className="row col-12 mt-3" style={{ rowGap: "10px" }}>
         <button
           id="pay-button"
-          className="btn btn-dark"
+          className="btn btn-dark clickable-button"
           disabled={error != null}
           onClick={() => {
             const result = paymentController.pay();

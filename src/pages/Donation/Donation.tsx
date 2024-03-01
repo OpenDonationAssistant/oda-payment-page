@@ -33,14 +33,13 @@ export default function Donation({
     <>
       <ODALogo />
       <div className="page-content-container">
-        <div id="page-card">
           <AmountInput
             recipientId={recipientId}
             streamerName={streamerName}
             paymentController={paymentController}
           />
 
-          <div id="data-panel" className="container rounded-bottom-0 rounded-3">
+          <div id="data-panel" className="container">
             <NicknameInput paymentController={paymentController} />
             <MessageInput paymentController={paymentController} />
             <MediaInput
@@ -56,7 +55,6 @@ export default function Donation({
 
           <Footer nickname={streamerName} />
           <CookiePopup />
-        </div>
         <div className="arbitrary-text-container">
           {pageConfig.arbitraryText && (
             <ArbitraryTextPanel

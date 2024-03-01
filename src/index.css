@@ -31,7 +31,7 @@ input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
 
-#page-card .card-footer {
+.page-content-container .card-footer {
 	/* todo make padding through inheritance */
 	/* padding-left: calc(1.5 * var(--bs-gutter-x)) !important; */
 	padding-left: 26px;
@@ -43,6 +43,11 @@ input[type=number] {
 	border-bottom-left-radius: 8px!important;
   padding-top: 10px;
   padding-bottom: 10px;
+  max-width: 550px;
+  min-width: 330px;
+  grid-column: 2;
+  justify-self: end;
+  max-height: 85px;
 }
 
 .card {
