@@ -37,7 +37,9 @@ export default function ArbitraryTextPanel({
 
   return (
     <>
-      <div className={`${classes.text}`}>
+      <div
+        className={`${classes.text} ${panelHidden ? classes.texthidden : ""}`}
+      >
         <div
           className={`${
             panelHidden ? classes.collapsedpanel : classes.expandedpanel
@@ -49,8 +51,7 @@ export default function ArbitraryTextPanel({
           {collapsed && <div className={classes.overflowTextShadow}></div>}
         </div>
         <button
-          className={`${classes.hidebutton} clickable-button`}
-          style={{display: "none"}}
+          className={`${classes.hidebutton} ${classes.fullpagebutton} clickable-button`}
           onClick={() => togglePanel(!panelHidden)}
           data-tooltip-id="arbitrary-panel-tooltip"
         >
@@ -58,19 +59,31 @@ export default function ArbitraryTextPanel({
             {panelHidden ? "chevron_right" : "chevron_left"}
           </span>
         </button>
-        {!panelHidden && <Tooltip
-          id="arbitrary-panel-tooltip"
-          place="right"
-          variant="info"
-          content={
-            <>
-              <div className={`${classes.tooltip}`}>
-                Скрыть панель до тех пор, пока текст не поменяется (пока стример не обновит описание)
-              </div>
-            </>
-          }
-          className="nickname-gif-tooltip"
-        />}
+        <button
+          className={`${classes.hidebutton} ${classes.mobilepagebutton} clickable-button`}
+          onClick={() => togglePanel(!panelHidden)}
+          data-tooltip-id="arbitrary-panel-tooltip"
+        >
+          <span className={`material-symbols-sharp`}>
+            {panelHidden ? "unfold_more" : "collapse_all"}
+          </span>
+        </button>
+        {!panelHidden && (
+          <Tooltip
+            id="arbitrary-panel-tooltip"
+            place="right"
+            variant="info"
+            content={
+              <>
+                <div className={`${classes.tooltip}`}>
+                  Скрыть панель до тех пор, пока текст не поменяется (пока
+                  стример не обновит описание)
+                </div>
+              </>
+            }
+            className="nickname-gif-tooltip"
+          />
+        )}
         {collapsed && (
           <button
             className={classes.collapseButton}

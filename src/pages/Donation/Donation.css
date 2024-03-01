@@ -426,7 +426,6 @@
 
 .arbitrary-text-container {
   max-width: 400px;
-  margin-right: 20px;
   grid-column: 3;
   grid-row: 2;
 }
@@ -434,10 +433,9 @@
 @media (max-width: 1000px) {
   .arbitrary-text-container {
     max-width: 550px !important;
-    margin-top: 20px;
-    margin-right: 20px;
+    margin-right: 0px;
     grid-column: 2;
-    grid-row: 1;
+    grid-row: 2;
   }
   #page-card {
     box-shadow: none;
@@ -489,8 +487,7 @@
     margin-right: 0px !important;
   }
   .arbitrary-text-container {
-    margin-left: 24px;
     grid-column: 2;
-    grid-row: 1;
+    grid-row: 2;
   }
 }

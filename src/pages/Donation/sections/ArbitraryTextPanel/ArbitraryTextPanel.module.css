@@ -13,6 +13,10 @@
   height: 100%;
 }
 
+.texthidden {
+  width: 20px;
+}
+
 .collapsedpanel {
   display: none;
 }
@@ -33,18 +37,46 @@
   background-color: white;
 }
 
+.fullpagebutton {
+  display: initial;
+}
+
+.mobilepagebutton {
+  display: none;
+}
+
 @media (max-width: 1000px) {
   .text {
     margin-top: 0px !important;
-    border-bottom-right-radius: 8px !important;
-    border-bottom-left-radius: 8px !important;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
     box-shadow: none;
+  }
+
+  .fullpagebutton {
+    display: none;
+  }
+  .hidebutton.mobilepagebutton {
+    display: initial;
+    top: 0%;
+    right: 40px;
+    z-index: 30;
+  }
+
+  .texthidden {
+    height: 30px;
+    width: 100%;
   }
 }
 
 @media (max-width: 540px) {
   .text {
-    border-radius: 8px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
   }
 }
 
