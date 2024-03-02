@@ -17,6 +17,7 @@ export async function loader({ params }: { params: Params<"paymentId"> }) {
   return { payment };
 }
 
+
 function success(recipientId: string) {
   return (
     <div id="paymentResultContainer">
@@ -82,12 +83,27 @@ export default function PaymentResult({
   });
 
   return (
+    <>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `#root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto !important;
+    padding: 10vh 0;
+    min-height: 100vh;
+          }`,
+        }}
+      />
     <div className="h-100 d-flex align-items-center justify-content-center">
+
       <div className="card shadow-lg rounded">
         <div className="result-page card-header pb-4 pt-4 ps-4 align-middle">
           {payment.status === "completed" ? success(recipientId) : failure()}
         </div>
       </div>
     </div>
+    </>
   );
 }

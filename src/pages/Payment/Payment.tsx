@@ -48,19 +48,33 @@ export default function Payment({ nickname }: PaymentProps) {
   }, [payment]);
 
   return (
-    <div className="h-100 d-flex align-items-center justify-content-center">
-      <div className="card shadow-lg rounded">
-        <div className="payment-page card-header pb-4 pt-4 ps-4 align-middle">
-          <div id="payment-container">
-            <PaymentInfo
-              amount={payment.amount.major}
-              currency={payment.amount.currency}
-              nickname={nickname}
-            />
-            <div id="payment-form"></div>
+    <>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `#root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto !important;
+    padding: 10vh 0;
+    min-height: 100vh;
+          }`,
+        }}
+      />
+      <div className="h-100 d-flex align-items-center justify-content-center">
+        <div className="card shadow-lg rounded">
+          <div className="payment-page card-header pb-4 pt-4 ps-4 align-middle">
+            <div id="payment-container">
+              <PaymentInfo
+                amount={payment.amount.major}
+                currency={payment.amount.currency}
+                nickname={nickname}
+              />
+              <div id="payment-form"></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
