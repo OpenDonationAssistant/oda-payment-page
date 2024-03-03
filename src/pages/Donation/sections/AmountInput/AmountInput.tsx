@@ -44,7 +44,7 @@ export default function AmountInput({
 
   return (
     <>
-      <div className="card-header pb-4 pt-4 ps-4 text-bg-dark align-middle">
+      <div className="card-header ps-4 text-bg-dark align-middle">
         <div id="recipient-title">
           Для <span>{streamerName}</span> на развитие канала
         </div>
