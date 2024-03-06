@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { PaymentController } from "../../../../logic/payment/PaymentController";
 import { Tooltip } from "react-tooltip";
+import { useSearchParams } from "react-router-dom";
 
 export default function NicknameInput({
   paymentController,
 }: {
   paymentController: PaymentController;
 }) {
+  const [params] = useSearchParams();
   const [nickname, setNickname] = useState(() => {
+    const nickname = params.get("nickname");
+    if (nickname) {
+      return nickname;
+    }
     const saved = localStorage.getItem("nickname");
     paymentController.nickname = saved || "";
     return saved || "";
