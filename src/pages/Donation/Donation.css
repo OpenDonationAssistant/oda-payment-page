@@ -178,7 +178,7 @@
 
 .media {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-top: 5px;
   margin-left: -10px;
   padding-right: 50px;
@@ -192,9 +192,6 @@
 }
 
 .media-preview iframe {
-  /* margin-left: 8px; */
-  /* margin-top: 10px; */
-  /* margin-bottom: 10px; */
   width: 100%;
   height: 100%;
 }
@@ -486,15 +483,9 @@
   flex: 0 1 auto;
 }
 
-.media-item-with-delete-button {
-  display: flex;
-  width: 100%;
-  flex: 0 1 auto;
-  align-items: center;
-}
-
 .media-item-delete {
   flex: 0 0 auto;
+  margin-top: 23px;
   margin-left: 10px;
   color: rgba(226, 126, 126, 1);
 }

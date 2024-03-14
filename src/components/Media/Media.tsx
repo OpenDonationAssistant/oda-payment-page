@@ -13,8 +13,8 @@ interface MediaProps {
 export default function Media({ data, deleteHandler }: MediaProps) {
   const [collapsed, setCollapsed] = useState<boolean>(true);
   return (
-    <div className={`preview-container mt-2 `}>
-      <div className="media-item-with-delete-button">
+    <>
+      <div className={`preview-container mt-2 `}>
         <div
           className={`media-item ${collapsed ? "bordered" : "top-bordered"}`}
           onClick={() => setCollapsed((oldValue) => !oldValue)}
@@ -27,19 +27,19 @@ export default function Media({ data, deleteHandler }: MediaProps) {
             {collapsed ? "expand_more" : "expand_less"}{" "}
           </span>
         </div>
-        <span
-          className="media-item-delete material-symbols-sharp"
-          onClick={deleteHandler}
-        >
-          delete
-        </span>
+        <div className={`${collapsed ? "hidden" : ""} media-preview`}>
+          <iframe
+            height="200"
+            src={`https://www.youtube.com/embed/${data.originId}?autoplay=0`}
+          />
+        </div>
       </div>
-      <div className={`${collapsed ? "hidden" : ""} media-preview`}>
-        <iframe
-          height="200"
-          src={`https://www.youtube.com/embed/${data.originId}?autoplay=0`}
-        />
-      </div>
-    </div>
+      <span
+        className="media-item-delete material-symbols-sharp"
+        onClick={deleteHandler}
+      >
+        delete
+      </span>
+    </>
   );
 }
