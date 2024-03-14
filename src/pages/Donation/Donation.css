@@ -123,6 +123,12 @@
   flex: 1 0 auto;
 }
 
+.preview-container-with-delete-button {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
 .top-bordered {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -178,7 +184,7 @@
 
 .media {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   margin-top: 5px;
   margin-left: -10px;
   padding-right: 50px;

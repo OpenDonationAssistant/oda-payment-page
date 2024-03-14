@@ -14,6 +14,7 @@ export default function Media({ data, deleteHandler }: MediaProps) {
   const [collapsed, setCollapsed] = useState<boolean>(true);
   return (
     <>
+      <div className="preview-container-with-delete-button">
       <div className={`preview-container mt-2 `}>
         <div
           className={`media-item ${collapsed ? "bordered" : "top-bordered"}`}
@@ -40,6 +41,7 @@ export default function Media({ data, deleteHandler }: MediaProps) {
       >
         delete
       </span>
+      </div>
     </>
   );
 }
