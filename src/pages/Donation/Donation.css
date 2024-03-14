@@ -118,6 +118,14 @@
 
 .preview-container {
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 0 auto;
+}
+
+.top-bordered {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 .preview-container:hover .button-overlay {
@@ -131,9 +139,8 @@
 .left-icon {
   position: absolute;
   vertical-align: center;
-  top: 9px;
+  top: 6px;
   z-index: 1;
-  font-size: 20px;
 }
 
 .footer-links {
@@ -174,10 +181,22 @@
   flex-wrap: wrap;
   margin-top: 5px;
   margin-left: -10px;
+  padding-right: 50px;
 }
 
-.media iframe {
-  width: 95%;
+.media-preview {
+  justify-self: flex-start;
+  border: 2px solid #dddddd;
+  width: 100%;
+  background-color: white;
+}
+
+.media-preview iframe {
+  /* margin-left: 8px; */
+  /* margin-top: 10px; */
+  /* margin-bottom: 10px; */
+  width: 100%;
+  height: 100%;
 }
 
 #amount-input {
@@ -428,6 +447,75 @@
   max-width: 400px;
   grid-column: 3;
   grid-row: 2;
+}
+
+.media-item {
+  border: 2px solid #dddddd;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 1.2em;
+  background-color: #dddddd;
+  flex: 0 1 auto;
+  justify-content: space-between;
+  display: flex;
+  width: 100%;
+}
+
+.media-item.bordered:hover {
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 0px 10px 0px;
+}
+
+.bordered {
+  border-radius: 8px;
+}
+
+.media-item .material-symbols-sharp {
+  vertical-align: middle;
+}
+
+.media-title {
+  overflow: hidden;
+  text-wrap: nowrap;
+  margin-left: 15px;
+  margin-right: 15px;
+  font-size: 18px;
+  flex: 0 1 auto;
+}
+
+.media-item-with-delete-button {
+  display: flex;
+  width: 100%;
+  flex: 0 1 auto;
+  align-items: center;
+}
+
+.media-item-delete {
+  flex: 0 0 auto;
+  margin-left: 10px;
+  color: rgba(226, 126, 126, 1);
+}
+.media-item-delete:hover {
+  cursor: pointer;
+}
+
+.media-item-icon {
+  font-size: 26px;
+}
+
+.media-item-collapse {
+  font-size: 30px;
+}
+
+.media-item:hover {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
 }
 
 @media (min-width: 540px) {

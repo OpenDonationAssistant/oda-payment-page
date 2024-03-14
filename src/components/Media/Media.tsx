@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface MediaData {
   originId: string;
@@ -11,16 +11,34 @@ interface MediaProps {
 }
 
 export default function Media({ data, deleteHandler }: MediaProps) {
+  const [collapsed, setCollapsed] = useState<boolean>(true);
   return (
-    <div className="preview-container position-relative d-inline-block me-2 mt-2">
-      <iframe height="200" src={`https://www.youtube.com/embed/${data.originId}?autoplay=0`}/>
-      <div className="button-overlay">
-        <button
-          className="remove-media-button material-symbols-sharp"
+    <div className={`preview-container mt-2 `}>
+      <div className="media-item-with-delete-button">
+        <div
+          className={`media-item ${collapsed ? "bordered" : "top-bordered"}`}
+          onClick={() => setCollapsed((oldValue) => !oldValue)}
+        >
+          <span className="media-item-icon material-symbols-sharp">
+            smart_display
+          </span>
+          <span className="media-title">{data.title}</span>
+          <span className="media-item-collapse material-symbols-sharp">
+            {collapsed ? "expand_more" : "expand_less"}{" "}
+          </span>
+        </div>
+        <span
+          className="media-item-delete material-symbols-sharp"
           onClick={deleteHandler}
         >
-          close
-        </button>
+          delete
+        </span>
+      </div>
+      <div className={`${collapsed ? "hidden" : ""} media-preview`}>
+        <iframe
+          height="200"
+          src={`https://www.youtube.com/embed/${data.originId}?autoplay=0`}
+        />
       </div>
     </div>
   );

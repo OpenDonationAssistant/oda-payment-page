@@ -115,7 +115,7 @@ export default function MediaInput({
           {mediaRequestsEnabled && (
             <div className="col-12 mt-2 position-relative">
               <span className="material-symbols-sharp left-icon" >
-                video_search
+                search
               </span>
               <div className="row col-12 mt-2 media-container">
                 <input
