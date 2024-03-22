@@ -13,6 +13,7 @@ import MediaInput from "./sections/MediaInput/MediaInput";
 import ArbitraryTextPanel from "./sections/ArbitraryTextPanel/ArbitraryTextPanel";
 import { PaymentPageConfig } from "../../logic/PaymentPageConfig";
 import ODALogo from "../../components/ODALogo/ODALogo";
+import DonationTargetPanel from "./sections/DonationTargetPanel/DonationTargetPanel";
 
 export default function Donation({
   pageConfig,
@@ -33,28 +34,54 @@ export default function Donation({
     <>
       <ODALogo />
       <div className="page-content-container">
-          <AmountInput
+        <AmountInput
+          recipientId={recipientId}
+          streamerName={streamerName}
+          paymentController={paymentController}
+        />
+
+        <div className="donation-target hidden">
+          <DonationTargetPanel
+            targets={[
+              {
+                title: "на жызнь за март",
+                requiredAmount: 100,
+                collectedAmount: 65,
+                description: 'Спасибо что помогаете заплатить за квартиру, еду, работу, машину, церковь и далее по списку',
+                selected: false
+              },
+              {
+                title: "на скрытую жызнь за март",
+                requiredAmount: 100,
+                collectedAmount: 30,
+                description: 'Отдельная благодарность моей маме, бабушке, тетушке, собачке Полли, и моей любимой фиалке, благодаря им я не смотря ни на что',
+                selected: false
+              },
+              {
+                title: "Чтобы наслаждаться жизнью",
+                requiredAmount: 220,
+                collectedAmount: 80,
+                description: 'а пусть будет',
+                selected: false
+              },
+            ]}
+          />
+        </div>
+
+        <div id="data-panel" className="container">
+          <NicknameInput paymentController={paymentController} />
+          <MessageInput paymentController={paymentController} />
+          <MediaInput
             recipientId={recipientId}
-            streamerName={streamerName}
+            mediaRequestsDisabledPermanently={mediaRequestsDisabledPermanently}
+            mediaRequestsEnabled={mediaRequestsEnabled}
             paymentController={paymentController}
           />
+          <PayButton paymentController={paymentController} />
+        </div>
 
-          <div id="data-panel" className="container">
-            <NicknameInput paymentController={paymentController} />
-            <MessageInput paymentController={paymentController} />
-            <MediaInput
-              recipientId={recipientId}
-              mediaRequestsDisabledPermanently={
-                mediaRequestsDisabledPermanently
-              }
-              mediaRequestsEnabled={mediaRequestsEnabled}
-              paymentController={paymentController}
-            />
-            <PayButton paymentController={paymentController} />
-          </div>
-
-          <Footer nickname={streamerName} />
-          <CookiePopup />
+        <Footer nickname={streamerName} />
+        <CookiePopup />
         <div className="arbitrary-text-container">
           {pageConfig.arbitraryText && (
             <ArbitraryTextPanel

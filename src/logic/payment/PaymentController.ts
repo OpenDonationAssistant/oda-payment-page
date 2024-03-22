@@ -55,7 +55,8 @@ export class PaymentController {
     }
   }
 
-  pay(): Promise<any> {
+  pay(type: string): Promise<any> {
+    console.log(`paying with ${type}`);
     let { treshold, isIncorrect } = this.checkAmount(
       this.attachments.length,
       this.amount,
@@ -73,6 +74,7 @@ export class PaymentController {
         major: this.amount,
         currency: "RUB",
       },
+      method: "bank_card",
       attachments: attachmentIds,
       recipientId: this._recipientId,
     });

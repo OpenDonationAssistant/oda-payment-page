@@ -1,3 +1,7 @@
+.hidden {
+  display: none!important;
+}
+
 .material-symbols-outlined.currency {
   font-size: 19px;
   vertical-align: text-bottom;
@@ -52,6 +56,7 @@
   border-top-right-radius: 16px !important;
   grid-column: 2;
   justify-self: end;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 0px 10px 0px;
 }
 
 .recipient-title-container {
@@ -185,7 +190,6 @@
 .media {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 5px;
   margin-left: -10px;
   padding-right: 50px;
 }
@@ -449,7 +453,9 @@
 .arbitrary-text-container {
   max-width: 400px;
   grid-column: 3;
-  grid-row: 2;
+  grid-row-start: 2;
+  grid-row-end: 4;
+  margin-left: 50px;
 }
 
 .media-item {
@@ -515,6 +521,19 @@
   display: none;
 }
 
+.donation-target {
+  grid-row-start: 2;
+  grid-row-end: 4;
+  grid-column: 1;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 0px 10px 0px;
+  border-radius: 8px;
+  max-width: 400px;
+  margin-right: 50px;
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+}
+
 @media (min-width: 540px) {
   .page-content-container .card-header {
     padding-bottom: 1.5em;
@@ -526,6 +545,7 @@
   .arbitrary-text-container {
     max-width: 550px !important;
     margin-right: 0px;
+    margin-left: 0px;
     grid-column: 2;
     grid-row: 2;
   }
@@ -585,8 +605,10 @@
   .page-content-container {
     grid-template-columns: auto;
   }
-
   .page-content-container .card-header {
     padding-top: 0.5em;
+  }
+  .card-footer {
+    margin-bottom: 25px;
   }
 }
