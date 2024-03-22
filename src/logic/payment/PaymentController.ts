@@ -74,7 +74,7 @@ export class PaymentController {
         major: this.amount,
         currency: "RUB",
       },
-      method: "bank_card",
+      method: type,
       attachments: attachmentIds,
       recipientId: this._recipientId,
     });

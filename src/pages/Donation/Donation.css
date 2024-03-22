@@ -147,7 +147,8 @@
   display: initial;
 }
 
-.left-icon {
+.material-symbols-sharp.left-icon{
+  width: initial;
   position: absolute;
   vertical-align: center;
   top: 6px;

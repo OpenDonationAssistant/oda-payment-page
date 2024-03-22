@@ -11,7 +11,8 @@
 }
 
 .texthidden {
-  width: 20px;
+  width: 0px;
+  padding: 0px;
 }
 
 .collapsedpanel {
@@ -24,14 +25,15 @@
 
 .hidebutton {
   position: absolute;
-  top: 50%;
+  top: 30px;
   right: 0px;
-  border: 1px solid #DDDDDD;
+  border: 1px solid #dddddd;
   line-height: 0;
   border-radius: 20px;
   padding: 4px;
   margin: -16px;
   background-color: white;
+  color: #747373;
 }
 
 .fullpagebutton {

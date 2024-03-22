@@ -56,7 +56,7 @@ export default function ArbitraryTextPanel({
           data-tooltip-id="arbitrary-panel-tooltip"
         >
           <span className={`material-symbols-sharp`}>
-            {panelHidden ? "chevron_right" : "chevron_left"}
+            {panelHidden ? "priority_high" : "chevron_left"}
           </span>
         </button>
         <button
