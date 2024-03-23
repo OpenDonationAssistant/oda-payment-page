@@ -96,7 +96,7 @@ export default function PayButton({
     );
   }
 
-  function pay(type: string) {
+  function pay(type: string|null) {
     paymentController
       .pay(type)
       .then((data) => navigate(`/payment/${data.data.id}`));
@@ -174,7 +174,7 @@ export default function PayButton({
           className="btn btn-dark clickable-button"
           disabled={error != null}
           onClick={() => {
-            setShowPopup(true);
+            pay(null);
           }}
         >
           Задонатить {amount ? amount : 0}&#x20BD;

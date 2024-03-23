@@ -55,7 +55,7 @@ export class PaymentController {
     }
   }
 
-  pay(type: string): Promise<any> {
+  pay(type: string | null): Promise<any> {
     console.log(`paying with ${type}`);
     let { treshold, isIncorrect } = this.checkAmount(
       this.attachments.length,
@@ -65,19 +65,22 @@ export class PaymentController {
       this.updateAmountError(treshold);
       return Promise.resolve({});
     }
-    const attachmentIds = this.attachments.map(attach => attach.id);
-    return axios.put(`${process.env.REACT_APP_API_ENDPOINT}/commands/payment/create`, {
-      id: uuidv4(),
-      nickname: this.nickname,
-      message: this.text,
-      amount: {
-        major: this.amount,
-        currency: "RUB",
+    const attachmentIds = this.attachments.map((attach) => attach.id);
+    return axios.put(
+      `${process.env.REACT_APP_API_ENDPOINT}/commands/payment/create`,
+      {
+        id: uuidv4(),
+        nickname: this.nickname,
+        message: this.text,
+        amount: {
+          major: this.amount,
+          currency: "RUB",
+        },
+        method: type,
+        attachments: attachmentIds,
+        recipientId: this._recipientId,
       },
-      method: type,
-      attachments: attachmentIds,
-      recipientId: this._recipientId,
-    });
+    );
   }
 
   private updateAmountError(treshold: number) {
@@ -90,7 +93,7 @@ export class PaymentController {
   }
   public set treshold(value: number) {
     this._treshold = value;
-    this._listeners.forEach(listener => listener.setTreshold(value));
+    this._listeners.forEach((listener) => listener.setTreshold(value));
   }
   public get nickname(): string {
     return this._nickname;
