@@ -97,7 +97,8 @@ export default function PayButton({
   }
 
   function pay(type: string) {
-    paymentController.pay(type)
+    paymentController
+      .pay(type)
       .then((data) => navigate(`/payment/${data.data.id}`));
   }
 
@@ -109,18 +110,26 @@ export default function PayButton({
       <div
         className={`${classes.paymentmethodpopup} ${showPopup ? "" : "hidden"}`}
       >
-        <div
-          ref={popupRef}
-          className={`${classes.paymentmethodpanel}`}
-          onClick={() => pay("bank_card")}
-        >
-          <div className={`${classes.paymentmethod}`}>
+        <div ref={popupRef} className={`${classes.paymentmethodpanel}`}>
+          <div
+            className={`${classes.paymentmethodpopupclosebutton}`}
+            onClick={() => setShowPopup(false)}
+          >
+            <span className="material-symbols-sharp">close</span>
+          </div>
+          <div
+            className={`${classes.paymentmethod}`}
+            onClick={() => pay("bank_card")}
+          >
             <img className={`${classes.paymentmethodlogo}`} src="/visa.svg" />
             <div className={`${classes.paymentmethoddescription}`}>
               Банковские карты RUS
             </div>
           </div>
-          <div className={`${classes.paymentmethod}`}>
+          <div
+            className={`${classes.paymentmethod}`}
+            onClick={() => pay("yoo_money")}
+          >
             <img
               style={{ width: "50px" }}
               className={`${classes.paymentmethodlogo}`}
@@ -128,20 +137,28 @@ export default function PayButton({
             />
             <div className={`${classes.paymentmethoddescription}`}>ЮMoney</div>
           </div>
-          <div className={`${classes.paymentmethod}`}>
+          <div
+            className={`${classes.paymentmethod}`}
+            onClick={() => pay("sberbank")}
+          >
             <img
               className={`${classes.paymentmethodlogo}`}
               src="/sberpay.png"
             />
             <div className={`${classes.paymentmethoddescription}`}>SberPay</div>
           </div>
-          <div className={`${classes.paymentmethod}`}>
+          <div
+            className={`${classes.paymentmethod}`}
+            onClick={() => pay("tinkoff_bank")}
+          >
             <img className={`${classes.paymentmethodlogo}`} src="/tinkof.png" />
             <div className={`${classes.paymentmethoddescription}`}>
               Tinkoff Pay
             </div>
           </div>
-          <div className={`${classes.paymentmethod}`}>
+          <div className={`${classes.paymentmethod}`}
+            onClick={() => pay("sbp")}
+          >
             <img
               style={{ height: "60px" }}
               className={`${classes.paymentmethodlogo}`}

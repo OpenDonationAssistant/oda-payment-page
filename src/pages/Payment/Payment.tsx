@@ -34,6 +34,9 @@ export default function Payment({ nickname }: PaymentProps) {
           let paymentForm = new window.YooMoneyCheckoutWidget({
             confirmation_token: payment.confirmation,
             return_url: `${window.location.href}/result`,
+            customization: {
+                payment_methods: [payment.method]
+            },
             error_callback: function (error) {
               console.error(error);
             },

@@ -45,6 +45,9 @@
 
 .paymentmethodpopupclosebutton {
   color: black;
+  position: absolute;
+  top: 8px;
+  right: 8px;
 }
 
 .savedpaymentmethods {
@@ -81,6 +84,7 @@
 }
 
 .paymentmethodpanel{
+  position: relative;
   background-color: #c1c1c1;
   width: 600px;
   flex: 0 0 auto;
