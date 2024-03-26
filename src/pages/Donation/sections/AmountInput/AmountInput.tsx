@@ -46,7 +46,7 @@ export default function AmountInput({
     <>
       <div className="card-header ps-4 text-bg-dark align-middle">
         <div id="recipient-title">
-          Для <span>{streamerName}</span> на развитие канала
+          Для <a className="stream-link" href={`https://twitch.tv/${streamerName}`}>{streamerName}</a> на развитие канала
         </div>
         <div style={{ display: "flex" }}>
           <img
