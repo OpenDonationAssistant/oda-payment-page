@@ -108,7 +108,7 @@ export default function MediaInput({
           {!mediaRequestsEnabled && (
             <>
               <div className="col-12  row mt-2 alert alert-warning">
-                Заказы музыки временно приостановлены.
+                Реквесты музыки временно приостановлены.
               </div>
             </>
           )}
