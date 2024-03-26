@@ -10,7 +10,7 @@ export default function Footer({ nickname }: FooterProps) {
     <div className="card-footer">
       <div className="footer-warning">
         <a className="stream-link" href={`https://twitch.tv/${nickname}`}>{nickname}</a> - российский игровой
-        стример. Эта страница для сбора пожертвований на развитие и поддержку
+        стример. Эта страница для сбора средств на развитие и поддержку
         канала
       </div>
       <div className="footer-links">
