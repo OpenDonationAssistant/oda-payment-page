@@ -42,7 +42,7 @@ export default function NicknameInput({
           className="material-symbols-sharp media-info-icon"
           data-tooltip-id="nickname-gif-tooltip"
         >
-          info
+          help
         </span>
         <Tooltip
           id="nickname-gif-tooltip"

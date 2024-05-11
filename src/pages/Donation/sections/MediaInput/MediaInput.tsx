@@ -173,7 +173,7 @@ export default function MediaInput({
                 className="material-symbols-sharp media-info-icon"
                 data-tooltip-id="media-gif-tooltip"
               >
-                info
+                help
               </span>
               <Tooltip
                 id="media-gif-tooltip"

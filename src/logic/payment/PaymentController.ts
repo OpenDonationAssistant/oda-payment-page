@@ -13,6 +13,7 @@ export class PaymentController {
   private _recipientId: string;
   private _mediaRequestCost: number;
   private _minimalPayment: number;
+  private _goal: string | null = null;
 
   constructor(
     recipientId: string,
@@ -79,6 +80,7 @@ export class PaymentController {
         method: type,
         attachments: attachmentIds,
         recipientId: this._recipientId,
+        goal: this._goal
       },
     );
   }
@@ -131,5 +133,11 @@ export class PaymentController {
   public set error(value: string | null) {
     this._error = value;
     this._listeners.forEach((listener) => listener.setError(value));
+  }
+  public get goal(): string | null {
+    return this._goal;
+  }
+  public set goal(value: string | null) {
+    this._goal = value;
   }
 }

@@ -40,31 +40,10 @@ export default function Donation({
           paymentController={paymentController}
         />
 
-        <div className="donation-target hidden">
+        <div className="donation-target">
           <DonationTargetPanel
-            targets={[
-              {
-                title: "на жызнь за март",
-                requiredAmount: 100,
-                collectedAmount: 65,
-                description: 'Спасибо что помогаете заплатить за квартиру, еду, работу, машину, церковь и далее по списку',
-                selected: false
-              },
-              {
-                title: "на скрытую жызнь за март",
-                requiredAmount: 100,
-                collectedAmount: 30,
-                description: 'Отдельная благодарность моей маме, бабушке, тетушке, собачке Полли, и моей любимой фиалке, благодаря им я не смотря ни на что',
-                selected: false
-              },
-              {
-                title: "Чтобы наслаждаться жизнью",
-                requiredAmount: 220,
-                collectedAmount: 80,
-                description: 'а пусть будет',
-                selected: false
-              },
-            ]}
+            controller={paymentController}
+            targets={pageConfig.goals}
           />
         </div>
 

@@ -523,10 +523,9 @@
 }
 
 .donation-target {
-  grid-row-start: 2;
+  grid-row-start: 1;
   grid-row-end: 4;
   grid-column: 1;
-  box-shadow: rgba(0, 0, 0, 0.56) 0px 0px 10px 0px;
   border-radius: 8px;
   max-width: 400px;
   margin-right: 50px;
@@ -611,5 +610,10 @@
   }
   .card-footer {
     margin-bottom: 25px;
+  }
+  .donation-target{
+    grid-column: 2;
+    grid-row: 3;
+    margin-right: 0;
   }
 }

@@ -1,4 +1,13 @@
-import axios from "axios";
+import { Amount } from "../types";
+
+export interface Goal {
+  id: string;
+  fullDescription: string;
+  briefDescription: string;
+  requiredAmount: Amount;
+  accumulatedAmount: Amount;
+  selected?: boolean;
+}
 
 export class PaymentPageConfig {
   config: any = {};
@@ -9,9 +18,10 @@ export class PaymentPageConfig {
   private _requestsEnabled = true;
   private _requestsDisabledPermanently = false;
   private _requestCost = 100;
-  private _arbitraryText: string|null = null;
+  private _arbitraryText: string | null = null;
+  private _goals: Goal[] = [];
 
-  constructor(json:any) {
+  constructor(json: any) {
     this.config = json;
     this.requestsEnabled = json.value["media.requests.enabled"] ?? true;
     this.requestsDisabledPermanently =
@@ -20,8 +30,8 @@ export class PaymentPageConfig {
     this.email = json.value["email"] ?? "";
     this.fio = json.value["fio"] ?? "";
     this.inn = json.value["inn"] ?? "";
-    this.arbitraryText =
-      json.value["arbitraryText"] ?? null;
+    this.arbitraryText = json.value["arbitraryText"] ?? null;
+    this._goals = json.value["goals"] ?? [];
   }
 
   public get email(): string {
@@ -60,10 +70,16 @@ export class PaymentPageConfig {
   public set requestCost(value) {
     this._requestCost = value;
   }
-  public get arbitraryText(): string|null {
+  public get arbitraryText(): string | null {
     return this._arbitraryText;
   }
-  public set arbitraryText(value: string|null) {
+  public set arbitraryText(value: string | null) {
     this._arbitraryText = value;
+  }
+  public get goals(): Goal[] {
+      return this._goals;
+  }
+  public set goals(value: Goal[]) {
+      this._goals = value;
   }
 }

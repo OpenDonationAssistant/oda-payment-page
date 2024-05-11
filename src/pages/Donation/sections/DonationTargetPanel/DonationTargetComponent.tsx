@@ -1,21 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
-import { DonationTarget } from "./DonationTargetInterfaces";
 import classes from "./DonationTargetComponent.module.css";
+import { Goal } from "../../../../logic/PaymentPageConfig";
 
 export default function DonationTargetComponent({
   target,
-  selectHandler
+  selectHandler,
 }: {
-  target: DonationTarget;
+  target: Goal;
   selectHandler: (selected: boolean) => void;
 }) {
   const bar = useRef<HTMLDivElement>(null);
-  const [selected, setSelected] = useState<boolean>(target.selected);
-
+  const [selected, setSelected] = useState<boolean>(target.selected ?? false);
 
   useEffect(() => {
-    setSelected(target.selected);
-  },[target]);
+    setSelected(target.selected ?? false);
+  }, [target]);
 
   function chooseHandler() {
     setSelected((oldValue) => {
@@ -28,30 +27,40 @@ export default function DonationTargetComponent({
     if (!bar.current) {
       return;
     }
-    let progress = (
-      (target.collectedAmount / target.requiredAmount) *
-      100
-    ).toFixed(2);
+    let progress = Number.parseInt(
+      (
+        (target.accumulatedAmount.major / target.requiredAmount.major) *
+        100
+      ).toFixed(2),
+    );
+    if (progress > 100) {
+      progress = 100;
+    }
     bar.current.style["width"] = `${progress}%`;
   }, [target]);
 
   return (
     <>
       <div className={`${classes.donationtarget}`}>
-        <div className={`${classes.title}`}>{target.title}</div>
+        <div className={`${classes.title}`}>{target.briefDescription}</div>
         <div className={`${classes.progress}`}>
           <div ref={bar} className={`${classes.progressbar}`}></div>
         </div>
-        <div className={`${classes.description}`}>{target.description}</div>
+        <div className={`${classes.description}`}>{target.fullDescription}</div>
         <div className={`${classes.buttoncontainer}`}>
           <div className={`${classes.amount}`}>
-              {target.collectedAmount}&#x20BD; / {target.requiredAmount}&#x20BD;
+            {target.accumulatedAmount.major}&#x20BD; /{" "}
+            {target.requiredAmount.major}&#x20BD;
           </div>
           <button
-            className={`clickable-button ${classes.choosebutton} ${selected ? classes.choosebuttonselected : classes.choosebuttonnotselected}`}
+            className={`clickable-button ${classes.choosebutton} ${
+              selected
+                ? classes.choosebuttonselected
+                : classes.choosebuttonnotselected
+            }`}
             onClick={chooseHandler}
           >
-            {selected ? "Выбрано":"Выбрать"}
+            {selected ? "Выбрано" : "Выбрать"}
           </button>
         </div>
       </div>
