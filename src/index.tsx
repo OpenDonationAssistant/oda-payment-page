@@ -50,7 +50,7 @@ const pageConfig = new PaymentPageConfig(config);
 const paymentController = new PaymentController(
   recipientId,
   config.value["media.requests.cost"] ?? 100,
-  40,
+  config.value["minimalAmount"],
 );
 
 const assistController = new AssistController();
