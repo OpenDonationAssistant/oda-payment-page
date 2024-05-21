@@ -137,3 +137,14 @@ body::before {
   filter: blur(5px);
 }
 
+@media (max-width: 540px) {
+  .page-content-container .card-footer {
+    padding-bottom: 0px;
+    min-height: 120px;
+  }
+  .arbitrary-text-container .text-panel {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+}
+
