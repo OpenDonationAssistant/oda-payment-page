@@ -20,6 +20,8 @@ export class PaymentPageConfig {
   private _requestCost = 100;
   private _arbitraryText: string | null = null;
   private _goals: Goal[] = [];
+  private _payButtonText: string | null = null;
+  private _customCss: string | null = null;
 
   constructor(json: any) {
     this.config = json;
@@ -32,6 +34,8 @@ export class PaymentPageConfig {
     this.inn = json.value["inn"] ?? "";
     this.arbitraryText = json.value["arbitraryText"] ?? null;
     this._goals = json.value["goals"] ?? [];
+    this._payButtonText = json.value["payButtonText"] ?? "";
+    this._customCss = json.value["customCss"] ?? null;
   }
 
   public get email(): string {
@@ -77,9 +81,21 @@ export class PaymentPageConfig {
     this._arbitraryText = value;
   }
   public get goals(): Goal[] {
-      return this._goals;
+    return this._goals;
   }
   public set goals(value: Goal[]) {
-      this._goals = value;
+    this._goals = value;
+  }
+  public get payButtonText(): string | null {
+    return this._payButtonText;
+  }
+  public set payButtonText(value: string | null) {
+    this._payButtonText = value;
+  }
+  public get customCss(): string | null {
+    return this._customCss;
+  }
+  public set customCss(value: string | null) {
+    this._customCss = value;
   }
 }

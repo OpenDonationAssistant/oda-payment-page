@@ -1,5 +1,5 @@
 .hidden {
-  display: none!important;
+  display: none !important;
 }
 
 .material-symbols-outlined.currency {
@@ -68,6 +68,7 @@
   height: 110px;
   display: inline-block;
   margin-top: -26px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0px 0px 10px 0px;
 }
 
 #recipient-title {
@@ -147,7 +148,7 @@
   display: initial;
 }
 
-.material-symbols-sharp.left-icon{
+.material-symbols-sharp.left-icon {
   width: initial;
   position: absolute;
   vertical-align: center;
@@ -611,9 +612,10 @@
   .card-footer {
     margin-bottom: 25px;
   }
-  .donation-target{
+  .donation-target {
     grid-column: 2;
     grid-row: 3;
     margin-right: 0;
   }
 }
+

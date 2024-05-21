@@ -32,6 +32,13 @@ export default function Donation({
 }) {
   return (
     <>
+      {pageConfig.customCss && (
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `@import url(${pageConfig.customCss})`,
+          }}
+        />
+      )}
       <ODALogo />
       <div className="page-content-container">
         <AmountInput
@@ -56,7 +63,10 @@ export default function Donation({
             mediaRequestsEnabled={mediaRequestsEnabled}
             paymentController={paymentController}
           />
-          <PayButton paymentController={paymentController} />
+          <PayButton
+            paymentPageConfig={pageConfig}
+            paymentController={paymentController}
+          />
         </div>
 
         <Footer nickname={streamerName} />

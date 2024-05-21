@@ -2,10 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { PaymentController } from "../../../../logic/payment/PaymentController";
 import { useNavigate } from "react-router-dom";
 import classes from "./PayButton.module.css";
+import { PaymentPageConfig } from "../../../../logic/PaymentPageConfig";
 
 export default function PayButton({
+  paymentPageConfig,
   paymentController,
 }: {
+  paymentPageConfig: PaymentPageConfig,
   paymentController: PaymentController;
 }) {
   const [nickname, setNickname] = useState<string>(paymentController.nickname);
@@ -177,7 +180,7 @@ export default function PayButton({
             pay(null);
           }}
         >
-          Задонатить {amount ? amount : 0}&#x20BD;
+          {paymentPageConfig.payButtonText?.replace("<amount>", `${amount ? amount : 0}\u20BD`)}
         </button>
         <div id="confirmation-text" className="col">
           {error

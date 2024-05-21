@@ -38,7 +38,7 @@ export default function ArbitraryTextPanel({
   return (
     <>
       <div
-        className={`${classes.text} ${panelHidden ? classes.texthidden : ""}`}
+        className={`text-panel ${classes.text} ${panelHidden ? classes.texthidden : ""}`}
       >
         <div
           className={`${
