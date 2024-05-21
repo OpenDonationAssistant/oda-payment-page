@@ -608,6 +608,7 @@
   }
   .page-content-container .card-header {
     padding-top: 0.5em;
+    border-radius: 0!important;
   }
   .card-footer {
     margin-bottom: 25px;
