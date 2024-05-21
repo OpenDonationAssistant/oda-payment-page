@@ -67,6 +67,7 @@
 
   .texthidden {
     height: 30px;
+    min-height: 30px;
     width: 100%;
   }
 }
