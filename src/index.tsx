@@ -21,17 +21,18 @@ let recipientId = window.location.hostname.substring(
   window.location.hostname.indexOf("."),
 );
 
-String.prototype.hashCode = function() {
+String.prototype.hashCode = function () {
   var hash = 0,
-    i, chr;
+    i,
+    chr;
   if (this.length === 0) return hash;
   for (i = 0; i < this.length; i++) {
     chr = this.charCodeAt(i);
-    hash = ((hash << 5) - hash) + chr;
+    hash = (hash << 5) - hash + chr;
     hash |= 0; // Convert to 32bit integer
   }
   return hash;
-}
+};
 
 if (!recipientId) {
   recipientId = "testuser";
@@ -102,7 +103,19 @@ if (rootElement) {
     <React.StrictMode>
       <style
         dangerouslySetInnerHTML={{
-          __html: `html, body {background-image: url("${process.env.REACT_APP_CDN_ENDPOINT}/back-${recipientId}.jpg")}`,
+          __html: `body::before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  display: block;
+  background-image: url(${process.env.REACT_APP_CDN_ENDPOINT}/back-${recipientId}.jpg);
+  background-size:cover;
+  width: 100%;
+  height: 100%;
+  filter: blur(5px);
+}`,
         }}
       />
       <RouterProvider router={router} />
