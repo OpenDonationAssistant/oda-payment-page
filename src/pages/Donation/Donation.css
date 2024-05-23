@@ -407,7 +407,9 @@
   top: 9px;
   font-size: 20px;
   user-select: none;
+  color: #a2a8d3;
 }
+
 .media-gif-text {
   display: block;
   text-align: center;
