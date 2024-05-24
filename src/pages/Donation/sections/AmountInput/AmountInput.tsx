@@ -22,7 +22,7 @@ export default function AmountInput({
       setAmount: setAmount,
       setAttachments: () => {},
       setError: setError,
-      setTreshold: setTreshold
+      setTreshold: setTreshold,
     });
   }, [paymentController]);
 
@@ -35,10 +35,7 @@ export default function AmountInput({
       setAmountInputWidth(180);
     }
     if (amount >= 100000) {
-      setAmountInputWidth(200);
-    }
-    if (amount >= 1000000) {
-      setAmountInputWidth(220);
+      setAmountInputWidth(195);
     }
   }
 
@@ -46,7 +43,11 @@ export default function AmountInput({
     <>
       <div className="card-header ps-4 text-bg-dark align-middle">
         <div id="recipient-title">
-          Для <a className="stream-link" href={`https://twitch.tv/${streamerName}`}>{streamerName}</a> на развитие канала
+          Для{" "}
+          <a className="stream-link" href={`https://twitch.tv/${streamerName}`}>
+            {streamerName}
+          </a>{" "}
+          на развитие канала
         </div>
         <div style={{ display: "flex" }}>
           <img
@@ -58,6 +59,17 @@ export default function AmountInput({
           <div id="amount-container">
             <span id="donation-title">Донат</span>
             <div>
+              <div className="amount-border">
+                <i>
+                  {String(amount).replace(/^0+/, "")}
+                </i>
+              </div>
+              <div className="amount-mask">
+                <i>
+                  {String(amount).replace(/^0+/, "")}
+                </i>
+                <span>{`\u20BD`}</span>
+              </div>
               <input
                 id="amount-input"
                 autoFocus={true}
@@ -73,7 +85,6 @@ export default function AmountInput({
                   updateAmountInputWidth(value);
                 }}
               />
-              <span id="currency-sign">{`\u20BD`}</span>
             </div>
           </div>
         </div>
