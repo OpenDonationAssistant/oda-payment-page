@@ -115,6 +115,7 @@
   display: inline-block;
   overflow: hidden;
 }
+
 .amount-mask > span {
   color: #718cd0;
   vertical-align: top;
@@ -633,6 +634,12 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+  }
+  #amount-container > div {
+    padding-left: 10px;
+  }
+  .amount-border {
+    top: 0px!important;
   }
   #data-panel {
     border-top-right-radius: 0px !important;
