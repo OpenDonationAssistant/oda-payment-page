@@ -23,7 +23,7 @@ export default function MessageInput({
   return (
     <>
       <div className="row col-12 mt-2 position-relative">
-        <span className="material-symbols-sharp left-icon">chat</span>
+        <span id="chat-icon" className="material-symbols-sharp left-icon">chat</span>
         <textarea
           ref={descriptionInputRef}
           id="description-input"
