@@ -7,6 +7,7 @@ export interface Goal {
   requiredAmount: Amount;
   accumulatedAmount: Amount;
   selected?: boolean;
+  default: boolean;
 }
 
 export class PaymentPageConfig {
@@ -34,6 +35,12 @@ export class PaymentPageConfig {
     this.inn = json.value["inn"] ?? "";
     this.arbitraryText = json.value["arbitraryText"] ?? null;
     this._goals = json.value["goals"] ?? [];
+    this._goals.map(goal => {
+      if (goal.default) {
+        goal.selected = true;
+      }
+      return goal;
+    });
     this._payButtonText = json.value["payButtonText"] ?? "";
     this._customCss = json.value["customCss"] ?? null;
   }
