@@ -3,6 +3,9 @@ import React, { useState } from "react";
 const url = `https://api.oda.digital/logs/feedback`;
 
 function sendFeedback(feedback: string) {
+  if (!feedback) {
+    return;
+  }
   fetch(url, {
     method: "POST",
     headers: {
