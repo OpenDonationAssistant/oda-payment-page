@@ -38,7 +38,7 @@ export default function Feedback({}) {
             }}
           >
             <span className="material-symbols-sharp">send</span>
-            <span>Отправить</span>
+            <span className="btn-text">Отправить</span>
           </button>
         </div>
       </div>
@@ -50,7 +50,7 @@ export default function Feedback({}) {
           }}
         >
           <span className="material-symbols-sharp">rate_review</span>
-          <span>Обратная связь</span>
+          <span className="btn-text">Обратная связь</span>
         </button>
       </div>
     </>
