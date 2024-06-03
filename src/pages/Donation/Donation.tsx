@@ -14,6 +14,7 @@ import ArbitraryTextPanel from "./sections/ArbitraryTextPanel/ArbitraryTextPanel
 import { PaymentPageConfig } from "../../logic/PaymentPageConfig";
 import ODALogo from "../../components/ODALogo/ODALogo";
 import DonationTargetPanel from "./sections/DonationTargetPanel/DonationTargetPanel";
+import Feedback from "./sections/Feedback/Feedback";
 
 export default function Donation({
   pageConfig,
@@ -40,6 +41,7 @@ export default function Donation({
         />
       )}
       <ODALogo />
+      <Feedback/>
       <div className="page-content-container">
         <AmountInput
           recipientId={recipientId}

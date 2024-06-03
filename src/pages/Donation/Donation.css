@@ -589,6 +589,82 @@
   flex-direction: column;
 }
 
+.feedback-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 0px 10px 0px;
+}
+
+.feedback-container .btn {
+    background-color: white;
+}
+
+.feedback-container .btn:hover {
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 8px 8px -6.4px;
+  transform: translateY(-1px);
+}
+
+.feedback-message-container {
+  position: fixed;
+  right: 20px;
+  bottom: 80px;
+  width: 350px;
+  background-color: #f1f1f1;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+.feedback-message-container .feedback-message {
+  width: 100%;
+  min-height: 120px;
+  margin-bottom: 10px;
+  border: 1px solid rgb(222, 226, 230);
+  border-radius: 6px;
+  resize: none;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.feedback-message:focus {
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.feedback-button-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.feedback-button-group .btn {
+  width: 100%;
+  font-size: 20px;
+}
+
+.feedback-button-group .btn:hover {
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 8px 8px -6.4px;
+  transform: translateY(-1px);
+  background-color: rgb(33, 37, 41);
+}
+
+.feedback-message-container .material-symbols-sharp,
+.feedback-container .material-symbols-sharp {
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
 @media (min-width: 540px) {
   .page-content-container .card-header {
     padding-bottom: 1.5em;
