@@ -764,4 +764,7 @@
   .feedback-container .btn-text {
     display: none;
   }
+  .feedback-container {
+    display: none;
+  }
 }
