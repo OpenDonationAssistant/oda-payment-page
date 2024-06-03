@@ -593,7 +593,7 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 1000;
+  z-index: 500;
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.56) 0px 0px 10px 0px;
 }
@@ -624,7 +624,7 @@
   padding-right: 20px;
   padding-left: 20px;
   padding-top: 20px;
-  z-index: 1000;
+  z-index: 500;
   box-shadow: rgba(0, 0, 0, 0.56) 0px 0px 10px 0px;
 }
 
