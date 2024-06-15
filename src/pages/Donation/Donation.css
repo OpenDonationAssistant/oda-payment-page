@@ -327,6 +327,8 @@
   text-underline-offset: 3px;
   padding-left: 4px !important;
   margin-top: -5px;
+  z-index: 10;
+  position: relative;
 }
 
 #media-url-input {
@@ -599,7 +601,7 @@
 }
 
 .feedback-container .btn {
-    background-color: white;
+  background-color: white;
 }
 
 .feedback-message-container .btn-text,
