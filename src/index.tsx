@@ -54,6 +54,10 @@ const paymentController = new PaymentController(
   config.value["minimalAmount"],
 );
 
+pageConfig.goals
+  .filter((goal) => goal.selected)
+  .forEach((goal) => (paymentController.goal = goal.id));
+
 const assistController = new AssistController();
 
 const router = createBrowserRouter([

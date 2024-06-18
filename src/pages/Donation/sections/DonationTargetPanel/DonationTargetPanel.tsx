@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import classes from "./DonationTargetPanel.module.css";
-import { DonationTarget } from "./DonationTargetInterfaces";
 import DonationTargetComponent from "./DonationTargetComponent";
 import { Goal } from "../../../../logic/PaymentPageConfig";
 import { PaymentController } from "../../../../logic/payment/PaymentController";
