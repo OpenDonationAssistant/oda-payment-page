@@ -60,7 +60,7 @@ export default function Donation({
         <div id="data-panel" className="container">
           <NicknameInput paymentController={paymentController} />
           <MessageInput paymentController={paymentController} />
-          {pageConfig.gateway === "yookassa" && (<EmailInput/>)}
+          {pageConfig.gateway === "robokassa" && (<EmailInput/>)}
           <MediaInput
             recipientId={recipientId}
             mediaRequestsDisabledPermanently={mediaRequestsDisabledPermanently}
