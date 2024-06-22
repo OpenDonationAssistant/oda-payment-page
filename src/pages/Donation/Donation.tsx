@@ -15,6 +15,7 @@ import { PaymentPageConfig } from "../../logic/PaymentPageConfig";
 import ODALogo from "../../components/ODALogo/ODALogo";
 import DonationTargetPanel from "./sections/DonationTargetPanel/DonationTargetPanel";
 import Feedback from "./sections/Feedback/Feedback";
+import EmailInput from "./sections/EmailInput/EmailInput";
 
 export default function Donation({
   pageConfig,
@@ -59,6 +60,7 @@ export default function Donation({
         <div id="data-panel" className="container">
           <NicknameInput paymentController={paymentController} />
           <MessageInput paymentController={paymentController} />
+          {pageConfig.gateway === "yookassa" && (<EmailInput/>)}
           <MediaInput
             recipientId={recipientId}
             mediaRequestsDisabledPermanently={mediaRequestsDisabledPermanently}

@@ -95,6 +95,7 @@ const router = createBrowserRouter([
         fio={config.value.fio}
         inn={config.value.inn}
         email={config.value.email}
+        gateway={config.value.gateway}
       />
     ),
   },

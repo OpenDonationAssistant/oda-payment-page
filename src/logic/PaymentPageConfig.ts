@@ -23,6 +23,7 @@ export class PaymentPageConfig {
   private _goals: Goal[] = [];
   private _payButtonText: string | null = null;
   private _customCss: string | null = null;
+  private _gateway: string | null = null;
 
   constructor(json: any) {
     this.config = json;
@@ -35,7 +36,7 @@ export class PaymentPageConfig {
     this.inn = json.value["inn"] ?? "";
     this.arbitraryText = json.value["arbitraryText"] ?? null;
     this._goals = json.value["goals"] ?? [];
-    this._goals.map(goal => {
+    this._goals.map((goal) => {
       if (goal.default) {
         goal.selected = true;
       }
@@ -43,6 +44,7 @@ export class PaymentPageConfig {
     });
     this._payButtonText = json.value["payButtonText"] ?? "";
     this._customCss = json.value["customCss"] ?? null;
+    this._gateway = json.value["gateway"] ?? null;
   }
 
   public get email(): string {
@@ -104,5 +106,11 @@ export class PaymentPageConfig {
   }
   public set customCss(value: string | null) {
     this._customCss = value;
+  }
+  public set gateway(value: string | null) {
+    this._gateway = value;
+  }
+  public get gateway(): string | null {
+    return this._gateway;
   }
 }
