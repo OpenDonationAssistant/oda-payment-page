@@ -13,11 +13,13 @@ export default function MediaInput({
   mediaRequestsDisabledPermanently,
   mediaRequestsEnabled,
   paymentController,
+  tooltip
 }: {
   recipientId: string;
   mediaRequestsDisabledPermanently: boolean;
   mediaRequestsEnabled: boolean;
   paymentController: PaymentController;
+  tooltip: string;
 }) {
   const [attachments, setAttachments] = useState([]);
   const [mediaSuggestions, setMediaSuggestions] = useState([]);
@@ -79,7 +81,7 @@ export default function MediaInput({
     setShowMediaAutocomplete(false);
     axios
       .put(`${process.env.REACT_APP_MEDIA_API_ENDPOINT}/media/video`, {
-        url: url
+        url: url,
       })
       .then((json) => {
         let updated = [...attachments, json.data];
@@ -114,12 +116,18 @@ export default function MediaInput({
           )}
           {mediaRequestsEnabled && (
             <div className="col-12 mt-2 position-relative">
-              <span className="material-symbols-sharp left-icon" >
-                search
-              </span>
+              <span className="material-symbols-sharp left-icon">search</span>
               <div className="row col-12 mt-2 media-container">
+                {tooltip && <Tooltip
+                  id="media-url-tooltip"
+                  place="top"
+                  variant="info"
+                  content={tooltip}
+                  className="media-url-tooltip"
+                />}
                 <input
                   id="media-url-input"
+                  data-tooltip-id="media-url-tooltip"
                   hidden={attachments.length >= 12 ? true : false}
                   className={
                     incorrectMediaError

@@ -66,6 +66,7 @@ export default function Donation({
             mediaRequestsDisabledPermanently={mediaRequestsDisabledPermanently}
             mediaRequestsEnabled={mediaRequestsEnabled}
             paymentController={paymentController}
+            tooltip={pageConfig.tooltip}
           />
           <PayButton
             paymentPageConfig={pageConfig}

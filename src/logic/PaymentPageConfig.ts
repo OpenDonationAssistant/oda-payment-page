@@ -24,6 +24,7 @@ export class PaymentPageConfig {
   private _payButtonText: string | null = null;
   private _customCss: string | null = null;
   private _gateway: string | null = null;
+  private _tooltip: string = "";
 
   constructor(json: any) {
     this.config = json;
@@ -45,6 +46,7 @@ export class PaymentPageConfig {
     this._payButtonText = json.value["payButtonText"] ?? "";
     this._customCss = json.value["customCss"] ?? null;
     this._gateway = json.value["gateway"] ?? null;
+    this._tooltip = json.value["tooltip"] ?? "";
   }
 
   public get email(): string {
@@ -112,5 +114,11 @@ export class PaymentPageConfig {
   }
   public get gateway(): string | null {
     return this._gateway;
+  }
+  public set tooltip(value: string) {
+    this._tooltip = value;
+  }
+  public get tooltip(): string {
+    return this._tooltip;
   }
 }
