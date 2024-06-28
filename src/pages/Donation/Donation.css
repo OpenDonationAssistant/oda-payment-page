@@ -455,6 +455,10 @@
   padding-left: 40px;
 }
 
+#email-input {
+  padding-left: 40px;
+}
+
 .media-info-icon {
   position: absolute;
   right: 20px;
@@ -770,3 +774,5 @@
     display: none;
   }
 }
+
+
