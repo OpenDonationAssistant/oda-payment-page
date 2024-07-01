@@ -26,16 +26,16 @@ if (!recipientId) {
 }
 
 var myDynamicManifest = {
-  name: `Donation to ${recipientId}`,
-  short_name: `Donation to ${recipientId}`,
-  description: `Donation to ${recipientId}`,
+  name: `${recipientId} - Donation`,
+  short_name: `${recipientId} - Donation`,
+  description: `${recipientId} - Donation`,
   start_url: `${recipientId}.oda.digital`,
   background_color: "#000000",
-  theme_color: "#0f4a73",
+  theme_color: "#674ea7",
   icons: [
     {
-      src: `${process.env.PUBLIC_URL}/favicon-32x32.png`,
-      sizes: "32x32",
+      src: `${process.env.REACT_APP_CDN_ENDPOINT}/logo-${recipientId}.png`,
+      sizes: "300x300",
       type: "image/png",
     },
   ],
@@ -47,7 +47,7 @@ document
   .querySelector("#my-manifest-placeholder")
   ?.setAttribute("href", manifestURL);
 
-document.title = "Donation to "  + recipientId;
+document.title = `${recipientId} - Donation`;
 
 String.prototype.hashCode = function () {
   var hash = 0,
