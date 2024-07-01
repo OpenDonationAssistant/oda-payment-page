@@ -21,6 +21,34 @@ let recipientId = window.location.hostname.substring(
   window.location.hostname.indexOf("."),
 );
 
+if (!recipientId) {
+  recipientId = "testuser";
+}
+
+var myDynamicManifest = {
+  name: `Donation to ${recipientId}`,
+  short_name: `Donation to ${recipientId}`,
+  description: `Donation to ${recipientId}`,
+  start_url: `${recipientId}.oda.digital`,
+  background_color: "#000000",
+  theme_color: "#0f4a73",
+  icons: [
+    {
+      src: `${process.env.PUBLIC_URL}/favicon-32x32.png`,
+      sizes: "32x32",
+      type: "image/png",
+    },
+  ],
+};
+const stringManifest = JSON.stringify(myDynamicManifest);
+const blob = new Blob([stringManifest], { type: "application/json" });
+const manifestURL = URL.createObjectURL(blob);
+document
+  .querySelector("#my-manifest-placeholder")
+  ?.setAttribute("href", manifestURL);
+
+document.title = "Donation to "  + recipientId;
+
 String.prototype.hashCode = function () {
   var hash = 0,
     i,
@@ -33,10 +61,6 @@ String.prototype.hashCode = function () {
   }
   return hash;
 };
-
-if (!recipientId) {
-  recipientId = "testuser";
-}
 
 const config = await axios
   .get(
