@@ -12,8 +12,9 @@ interface PaymentProps {
 }
 
 export async function loader({ params }: { params: Params<"paymentId"> }) {
+  const paymentId = params.paymentId ?? params.SHP_ID;
   let payment = await axios
-    .get(`${process.env.REACT_APP_API_ENDPOINT}/payments/${params.paymentId}`)
+    .get(`${process.env.REACT_APP_API_ENDPOINT}/payments/${paymentId}`)
     .then((json) => {
       return json.data;
     });

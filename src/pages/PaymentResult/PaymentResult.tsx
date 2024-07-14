@@ -6,9 +6,10 @@ import { useEffect } from "react";
 import axios from "axios";
 
 export async function loader({ params }: { params: Params<"paymentId"> }) {
+  const paymentId  = params.paymentId ?? params.SHP_ID;
   let payment = await axios
     .put(`${process.env.REACT_APP_API_ENDPOINT}/commands/payment/complete`, {
-      paymentId: params.paymentId,
+      paymentId: paymentId
     })
     .then((json) => {
       return json.data;
