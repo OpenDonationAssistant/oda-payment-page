@@ -70,6 +70,7 @@ export class PaymentController {
     return axios.put(
       `${process.env.REACT_APP_API_ENDPOINT}/commands/payment/create`,
       {
+        // todo use v7
         id: uuidv4(),
         nickname: this.nickname,
         message: this.text,

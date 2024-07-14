@@ -67,7 +67,6 @@ export default function Donation({
             paymentController={paymentController}
             tooltip={pageConfig.tooltip}
           />
-          {pageConfig.gateway === "robokassa" && (<EmailInput/>)}
           <PayButton
             paymentPageConfig={pageConfig}
             paymentController={paymentController}

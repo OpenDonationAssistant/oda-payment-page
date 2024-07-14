@@ -102,7 +102,14 @@ export default function PayButton({
   function pay(type: string|null) {
     paymentController
       .pay(type)
-      .then((data) => navigate(`/payment/${data.data.id}`));
+      .then((data) => {
+        const url =  data.data.operationUrl as string;
+        if (url.startsWith("http")) {
+          window.location.href  =  url;
+        } else {
+          navigate(data.data.operationUrl);
+        }
+      });
   }
 
   return (
