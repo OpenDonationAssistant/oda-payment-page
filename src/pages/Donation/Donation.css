@@ -766,6 +766,7 @@
     grid-column: 2;
     grid-row: 3;
     margin-right: 0;
+    justify-self: stretch;
   }
   .feedback-container .btn-text {
     display: none;
