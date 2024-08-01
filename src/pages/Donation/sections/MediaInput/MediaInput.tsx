@@ -13,7 +13,7 @@ export default function MediaInput({
   mediaRequestsDisabledPermanently,
   mediaRequestsEnabled,
   paymentController,
-  tooltip
+  tooltip,
 }: {
   recipientId: string;
   mediaRequestsDisabledPermanently: boolean;
@@ -87,6 +87,7 @@ export default function MediaInput({
         let updated = [...attachments, json.data];
         setAttachments(updated);
         setNewMedia("");
+        console.log({updated:updated});
         paymentController.attachments = updated;
       })
       .catch(function (error) {
@@ -118,13 +119,15 @@ export default function MediaInput({
             <div className="col-12 mt-2 position-relative">
               <span className="material-symbols-sharp left-icon">search</span>
               <div className="row col-12 mt-2 media-container">
-                {tooltip && <Tooltip
-                  id="media-url-tooltip"
-                  place="top"
-                  variant="info"
-                  content={tooltip}
-                  className="media-url-tooltip"
-                />}
+                {tooltip && (
+                  <Tooltip
+                    id="media-url-tooltip"
+                    place="top"
+                    variant="info"
+                    content={tooltip}
+                    className="media-url-tooltip"
+                  />
+                )}
                 <input
                   id="media-url-input"
                   data-tooltip-id="media-url-tooltip"
