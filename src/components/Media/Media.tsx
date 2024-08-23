@@ -11,7 +11,7 @@ interface MediaProps {
 }
 
 function createVkIframeSrc(id: string) {
-  return `https://vk.com/video_ext.php?oid=-${id.replace(
+  return `https://vk.com/video_ext.php?oid=${id.replace(
     "_",
     "&id=",
   )}&hd=2&autoplay=0`;
