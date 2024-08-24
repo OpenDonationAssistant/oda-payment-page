@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "./sections/Footer/Footer";
 import "./Donation.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -16,6 +16,7 @@ import ODALogo from "../../components/ODALogo/ODALogo";
 import DonationTargetPanel from "./sections/DonationTargetPanel/DonationTargetPanel";
 import Feedback from "./sections/Feedback/Feedback";
 import EmailInput from "./sections/EmailInput/EmailInput";
+import { useSearchParams } from "react-router-dom";
 
 export default function Donation({
   pageConfig,
@@ -32,6 +33,16 @@ export default function Donation({
   streamerName: string;
   paymentController: PaymentController;
 }) {
+  const [params] = useSearchParams();
+
+  const [useBeta, _] = useState(() => {
+    const useBeta = params.get("beta");
+    if (useBeta) {
+      return true;
+    }
+    return false;
+  });
+
   return (
     <>
       {pageConfig.customCss && (
@@ -42,7 +53,7 @@ export default function Donation({
         />
       )}
       <ODALogo />
-      <Feedback/>
+      <Feedback />
       <div className="page-content-container">
         <AmountInput
           recipientId={recipientId}
@@ -58,6 +69,24 @@ export default function Donation({
         </div>
 
         <div id="data-panel" className="container">
+          {useBeta && (
+            <button
+              onClick={() => {
+                console.log("login");
+                // VK.Auth.login((r) => {
+                //   console.log(r);
+                // });
+                VK.App.open('vkpay', {
+                  "amount": 10,
+                  "action": "pay-to-user",
+                  "description": "донат",
+                  "user_id": "id143724949"
+                });
+              }}
+            >
+              login
+            </button>
+          )}
           <NicknameInput paymentController={paymentController} />
           <MessageInput paymentController={paymentController} />
           <MediaInput
