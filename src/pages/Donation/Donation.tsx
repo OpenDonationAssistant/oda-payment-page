@@ -73,15 +73,20 @@ export default function Donation({
             <button
               onClick={() => {
                 console.log("login");
-                // VK.Auth.login((r) => {
-                //   console.log(r);
-                // });
-                VK.App.open('vkpay', {
-                  "amount": 10,
-                  "action": "pay-to-user",
-                  "description": "донат",
-                  "user_id": "id143724949"
+                VK.Auth.login((r) => {
+                  console.log(r);
                 });
+                try{
+                  const resp = VK.App.open('vkpay', {
+                    "amount": 10,
+                    "action": "pay-to-user",
+                    "description": "донат",
+                    "user_id": "id143724949"
+                  });
+                  console.log({response: resp}, "response");
+                }catch(error){
+                  console.log({error: error}, "error");
+                }
               }}
             >
               login
