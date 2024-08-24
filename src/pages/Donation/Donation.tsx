@@ -73,9 +73,10 @@ export default function Donation({
             <button
               onClick={() => {
                 console.log("login");
-                VK.Auth.login((r) => {
+                const session = VK.Auth.login((r) => {
                   console.log(r);
                 });
+                console.log({session: session}, "session");
                 try{
                   const resp = VK.App.open('vkpay', {
                     "amount": 10,
