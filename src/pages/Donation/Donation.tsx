@@ -69,30 +69,6 @@ export default function Donation({
         </div>
 
         <div id="data-panel" className="container">
-          {useBeta && (
-            <button
-              onClick={() => {
-                console.log("login");
-                const session = VK.Auth.login((r) => {
-                  console.log(r);
-                });
-                console.log({session: session}, "session");
-                try{
-                  const resp = VK.App.open('vkpay', {
-                    "amount": 10,
-                    "action": "pay-to-user",
-                    "description": "донат",
-                    "user_id": "id143724949"
-                  });
-                  console.log({response: resp}, "response");
-                }catch(error){
-                  console.log({error: error}, "error");
-                }
-              }}
-            >
-              login
-            </button>
-          )}
           <NicknameInput paymentController={paymentController} />
           <MessageInput paymentController={paymentController} />
           <MediaInput
