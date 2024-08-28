@@ -4,6 +4,9 @@
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@fontsource-variable/exo-2": "^5.0.20",
+    "@fontsource/black-ops-one": "^5.0.14",
+    "@fontsource/material-symbols-sharp": "^5.0.40",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

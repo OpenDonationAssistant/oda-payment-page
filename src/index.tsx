@@ -2,6 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
+import '@fontsource/black-ops-one';
+import '@fontsource-variable/exo-2';
+import "@fontsource/material-symbols-sharp";
+
 import Donation from "./pages/Donation/Donation";
 
 import PaymentResult, {
