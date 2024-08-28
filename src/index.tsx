@@ -25,7 +25,7 @@ if (!recipientId) {
   recipientId = "testuser";
 }
 
-var myDynamicManifest = {
+var dynamicManifest = {
   name: `${recipientId} - Donation`,
   short_name: `${recipientId} - Donation`,
   description: `${recipientId} - Donation`,
@@ -40,9 +40,11 @@ var myDynamicManifest = {
     },
   ],
 };
-const stringManifest = JSON.stringify(myDynamicManifest);
+
+const stringManifest = JSON.stringify(dynamicManifest);
 const blob = new Blob([stringManifest], { type: "application/json" });
 const manifestURL = URL.createObjectURL(blob);
+
 document
   .querySelector("#my-manifest-placeholder")
   ?.setAttribute("href", manifestURL);
@@ -81,8 +83,6 @@ const paymentController = new PaymentController(
 pageConfig.goals
   .filter((goal) => goal.selected)
   .forEach((goal) => (paymentController.goal = goal.id));
-
-const assistController = new AssistController();
 
 const router = createBrowserRouter([
   {
@@ -130,6 +130,23 @@ if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <React.StrictMode>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `html::before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  display: block;
+  background-image: url(${process.env.REACT_APP_CDN_ENDPOINT}/commonback.jpg);
+  background-size:cover;
+  width: 100%;
+  height: 100%;
+  filter: blur(5px);
+}`,
+        }}
+      />
       <style
         dangerouslySetInnerHTML={{
           __html: `body::before {
