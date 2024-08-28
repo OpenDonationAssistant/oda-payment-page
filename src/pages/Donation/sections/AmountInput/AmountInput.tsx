@@ -54,7 +54,7 @@ export default function AmountInput({
             id="streamer-logo"
             src={`${process.env.REACT_APP_CDN_ENDPOINT}/logo-${recipientId}.png`}
             className="logo img-fluid rounded-2"
-            alt="Streamer logo"
+            alt=""
           />
           <div id="amount-container">
             <span id="donation-title">Донат</span>
