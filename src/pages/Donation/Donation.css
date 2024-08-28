@@ -68,6 +68,7 @@
 }
 
 #streamer-logo {
+  z-index: 0;
   width: 110px;
   height: 110px;
   display: inline-block;
@@ -679,12 +680,11 @@
 
 #streamer-logo::before {
   content: "";
-  left: 0;
-  right: 0;
   z-index: -1;
   display: block;
   background-image: url("https://api.oda.digital/images/commonlogo.png");
   background-size:cover;
+  border-radius: var(--bs-border-radius) !important;
   width: 100%;
   height: 100%;
 }
