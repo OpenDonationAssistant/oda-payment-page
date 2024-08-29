@@ -67,14 +67,14 @@
   display: inline-block;
 }
 
-#streamer-logo {
+img.logo {
   z-index: 0;
   position: relative;
   width: 110px;
   height: 110px;
   display: inline-block;
   margin-top: -26px;
-  /* box-shadow: rgba(0, 0, 0, 0.8) 0px 0px 10px 0px; */
+  box-shadow: 0 0 5px 1px black;
 }
 
 #recipient-title {
@@ -679,18 +679,6 @@
   vertical-align: middle;
 }
 
-/* #streamer-logo::before { */
-/*   content: ""; */
-/*   z-index: -2; */
-/*   display: block; */
-/*   background-image: url("https://api.oda.digital/images/commonlogo.png"); */
-/*   background-size:cover; */
-/*   border-radius: var(--bs-border-radius) !important; */
-/*   width: 100%; */
-/*   height: 100%; */
-/*   position: relative; */
-/* } */
-
 @media (min-width: 540px) {
   .page-content-container .card-header {
     padding-bottom: 1.5em;
@@ -724,7 +712,7 @@
     margin-bottom: 5px;
   }
 
-  #streamer-logo {
+  img.logo {
     margin-top: 0px;
   }
   #donation-title {

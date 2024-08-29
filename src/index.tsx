@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
-import '@fontsource/black-ops-one';
-import '@fontsource-variable/exo-2';
+import "@fontsource/black-ops-one";
+import "@fontsource-variable/exo-2";
 import "@fontsource/material-symbols-sharp";
 
 import Donation from "./pages/Donation/Donation";
@@ -161,7 +161,7 @@ if (rootElement) {
   z-index: -1;
   display: block;
   background-image: url(${process.env.REACT_APP_CDN_ENDPOINT}/back-${recipientId}.jpg);
-  background-size:cover;
+  background-size: cover;
   width: 100%;
   height: 100%;
   filter: blur(5px);

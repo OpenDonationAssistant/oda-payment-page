@@ -41,24 +41,6 @@ export default function AmountInput({
 
   return (
     <>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `#streamer-logo::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: -1;
-  display: block;
-  background-image: url(${process.env.REACT_APP_CDN_ENDPOINT}/logo-${recipientId}.png);
-  background-size:cover;
-  border-radius: var(--bs-border-radius) !important;
-  width: 100%;
-  height: 100%;
-}`,
-        }}
-      />
       <div className="card-header ps-4 text-bg-dark align-middle">
         <div id="recipient-title">
           Для{" "}
@@ -68,7 +50,27 @@ export default function AmountInput({
           на развитие канала
         </div>
         <div style={{ display: "flex" }}>
-          <div id="streamer-logo" className="logo img-fluid rounded-2"/>
+          <img
+            id="default-logo"
+            src={`${process.env.REACT_APP_CDN_ENDPOINT}/commonlogo.png`}
+            style={{ display: "none" }}
+            className="logo img-fluid rounded-2"
+          />
+          <img
+            id="streamer-logo"
+            src={`${process.env.REACT_APP_CDN_ENDPOINT}/logo-${recipientId}.png`}
+            onError={() => {
+              const style = document.getElementById("streamer-logo")?.style;
+              if (style) {
+                style.display = "none";
+              }
+              const defaultLogoStyle = document.getElementById("default-logo")?.style;
+              if (defaultLogoStyle){
+                defaultLogoStyle.display = "block";
+              }
+            }}
+            className="logo img-fluid rounded-2"
+          />
           <div id="amount-container">
             <span id="donation-title">Донат</span>
             <div>
