@@ -679,17 +679,17 @@
   vertical-align: middle;
 }
 
-#streamer-logo::before {
-  content: "";
-  z-index: -2;
-  display: block;
-  background-image: url("https://api.oda.digital/images/commonlogo.png");
-  background-size:cover;
-  border-radius: var(--bs-border-radius) !important;
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
+/* #streamer-logo::before { */
+/*   content: ""; */
+/*   z-index: -2; */
+/*   display: block; */
+/*   background-image: url("https://api.oda.digital/images/commonlogo.png"); */
+/*   background-size:cover; */
+/*   border-radius: var(--bs-border-radius) !important; */
+/*   width: 100%; */
+/*   height: 100%; */
+/*   position: relative; */
+/* } */
 
 @media (min-width: 540px) {
   .page-content-container .card-header {
