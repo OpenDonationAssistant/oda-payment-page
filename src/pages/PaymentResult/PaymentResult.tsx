@@ -80,10 +80,6 @@ export default function PaymentResult({
 }) {
   const { payment } = useLoaderData();
 
-  useEffect(() => {
-    window.gtag("event", "payment_finished");
-  });
-
   return (
     <>
       <style
