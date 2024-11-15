@@ -10,6 +10,7 @@ COPY .env .env
 COPY .env.production .env.production
 COPY public/ public
 COPY src/ src
+COPY rsbuild.config.ts rsbuild.config.ts
 RUN npm run build
 
 FROM httpd:2.4-alpine
