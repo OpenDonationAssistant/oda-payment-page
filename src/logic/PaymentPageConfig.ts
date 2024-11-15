@@ -25,6 +25,8 @@ export class PaymentPageConfig {
   private _customCss: string | null = null;
   private _gateway: string | null = null;
   private _tooltip: string = "";
+  private _urls: Map<string, string> = new Map();
+  private _streamerName: string = "";
 
   constructor(json: any) {
     this.config = json;
@@ -47,6 +49,14 @@ export class PaymentPageConfig {
     this._customCss = json.value["customCss"] ?? null;
     this._gateway = json.value["gateway"] ?? null;
     this._tooltip = json.value["tooltip"] ?? "";
+    const urls = new Map<string, string>();
+    json.value["url"].map((url: any) => {
+      const key = Object.keys(url)[0];
+      urls.set(key, url[key]);
+    });
+    this._urls = urls;
+    this._streamerName = json.value["nickname"] ?? "";
+    console.debug({ paymentPageConfig: this }, "loaded config");
   }
 
   public get email(): string {
@@ -120,5 +130,17 @@ export class PaymentPageConfig {
   }
   public get tooltip(): string {
     return this._tooltip;
+  }
+  public get urls(): Map<string, string> {
+    return this._urls;
+  }
+  public set urls(value: Map<string, string>) {
+    this._urls = value;
+  }
+  public get streamerName(): string {
+    return this._streamerName;
+  }
+  public set streamerName(value: string) {
+    this._streamerName = value;
   }
 }

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { PaymentController } from "../../../../logic/payment/PaymentController";
+import { PaymentPageConfig } from "../../../../logic/PaymentPageConfig";
+import Url from "../Url/Url";
 
 export default function AmountInput({
-  streamerName,
+  config,
   recipientId,
   paymentController,
 }: {
-  streamerName: string;
+  config: PaymentPageConfig
   recipientId: string;
   paymentController: PaymentController;
 }) {
@@ -44,10 +46,8 @@ export default function AmountInput({
       <div className="card-header ps-4 text-bg-dark align-middle">
         <div id="recipient-title">
           Для{" "}
-          <a className="stream-link" href={`https://twitch.tv/${streamerName}`}>
-            {streamerName}
-          </a>{" "}
-          на развитие канала
+          <Url config={config}/>
+          {" "}на развитие канала
         </div>
         <div style={{ display: "flex" }}>
           <img
@@ -64,8 +64,9 @@ export default function AmountInput({
               if (style) {
                 style.display = "none";
               }
-              const defaultLogoStyle = document.getElementById("default-logo")?.style;
-              if (defaultLogoStyle){
+              const defaultLogoStyle =
+                document.getElementById("default-logo")?.style;
+              if (defaultLogoStyle) {
                 defaultLogoStyle.display = "block";
               }
             }}

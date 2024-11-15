@@ -4,6 +4,10 @@
   font-family: "Exo 2 Variable";
 }
 
+.hidden {
+  display: none!important;
+}
+
 .material-symbols-sharp {
   font-family: "Material Symbols Sharp";
   font-weight: normal;
@@ -48,6 +52,7 @@ input::-webkit-inner-spin-button {
 
 input[type=number] {
     -moz-appearance:textfield; /* Firefox */
+    appearance: textfield;
 }
 
 .page-content-container .card-footer {

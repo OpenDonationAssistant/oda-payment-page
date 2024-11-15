@@ -7,14 +7,6 @@
     "@fontsource-variable/exo-2": "^5.0.20",
     "@fontsource/black-ops-one": "^5.0.14",
     "@fontsource/material-symbols-sharp": "^5.0.40",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^29.5.5",
-    "@types/node": "^20.8.3",
-    "@types/react": "^18.2.25",
-    "@types/react-dom": "^18.2.11",
-    "@types/uuid": "^9.0.7",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.1",
     "link-preview-js": "^3.0.4",
@@ -23,7 +15,6 @@
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
     "react-router-dom": "^6.14.2",
-    "react-scripts": "5.0.1",
     "react-tooltip": "^5.20.0",
     "scriptjs": "^2.5.9",
     "typescript": "^5.2.2",
@@ -31,12 +22,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "docker": "podman build . -t ghcr.io/stcarolas/oda-payment-page:latest",
-    "update": "podman build . -t ghcr.io/stcarolas/oda-payment-page:latest && podman push ghcr.io/stcarolas/oda-payment-page:latest && ssh ubuntu@jaskier \"sh ~/update_payment_page.sh\""
+    "start": "rsbuild dev",
+    "build": "rsbuild build",
+    "preview": "rsbuild preview"
   },
   "eslintConfig": {
     "extends": [
@@ -57,6 +45,16 @@
     ]
   },
   "devDependencies": {
-    "@playwright/test": "^1.40.0"
+    "@playwright/test": "^1.40.0",
+    "@rsbuild/core": "^1.1.1",
+    "@rsbuild/plugin-react": "^1.0.7",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^29.5.5",
+    "@types/node": "^20.8.3",
+    "@types/react": "^18.2.25",
+    "@types/react-dom": "^18.2.11",
+    "@types/uuid": "^9.0.7"
   }
 }

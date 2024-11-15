@@ -1,17 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { PaymentPageConfig } from "../../../../logic/PaymentPageConfig";
+import Url from "../Url/Url";
 
 interface FooterProps {
-  nickname: string;
+  config: PaymentPageConfig;
 }
 
-export default function Footer({ nickname }: FooterProps) {
+export default function Footer({ config }: FooterProps) {
   return (
     <div className="card-footer">
       <div className="footer-warning">
-        <a className="stream-link" href={`https://twitch.tv/${nickname}`}>{nickname}</a> - российский игровой
-        стример. Эта страница для сбора средств на развитие и поддержку
-        канала
+        <Url config={config} /> - российский игровой стример. Эта страница для
+        сбора средств на развитие и поддержку канала
       </div>
       <div className="footer-links">
         <Link to="/offer" className="footer-link">

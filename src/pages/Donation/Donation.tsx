@@ -56,8 +56,8 @@ export default function Donation({
       <Feedback />
       <div className="page-content-container">
         <AmountInput
+          config={pageConfig}
           recipientId={recipientId}
-          streamerName={streamerName}
           paymentController={paymentController}
         />
 
@@ -84,7 +84,7 @@ export default function Donation({
           />
         </div>
 
-        <Footer nickname={streamerName} />
+        <Footer config={pageConfig}/>
         <CookiePopup />
         <div className="arbitrary-text-container">
           {pageConfig.arbitraryText && (

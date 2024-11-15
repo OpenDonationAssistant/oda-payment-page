@@ -64,14 +64,12 @@ export default function MediaInput({
       setShowMediaAutocomplete(false);
       return;
     }
-    console.log("Started handleMedia");
     axios
       .get(
         `${process.env.REACT_APP_MEDIA_API_ENDPOINT}/media/available?query=${query}`,
       )
       .then((response) => response.data)
       .then((data) => {
-        console.log(data);
         setMediaSuggestions(data);
         setShowMediaAutocomplete(true);
       });
@@ -87,11 +85,9 @@ export default function MediaInput({
         let updated = [...attachments, json.data];
         setAttachments(updated);
         setNewMedia("");
-        console.log({updated:updated});
         paymentController.attachments = updated;
       })
       .catch(function (error) {
-        console.log(error);
         const message = error.response.data;
         if (Object.prototype.toString.call(message) == "[object String]") {
           setIncorrectMediaError(message);
