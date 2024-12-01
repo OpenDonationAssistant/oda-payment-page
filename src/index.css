@@ -67,7 +67,7 @@ input[type=number] {
 	border-bottom-left-radius: 8px!important;
   padding-top: 10px;
   padding-bottom: 10px;
-  max-width: 550px;
+  max-width: var(--oda-panel-max-width);
   min-width: 330px;
   grid-column: 2;
   justify-self: end;

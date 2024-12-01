@@ -1,3 +1,6 @@
+:root{
+  --oda-panel-max-width: 550px;
+}
 .hidden {
   display: none !important;
 }
@@ -54,7 +57,7 @@
 .page-content-container .card-header {
   display: flex;
   flex-wrap: wrap;
-  max-width: 550px;
+  max-width: var(--oda-panel-max-width);
   min-width: 330px;
   border-top-left-radius: 16px !important;
   border-top-right-radius: 16px !important;
@@ -291,7 +294,7 @@ img.logo {
 }
 
 #page-card {
-  max-width: 550px !important;
+  max-width: var(--oda-panel-max-width)!important;
   min-width: 330px;
   border-color: rgb(33, 37, 41);
   background-color: rgb(33, 37, 41);
@@ -437,12 +440,13 @@ img.logo {
 
 .page-content-container {
   display: grid;
-  grid-template-columns: auto 550px auto;
+  grid-template-columns: calc((96% - var(--oda-panel-max-width))/2) var(--oda-panel-max-width) calc((96% - var(--oda-panel-max-width))/2);
+  column-gap: 2%;
 }
 
 #data-panel.container {
   background-color: #f1f1f1;
-  max-width: 550px !important;
+  max-width: var(--oda-panel-max-width) !important;
   min-width: 330px;
   padding-top: 12px !important;
   padding-bottom: 18px !important;
@@ -520,7 +524,7 @@ img.logo {
   grid-column: 3;
   grid-row-start: 2;
   grid-row-end: 4;
-  margin-left: 50px;
+  padding-right: 20px;
 }
 
 .media-item {
@@ -590,9 +594,7 @@ img.logo {
   grid-row-start: 2;
   grid-row-end: 4;
   grid-column: 1;
-  border-radius: 8px;
-  max-width: 400px;
-  margin-right: 50px;
+  width: 100%;
   justify-self: end;
   display: flex;
   flex-direction: column;
@@ -680,24 +682,42 @@ img.logo {
   vertical-align: middle;
 }
 
+@media (min-width: 1000px) {
+  .donation-target {
+    max-width: 400px;
+    padding-left: 20px;
+  }
+}
+
 @media (min-width: 540px) {
   .page-content-container .card-header {
     padding-bottom: 1.5em;
     padding-top: 1.5em;
   }
+  .page-content-container {
+    column-gap: 2%;
+  }
 }
 
 @media (max-width: 1000px) {
   .arbitrary-text-container {
-    max-width: 550px !important;
+    max-width: var(--oda-panel-max-width) !important;
     margin-right: 0px;
     margin-left: 0px;
+    padding-right: 0px;
     grid-column: 2;
     grid-row: 2;
   }
   #page-card {
     box-shadow: none;
   }
+  .donation-target {
+    grid-column: 2;
+    grid-row: 3;
+    margin-right: 0;
+    justify-self: stretch;
+  }
+
 }
 
 @media (max-width: 540px) {
@@ -757,6 +777,7 @@ img.logo {
   }
   .page-content-container {
     grid-template-columns: auto;
+    column-gap: 0;
   }
   .page-content-container .card-header {
     padding-top: 0.5em;
@@ -765,12 +786,6 @@ img.logo {
   .card-footer {
     margin-bottom: 25px;
   }
-  .donation-target {
-    grid-column: 2;
-    grid-row: 3;
-    margin-right: 0;
-    justify-self: stretch;
-  }
   .feedback-container .btn-text {
     display: none;
   }
@@ -778,5 +793,3 @@ img.logo {
     display: none;
   }
 }
-
-
