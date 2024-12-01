@@ -39,6 +39,7 @@
 .choosebuttonselected {
   background-color: white;
   color: #00CC33;
+  border: 2px solid white;
 }
 
 .choosebuttonnotselected {
