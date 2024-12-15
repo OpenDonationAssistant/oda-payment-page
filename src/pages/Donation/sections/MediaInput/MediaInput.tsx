@@ -143,7 +143,7 @@ export default function MediaInput({
                   autoComplete="off"
                   placeholder={
                     attachments.length === 0
-                      ? "Введите название видео или ссылку на youtube"
+                      ? "Название видео или ссылка на youtube или vk video"
                       : "Можете добавить еще видео. Максимум 12 штук"
                   }
                 />
