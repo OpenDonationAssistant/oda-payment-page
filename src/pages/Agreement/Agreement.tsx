@@ -33,15 +33,15 @@ function yookassa(
         <li>
           Договор пожертвования заключается путем акцепта оферты донором. Оферта
           акцептуется перечислением {nickname} денежных средств с помощью
-          платежной формы на сайте {recipientId}.oda.digital
+          платежной формы на сайте {window.location.hostname}
         </li>
         <li>
           Датой акцепта оферты и датой заключения договора пожертвования
           является дата поступления денежных средств донора на расчетный счет
         </li>
         <li>
-          Оферта вступает в силу со дня публикации на сайте {recipientId}
-          .oda.digital. В оферту могут быть внесены изменения и дополнения,
+          Оферта вступает в силу со дня публикации на сайте {window.location.hostname}.
+          В оферту могут быть внесены изменения и дополнения,
           вступающие на следующий день с момента публикации на сайте. Оферта
           действует бессрочно.
         </li>
@@ -87,7 +87,7 @@ function robokassa(
         </li>
         <li>
           Оферта вступает в силу со дня её публикации на сайте сервиса -
-          https://{recipientId}.oda.digital (далее – сайт сервиса). В случае
+          https://{window.location.hostname} (далее – сайт сервиса). В случае
           наличия копий настоящей оферты, её использования на других сайтах
           актуальным текстом оферты считается текст, размещенный на сайте
           сервиса. Текст настоящей оферты может быть изменен в любой момент
@@ -224,6 +224,7 @@ export default function Agreement({
   email,
   gateway,
 }: AgreementProps) {
+
   return (
     <div className="h-100 d-flex align-items-center justify-content-center">
       <style
@@ -236,12 +237,12 @@ export default function Agreement({
           {gateway !== "robokassa" &&
             yookassa(nickname, recipientId, fio, inn, email)}
           {gateway === "robokassa" && robokassa(fio, recipientId, inn, email)}
-          <h1>Условия использования сайта {recipientId}.oda.digital</h1>
+          <h1>Условия использования сайта {window.location.hostname}</h1>
           <ol>
             <li>
-              {recipientId}.oda.digital использует YouTube API и Google
-              Analytics. Используя и взаимодействуя с сайтом {recipientId}
-              .oda.digital пользователь соглашается с условиями использования
+              {window.location.hostname} использует YouTube API и Google
+              Analytics. Используя и взаимодействуя с сайтом {window.location.hostname}
+               пользователь соглашается с условиями использования
               YouTube API Services (
               <a href="https://www.youtube.com/t/terms">
                 https://www.youtube.com/t/terms
