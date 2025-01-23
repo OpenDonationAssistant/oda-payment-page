@@ -11,32 +11,31 @@ interface AgreementProps {
 
 function yookassa(
   nickname: string,
-  recipientId: string,
   fio: string,
   inn: string,
   email: string,
 ) {
   return (
     <div>
-      <h2>Оферта о договоре пожертвования</h2>
+      <h2>Оферта о договоре дарения</h2>
       <div>10 августа 2023, Санкт-Петербург</div>
       <ol>
         <li>
           Оферта адресована донорам – любым юридическим и физическим лицам.
         </li>
-        <li>Предмет — договор пожертвования.</li>
-        <li>Сумма пожертвования определяется донором в приложении к оферте.</li>
+        <li>Предмет — договор дарения денежных средств.</li>
+        <li>Сумма дарения денежных средств определяется донором в приложении к оферте.</li>
         <li>
-          Назначение пожертвования – поддержка деятельности стримера {fio} (
+          Цель дарения денежных средств – поддержка деятельности стримера {fio} (
           {nickname})
         </li>
         <li>
-          Договор пожертвования заключается путем акцепта оферты донором. Оферта
+          Договор дарения заключается путем акцепта оферты донором. Оферта
           акцептуется перечислением {nickname} денежных средств с помощью
           платежной формы на сайте {window.location.hostname}
         </li>
         <li>
-          Датой акцепта оферты и датой заключения договора пожертвования
+          Датой акцепта оферты и датой заключения договора дарения
           является дата поступления денежных средств донора на расчетный счет
         </li>
         <li>
@@ -44,10 +43,6 @@ function yookassa(
           В оферту могут быть внесены изменения и дополнения,
           вступающие на следующий день с момента публикации на сайте. Оферта
           действует бессрочно.
-        </li>
-        <li>
-          {nickname} не платит НДС поскольку применяется упрощенная система
-          налогооблажения
         </li>
         <li>Стороны договора не подписывают акты</li>
         <div className="mt-4">
@@ -62,7 +57,6 @@ function yookassa(
 
 function robokassa(
   fio: string,
-  recipientId: string,
   inn: string,
   email: string,
 ) {
@@ -235,8 +229,8 @@ export default function Agreement({
       <div className="card shadow-lg rounded">
         <div className="card-header pb-4 pt-4 ps-4 align-middle">
           {gateway !== "robokassa" &&
-            yookassa(nickname, recipientId, fio, inn, email)}
-          {gateway === "robokassa" && robokassa(fio, recipientId, inn, email)}
+            yookassa(nickname, fio, inn, email)}
+          {gateway === "robokassa" && robokassa(fio, inn, email)}
           <h1>Условия использования сайта {window.location.hostname}</h1>
           <ol>
             <li>
