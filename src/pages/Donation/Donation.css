@@ -83,6 +83,7 @@ img.logo {
 #recipient-title {
   color: #747373;
   padding-left: 130px;
+  text-wrap: balance;
 }
 
 #donation-title {
