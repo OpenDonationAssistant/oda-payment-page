@@ -227,19 +227,19 @@ export default function Agreement({
           <h1>Условия использования сайта {window.location.hostname}</h1>
           <ol>
             {gateway === "yoomoney" && (
-              <div>
-                Дарение {nickname} денежных средств происходит с помощью
+              <li>
+                Дарение денежных средств стримеру {nickname} происходит с помощью
                 платежной формы на сайте https://yoomoney.ru/. Перечислением
                 денежных средств акцептуются соглашения этой платформы{" "}
                 <a href="https://yoomoney.ru/page?id=522764">
                   об осуществлении переводов
                 </a>
-                и{" "}
+                {" "}и{" "}
                 <a href="https://yoomoney.ru/page?id=526810">
                   об использовании "Страницы для сбора денег"
                 </a>
                 .
-              </div>
+              </li>
             )}
             <li>
               {window.location.hostname} использует YouTube API и Google
