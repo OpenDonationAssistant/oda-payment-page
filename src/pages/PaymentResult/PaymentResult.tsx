@@ -2,14 +2,16 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavLink, Params, useLoaderData } from "react-router-dom";
 import "./PaymentResult.css";
-import { useEffect } from "react";
 import axios from "axios";
 
 export async function loader({ params }: { params: Params<"paymentId"> }) {
   const url = new URL(window.location.href);
   const paymentId = url.searchParams.get("SHP_ID") ?? params.paymentId;
+  const apiUrl = window.location.hostname.endsWith(process.env.REACT_APP_DOMAIN ?? "localhost")
+    ? process.env.REACT_APP_API_ENDPOINT
+    : `https://${window.location.hostname}`;
   let payment = await axios
-    .put(`${process.env.REACT_APP_API_ENDPOINT}/commands/payment/complete`, {
+    .put(`${apiUrl}/commands/payment/complete`, {
       paymentId: paymentId
     })
     .then((json) => {
@@ -18,7 +20,6 @@ export async function loader({ params }: { params: Params<"paymentId"> }) {
 
   return { payment };
 }
-
 
 function success(recipientId: string) {
   return (

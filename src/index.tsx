@@ -67,9 +67,12 @@ String.prototype.hashCode = function () {
   return hash;
 };
 
+const apiUrl = window.location.hostname.endsWith(process.env.REACT_APP_DOMAIN ?? "localhost")
+  ? process.env.REACT_APP_CONFIG_API_ENDPOINT
+  : `https://${window.location.hostname}`;
 const config = await axios
   .get(
-    `${process.env.REACT_APP_CONFIG_API_ENDPOINT}/config/paymentpage?ownerId=${recipientId}`,
+    `${apiUrl}/config/paymentpage?ownerId=${recipientId}`,
   )
   .then((json) => {
     return json.data;

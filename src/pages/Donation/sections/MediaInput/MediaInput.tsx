@@ -64,9 +64,12 @@ export default function MediaInput({
       setShowMediaAutocomplete(false);
       return;
     }
+    const apiUrl = window.location.hostname.endsWith(process.env.REACT_APP_DOMAIN ?? "localhost")
+      ? process.env.REACT_APP_MEDIA_API_ENDPOINT
+      : `https://${window.location.hostname}`;
     axios
       .get(
-        `${process.env.REACT_APP_MEDIA_API_ENDPOINT}/media/available?query=${query}`,
+        `${apiUrl}/media/available?query=${query}`,
       )
       .then((response) => response.data)
       .then((data) => {
@@ -77,8 +80,11 @@ export default function MediaInput({
 
   function addMedia(url: string) {
     setShowMediaAutocomplete(false);
+    const apiUrl = window.location.hostname.endsWith(process.env.REACT_APP_DOMAIN ?? "localhost")
+      ? process.env.REACT_APP_MEDIA_API_ENDPOINT
+      : `https://${window.location.hostname}`;
     axios
-      .put(`${process.env.REACT_APP_MEDIA_API_ENDPOINT}/media/video`, {
+      .put(`${apiUrl}/media/video`, {
         url: url,
       })
       .then((json) => {

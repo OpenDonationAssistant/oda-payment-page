@@ -11,14 +11,16 @@ interface PaymentProps {
   nickname: string;
 }
 
-export async function loader({ params }: { params: Params<"paymentId"> }) {
+export async function loader({ params }: { params: Params<"paymentId" | "SHP_ID"> }) {
   const paymentId = params.paymentId ?? params.SHP_ID;
+  const apiUrl = window.location.hostname.endsWith(process.env.REACT_APP_DOMAIN ?? "localhost")
+    ? process.env.REACT_APP_API_ENDPOINT
+    : `https://${window.location.hostname}`;
   let payment = await axios
-    .get(`${process.env.REACT_APP_API_ENDPOINT}/payments/${paymentId}`)
+    .get(`${apiUrl}/payments/${paymentId}`)
     .then((json) => {
       return json.data;
     });
-  console.log(payment);
 
   return { payment };
 }

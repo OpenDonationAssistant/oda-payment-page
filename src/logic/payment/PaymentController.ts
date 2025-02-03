@@ -67,8 +67,11 @@ export class PaymentController {
       return Promise.resolve({});
     }
     const attachmentIds = this.attachments.map((attach) => attach.id);
+  const apiUrl = window.location.hostname.endsWith(process.env.REACT_APP_DOMAIN ?? "localhost")
+    ? process.env.REACT_APP_API_ENDPOINT
+    : `https://${window.location.hostname}`;
     return axios.put(
-      `${process.env.REACT_APP_API_ENDPOINT}/commands/payment/create`,
+      `${apiUrl}/commands/payment/create`,
       {
         // todo use v7
         id: uuidv4(),

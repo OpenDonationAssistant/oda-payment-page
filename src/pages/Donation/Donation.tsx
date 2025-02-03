@@ -15,7 +15,6 @@ import { PaymentPageConfig } from "../../logic/PaymentPageConfig";
 import ODALogo from "../../components/ODALogo/ODALogo";
 import DonationTargetPanel from "./sections/DonationTargetPanel/DonationTargetPanel";
 import Feedback from "./sections/Feedback/Feedback";
-import EmailInput from "./sections/EmailInput/EmailInput";
 import { useSearchParams } from "react-router-dom";
 
 export default function Donation({
@@ -23,7 +22,6 @@ export default function Donation({
   recipientId,
   mediaRequestsEnabled,
   mediaRequestsDisabledPermanently,
-  streamerName,
   paymentController,
 }: {
   pageConfig: PaymentPageConfig;
