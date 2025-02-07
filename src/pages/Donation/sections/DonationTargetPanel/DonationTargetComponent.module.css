@@ -43,9 +43,9 @@
 }
 
 .choosebuttonnotselected {
-  background-color: #00CC33;
-  border: 2px solid #00CC33;
   color: white;
+  background-color: #212529;
+	border: 2px solid #212529;
 }
 
 .donationtarget {
