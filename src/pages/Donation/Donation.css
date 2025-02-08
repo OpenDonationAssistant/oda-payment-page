@@ -523,7 +523,7 @@ img.logo {
 .arbitrary-text-container {
   max-width: 400px;
   grid-column: 3;
-  grid-row-start: 2;
+  grid-row-start: 1;
   grid-row-end: 4;
   padding-right: 20px;
 }

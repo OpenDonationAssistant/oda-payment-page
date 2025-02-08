@@ -4,11 +4,12 @@
   padding-left: 12px;
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: #f1f1f1;
   display: flex;
   flex-direction: row;
   position: relative;
   box-shadow: 0 0 10px rgba(0,0,0,.56);
+  height: 100%;
+  background: rgba(241,241,241,0.5);
 }
 
 .texthidden {
@@ -23,7 +24,6 @@
 .expandedpanel {
   margin: 0;
   margin-left: 20px;
-	max-height: 310px;
 	overflow-y: scroll;
 }
 
