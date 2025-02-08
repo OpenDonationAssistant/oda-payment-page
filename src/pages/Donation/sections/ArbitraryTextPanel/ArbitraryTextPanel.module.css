@@ -17,7 +17,7 @@
 
 .expandedpanel {
 	overflow-y: scroll;
-  max-height: 600px;
+  max-height: 415px;
   margin: 0 0 0 20px;
   background: rgba(241,241,241,0.4);
   border-radius: 8px;
