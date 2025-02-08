@@ -67,9 +67,11 @@
 
 .footer-warning {
   color: white !important;
+  line-height: 16px;
 }
 
 .footer-link {
+  margin-top: 10px;
   color: white !important;
 }
 

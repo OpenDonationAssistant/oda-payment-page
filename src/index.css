@@ -58,8 +58,7 @@ input[type=number] {
 .page-content-container .card-footer {
 	/* todo make padding through inheritance */
 	/* padding-left: calc(1.5 * var(--bs-gutter-x)) !important; */
-	padding-left: 26px;
-	padding-right: 26px;
+	padding: 26px;
   font-size: smaller;
   font-style: italic;
 	background-color: rgb(33,37,41)!important;
@@ -95,6 +94,7 @@ input[type=number] {
 .footer-warning {
 	color: #747373;
 	padding-right: 18px;
+  line-height: 16px;
 }
 
 .stream-link {

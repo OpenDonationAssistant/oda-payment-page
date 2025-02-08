@@ -1,15 +1,9 @@
 .text {
   color: black;
-  padding-right: 12px;
-  padding-left: 12px;
-  padding-top: 10px;
-  padding-bottom: 10px;
   display: flex;
   flex-direction: row;
   position: relative;
-  box-shadow: 0 0 10px rgba(0,0,0,.56);
   height: 100%;
-  background: rgba(241,241,241,0.5);
 }
 
 .texthidden {
@@ -22,9 +16,13 @@
 }
 
 .expandedpanel {
-  margin: 0;
-  margin-left: 20px;
 	overflow-y: scroll;
+  max-height: 600px;
+  margin: 0 0 0 20px;
+  background: rgba(241,241,241,0.5);
+  border-radius: 8px;
+  padding: 12px 16px;
+  box-shadow: 0 0 10px rgba(0,0,0,.56);
 }
 
 .expandedpanel::-webkit-scrollbar {

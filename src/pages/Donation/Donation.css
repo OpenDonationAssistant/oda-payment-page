@@ -227,6 +227,7 @@ img.logo {
 .footer-link {
   color: #949393;
   line-height: 10px;
+  margin-top:10px;
 }
 
 .footer-copyright {
@@ -592,7 +593,7 @@ img.logo {
 }
 
 .donation-target {
-  grid-row-start: 2;
+  grid-row-start: 1;
   grid-row-end: 4;
   grid-column: 1;
   width: 100%;
