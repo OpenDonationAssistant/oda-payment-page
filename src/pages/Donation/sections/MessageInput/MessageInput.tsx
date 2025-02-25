@@ -40,7 +40,7 @@ export default function MessageInput({
     const tresholds = paymentPageConfig.charLimit.value as CharLimitTreshold[];
     return (
       tresholds
-        .sort((a, b) => a.treshold - b.treshold)
+        .sort((a, b) => -(a.treshold - b.treshold))
         .find((value) => value.treshold <= paymentController.amount)?.limit ??
       300
     );
