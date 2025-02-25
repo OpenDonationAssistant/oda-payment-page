@@ -52,13 +52,13 @@ export default function MessageInput({
           className="form-control"
           value={description}
           placeholder="Ваше сообщение"
-          maxLength={300}
+          maxLength={calcCharLimit()}
           style={{ height: inputHeight + "px" }}
           onChange={(e) => {
             handleMessage(e.target.value);
           }}
         />
-        <div className="counter-text">{textCounter} / 300</div>
+        <div className="counter-text">{textCounter} / {calcCharLimit()}</div>
       </div>
     </>
   );
