@@ -16,6 +16,7 @@ export default function MessageInput({
   const [description, setDescription] = useState("");
   const [inputHeight, setInputHeight] = useState<number>(150);
   const descriptionInputRef = useRef<HTMLTextAreaElement>(null);
+  const [limit, setLimit] = useState<number>(300);
 
   // TODO: use reaction to paymentController.amount
   function calcCharLimit(): number {
@@ -32,7 +33,9 @@ export default function MessageInput({
   }
 
   function handleMessage(text: string) {
-    let newValue = text.slice(0, calcCharLimit());
+    const charLimit = calcCharLimit();
+    setLimit(charLimit);
+    let newValue = text.slice(0, charLimit);
     setDescription(text);
     setTextCounter(text.length);
     const scrollHeight = descriptionInputRef.current?.scrollHeight ?? 150;
@@ -52,13 +55,13 @@ export default function MessageInput({
           className="form-control"
           value={description}
           placeholder="Ваше сообщение"
-          maxLength={calcCharLimit()}
+          maxLength={limit}
           style={{ height: inputHeight + "px" }}
           onChange={(e) => {
             handleMessage(e.target.value);
           }}
         />
-        <div className="counter-text">{textCounter} / {calcCharLimit()}</div>
+        <div className="counter-text">{textCounter} / {limit}</div>
       </div>
     </>
   );
