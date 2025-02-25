@@ -68,7 +68,10 @@ export default function Donation({
 
         <div id="data-panel" className="container">
           <NicknameInput paymentController={paymentController} />
-          <MessageInput paymentController={paymentController} />
+          <MessageInput
+            paymentPageConfig={pageConfig}
+            paymentController={paymentController}
+          />
           <MediaInput
             recipientId={recipientId}
             mediaRequestsDisabledPermanently={mediaRequestsDisabledPermanently}
@@ -82,7 +85,7 @@ export default function Donation({
           />
         </div>
 
-        <Footer config={pageConfig}/>
+        <Footer config={pageConfig} />
         <CookiePopup />
         <div className="arbitrary-text-container">
           {pageConfig.arbitraryText && (

@@ -10,6 +10,16 @@ export interface Goal {
   default: boolean;
 }
 
+export interface CharLimitTreshold {
+  treshold: number;
+  limit: number;
+}
+
+export interface CharLimit {
+  type: "fixed" | "treshold";
+  value: number | CharLimitTreshold[];
+}
+
 export class PaymentPageConfig {
   config: any = {};
 
@@ -27,6 +37,7 @@ export class PaymentPageConfig {
   private _tooltip: string = "";
   private _urls: Map<string, string> = new Map();
   private _streamerName: string = "";
+  private _charLimit: CharLimit;
 
   constructor(json: any) {
     this.config = json;
@@ -49,6 +60,10 @@ export class PaymentPageConfig {
     this._customCss = json.value["customCss"] ?? null;
     this._gateway = json.value["gateway"] ?? null;
     this._tooltip = json.value["tooltip"] ?? "";
+    this._charLimit = json.value["limits.char"] ?? {
+      type: "fixed",
+      value: 300,
+    };
     const urls = new Map<string, string>();
     json.value["url"].map((url: any) => {
       const key = Object.keys(url)[0];
@@ -62,39 +77,51 @@ export class PaymentPageConfig {
   public get email(): string {
     return this._email;
   }
+
   public set email(value: string) {
     this._email = value;
   }
+
   public get fio(): string {
     return this._fio;
   }
+
   public set fio(value: string) {
     this._fio = value;
   }
+
   public get inn(): string {
     return this._inn;
   }
+
   public set inn(value: string) {
     this._inn = value;
   }
+
   public get requestsEnabled() {
     return this._requestsEnabled;
   }
+
   public set requestsEnabled(value) {
     this._requestsEnabled = value;
   }
+
   public get requestsDisabledPermanently() {
     return this._requestsDisabledPermanently;
   }
+
   public set requestsDisabledPermanently(value) {
     this._requestsDisabledPermanently = value;
   }
+
   public get requestCost() {
     return this._requestCost;
   }
+
   public set requestCost(value) {
     this._requestCost = value;
   }
+
   public get arbitraryText(): string | null {
     return this._arbitraryText;
   }
@@ -142,5 +169,13 @@ export class PaymentPageConfig {
   }
   public set streamerName(value: string) {
     this._streamerName = value;
+  }
+
+  public get charLimit(): CharLimit {
+    return this._charLimit;
+  }
+
+  public set charLimit(value: CharLimit) {
+    this._charLimit = this.charLimit;
   }
 }
