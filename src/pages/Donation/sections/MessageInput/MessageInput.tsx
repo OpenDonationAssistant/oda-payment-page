@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { PaymentController } from "../../../../logic/payment/PaymentController";
 import {
   CharLimitTreshold,
@@ -16,7 +16,21 @@ export default function MessageInput({
   const [description, setDescription] = useState("");
   const [inputHeight, setInputHeight] = useState<number>(150);
   const descriptionInputRef = useRef<HTMLTextAreaElement>(null);
-  const [limit, setLimit] = useState<number>(300);
+  const [limit, setLimit] = useState<number>(calcCharLimit());
+
+  useEffect(() => {
+    paymentController.addListener({
+      setNickname: () => {},
+      setText: () => {},
+      setAmount: () => {
+        setLimit(calcCharLimit());
+      },
+      setAttachments: () => {},
+      setError: () => {},
+      setTreshold: () => {},
+    });
+  }, [paymentController]);
+
 
   // TODO: use reaction to paymentController.amount
   function calcCharLimit(): number {
@@ -33,9 +47,7 @@ export default function MessageInput({
   }
 
   function handleMessage(text: string) {
-    const charLimit = calcCharLimit();
-    setLimit(charLimit);
-    let newValue = text.slice(0, charLimit);
+    let newValue = text.slice(0, limit);
     setDescription(text);
     setTextCounter(text.length);
     const scrollHeight = descriptionInputRef.current?.scrollHeight ?? 150;
