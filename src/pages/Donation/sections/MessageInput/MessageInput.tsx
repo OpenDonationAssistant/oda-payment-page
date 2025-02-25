@@ -26,7 +26,7 @@ export default function MessageInput({
     return (
       tresholds
         .sort((a, b) => a.treshold - b.treshold)
-        .find((value) => value.treshold >= paymentController.amount)?.limit ??
+        .find((value) => value.treshold <= paymentController.amount)?.limit ??
       300
     );
   }
