@@ -17,7 +17,16 @@ import Payment, { loader as paymentLoader } from "./pages/Payment/Payment";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import axios from "axios";
 import { PaymentController } from "./logic/payment/PaymentController";
-import { PaymentPageConfig } from "./logic/PaymentPageConfig";
+import {
+  PaymentPageConfig,
+  PaymentPageConfigContext,
+} from "./logic/PaymentPageConfig";
+import DonationPage from "./pages/DonationPage/DonationPage";
+import { PaymentStore, PaymentStoreContext } from "./stores/PaymentStore";
+import {
+  UserSettingsStore,
+  UserSettingsStoreContext,
+} from "./stores/UserSettingsStore";
 
 let recipientId = window.location.hostname.substring(
   0,
@@ -26,6 +35,11 @@ let recipientId = window.location.hostname.substring(
 
 if (!recipientId) {
   recipientId = "testuser";
+}
+const urlParams = new URLSearchParams(window.location.search);
+const myParam = urlParams.get("recipientId");
+if (myParam) {
+  recipientId = myParam;
 }
 
 var dynamicManifest = {
@@ -67,13 +81,14 @@ String.prototype.hashCode = function () {
   return hash;
 };
 
-const apiUrl = window.location.hostname.endsWith(process.env.REACT_APP_DOMAIN ?? "localhost")
+const apiUrl = window.location.hostname.endsWith(
+  process.env.REACT_APP_DOMAIN ?? "localhost",
+)
   ? process.env.REACT_APP_CONFIG_API_ENDPOINT
   : `https://${window.location.hostname}`;
+
 const config = await axios
-  .get(
-    `${apiUrl}/config/paymentpage?ownerId=${recipientId}`,
-  )
+  .get(`${apiUrl}/config/paymentpage?ownerId=${recipientId}`)
   .then((json) => {
     return json.data;
   });
@@ -86,24 +101,47 @@ const paymentController = new PaymentController(
   config.value["minimalAmount"],
 );
 
+const paymentStore = new PaymentStore({
+  recipientId: recipientId,
+  mediaRequestCost: config.value["media.requests.cost"] ?? 100,
+  minimalPayment: config.value["minimalAmount"],
+});
+
 pageConfig.goals
   .filter((goal) => goal.selected)
   .forEach((goal) => (paymentController.goal = goal.id));
+
+const userSettings = new UserSettingsStore();
+console.log("use old theme: " + userSettings.useOldTheme);
+
+const showNewVersion = false
+  //recipientId === "tabularussia" &&
+  //window.screen.width > 1000 &&
+  //window.innerWidth > 1000 && !userSettings.useOldTheme;
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Donation
-        pageConfig={pageConfig}
-        recipientId={recipientId}
-        mediaRequestsEnabled={config.value["media.requests.enabled"]}
-        mediaRequestsDisabledPermanently={
-          config.value["media.requests.disabled.permanently"]
-        }
-        streamerName={config.value.nickname}
-        paymentController={paymentController}
-      />
+      <PaymentStoreContext.Provider value={paymentStore}>
+        <PaymentPageConfigContext.Provider value={pageConfig}>
+          <UserSettingsStoreContext.Provider value={userSettings}>
+            {showNewVersion && <DonationPage />}
+            {!showNewVersion && (
+              <Donation
+                pageConfig={pageConfig}
+                recipientId={recipientId}
+                mediaRequestsEnabled={config.value["media.requests.enabled"]}
+                mediaRequestsDisabledPermanently={
+                  config.value["media.requests.disabled.permanently"]
+                }
+                streamerName={config.value.nickname}
+                paymentController={paymentController}
+              />
+            )}
+          </UserSettingsStoreContext.Provider>
+        </PaymentPageConfigContext.Provider>
+      </PaymentStoreContext.Provider>
     ),
   },
   {

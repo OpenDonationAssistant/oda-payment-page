@@ -11,8 +11,7 @@ export default function Footer({ config }: FooterProps) {
   return (
     <div className="card-footer">
       <div className="footer-warning">
-        <Url config={config} /> - российский игровой стример. Эта страница для
-        сбора средств на развитие и поддержку канала
+        <Url config={config} /> - {config.streamerDescription}
       </div>
       <div className="footer-links">
         <Link to="/offer" className="footer-link">

@@ -1,6 +1,10 @@
 import axios from "axios";
 import { IPaymentListener } from "./IPaymentListener";
-import { v4 as uuidv4 } from "uuid";
+import { uuidv7 } from "uuidv7";
+import {
+  DefaultApiFactory,
+  GatewayControllerGatewayData,
+} from "@opendonationassistant/oda-payment-service-client";
 
 export class PaymentController {
   private _nickname: string = "Аноним";
@@ -14,6 +18,7 @@ export class PaymentController {
   private _mediaRequestCost: number;
   private _minimalPayment: number;
   private _goal: string | null = null;
+  private _fiatGateway: GatewayControllerGatewayData | null = null;
 
   constructor(
     recipientId: string,
@@ -25,6 +30,15 @@ export class PaymentController {
     this._minimalPayment = minimalPayment;
     this.amount = minimalPayment;
     this.treshold = minimalPayment;
+    DefaultApiFactory(undefined, process.env.REACT_APP_API_ENDPOINT)
+      .listGateways(recipientId)
+      .then((gateways) => {
+        this._fiatGateway =
+          gateways.data
+            .filter((gateway) => gateway.enabled)
+            .filter((gateway) => gateway.type === "fiat")
+            .at(0) ?? null;
+      });
   }
 
   addListener(listener: IPaymentListener) {
@@ -62,31 +76,33 @@ export class PaymentController {
       this.attachments.length,
       this.amount,
     );
+    if (this._fiatGateway === null) {
+      return Promise.resolve({});
+    }
     if (isIncorrect) {
       this.updateAmountError(treshold);
       return Promise.resolve({});
     }
     const attachmentIds = this.attachments.map((attach) => attach.id);
-  const apiUrl = window.location.hostname.endsWith(process.env.REACT_APP_DOMAIN ?? "localhost")
-    ? process.env.REACT_APP_API_ENDPOINT
-    : `https://${window.location.hostname}`;
-    return axios.put(
-      `${apiUrl}/commands/payment/create`,
-      {
-        // todo use v7
-        id: uuidv4(),
-        nickname: this.nickname,
-        message: this.text,
-        amount: {
-          major: this.amount,
-          currency: "RUB",
-        },
-        method: type,
-        attachments: attachmentIds,
-        recipientId: this._recipientId,
-        goal: this._goal
+    const apiUrl = window.location.hostname.endsWith(
+      process.env.REACT_APP_DOMAIN ?? "localhost",
+    )
+      ? process.env.REACT_APP_API_ENDPOINT
+      : `https://${window.location.hostname}`;
+    return axios.put(`${apiUrl}/payments/commands/create`, {
+      id: uuidv7(),
+      gatewayCredId: this._fiatGateway.id,
+      nickname: this.nickname,
+      message: this.text,
+      amount: {
+        major: this.amount,
+        currency: "RUB",
       },
-    );
+      method: type,
+      attachments: attachmentIds,
+      recipientId: this._recipientId,
+      goal: this._goal,
+    });
   }
 
   private updateAmountError(treshold: number) {

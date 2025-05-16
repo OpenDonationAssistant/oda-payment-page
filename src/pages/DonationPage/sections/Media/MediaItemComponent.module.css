@@ -1,0 +1,76 @@
+.titlecontainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.mediatitle {
+  flex-grow: 2;
+  margin-left: 13px;
+  margin-right: 9px;
+  overflow-x: hidden;
+  white-space: nowrap;
+  color: var(--oda-text-color);
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--oda-inactive-color);
+  border-radius: 9px;
+  padding: 12px;
+}
+
+.delete {
+  background-color: var(--oda-alert-color);
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 9px;
+}
+
+.preview {
+  margin-top: 12px;
+  margin-left: -12px;
+  margin-right: -12px;
+}
+
+.timestamp {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.timestamps {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.begintimestamp {
+  width: 50%;
+  border-right: 1px solid var(--oda-border-color);
+}
+
+.timestampvalue {
+  color: var(--oda-text-color);
+}

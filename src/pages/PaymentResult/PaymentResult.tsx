@@ -7,12 +7,14 @@ import axios from "axios";
 export async function loader({ params }: { params: Params<"paymentId"> }) {
   const url = new URL(window.location.href);
   const paymentId = url.searchParams.get("SHP_ID") ?? params.paymentId;
-  const apiUrl = window.location.hostname.endsWith(process.env.REACT_APP_DOMAIN ?? "localhost")
+  const apiUrl = window.location.hostname.endsWith(
+    process.env.REACT_APP_DOMAIN ?? "localhost",
+  )
     ? process.env.REACT_APP_API_ENDPOINT
     : `https://${window.location.hostname}`;
   let payment = await axios
-    .put(`${apiUrl}/commands/payment/complete`, {
-      paymentId: paymentId
+    .put(`${apiUrl}/payments/commands/complete`, {
+      paymentId: paymentId,
     })
     .then((json) => {
       return json.data;
@@ -95,14 +97,13 @@ export default function PaymentResult({
           }`,
         }}
       />
-    <div className="h-100 d-flex align-items-center justify-content-center">
-
-      <div className="card shadow-lg rounded">
-        <div className="result-page card-header pb-4 pt-4 ps-4 align-middle">
-          {payment.status === "completed" ? success(recipientId) : failure()}
+      <div className="h-100 d-flex align-items-center justify-content-center">
+        <div className="card shadow-lg rounded">
+          <div className="result-page card-header pb-4 pt-4 ps-4 align-middle">
+            {payment.status === "completed" ? success(recipientId) : failure()}
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 }

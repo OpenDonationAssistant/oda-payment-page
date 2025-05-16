@@ -64,13 +64,13 @@ export default function MediaInput({
       setShowMediaAutocomplete(false);
       return;
     }
-    const apiUrl = window.location.hostname.endsWith(process.env.REACT_APP_DOMAIN ?? "localhost")
+    const apiUrl = window.location.hostname.endsWith(
+      process.env.REACT_APP_DOMAIN ?? "localhost",
+    )
       ? process.env.REACT_APP_MEDIA_API_ENDPOINT
       : `https://${window.location.hostname}`;
     axios
-      .get(
-        `${apiUrl}/media/available?query=${query}`,
-      )
+      .get(`${apiUrl}/media/available?query=${query}`)
       .then((response) => response.data)
       .then((data) => {
         setMediaSuggestions(data);
@@ -80,7 +80,9 @@ export default function MediaInput({
 
   function addMedia(url: string) {
     setShowMediaAutocomplete(false);
-    const apiUrl = window.location.hostname.endsWith(process.env.REACT_APP_DOMAIN ?? "localhost")
+    const apiUrl = window.location.hostname.endsWith(
+      process.env.REACT_APP_DOMAIN ?? "localhost",
+    )
       ? process.env.REACT_APP_MEDIA_API_ENDPOINT
       : `https://${window.location.hostname}`;
     axios

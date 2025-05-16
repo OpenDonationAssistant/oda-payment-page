@@ -1,11 +1,29 @@
 @import-normalize;
 
+svg {
+  flex-shrink: 0;
+}
+
+/* mulish-latin-wght-normal */
+@font-face {
+  font-family: "Mulish Variable";
+  font-style: normal;
+  font-display: auto;
+  font-weight: 200 1000;
+  src: url(https://cdn.oda.digital/assets/Mulish-VariableFont_wght.ttf) format("truetype");
+}
+
+body {
+  overflow-x: hidden;
+  position: relative;
+}
+
 #root {
-  font-family: "Exo 2 Variable";
+  font-family: "Mulish Variable";
 }
 
 .hidden {
-  display: none!important;
+  display: none !important;
 }
 
 .material-symbols-sharp {
@@ -31,39 +49,38 @@ body {
 
 body {
   margin: 0;
-  font-family: "Exo 2 Variable", "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family:
+    "Mulish Variable", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
-    -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-input[type=number] {
-    -moz-appearance:textfield; /* Firefox */
-    appearance: textfield;
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+  appearance: textfield;
 }
 
 .page-content-container .card-footer {
-	/* todo make padding through inheritance */
-	/* padding-left: calc(1.5 * var(--bs-gutter-x)) !important; */
-	padding: 26px;
+  /* todo make padding through inheritance */
+  /* padding-left: calc(1.5 * var(--bs-gutter-x)) !important; */
+  padding: 26px;
   font-size: smaller;
   font-style: italic;
-	background-color: rgb(33,37,41)!important;
-	border-bottom-right-radius: 8px!important;
-	border-bottom-left-radius: 8px!important;
+  background-color: rgb(33, 37, 41) !important;
+  border-bottom-right-radius: 8px !important;
+  border-bottom-left-radius: 8px !important;
   padding-top: 10px;
   padding-bottom: 10px;
   max-width: var(--oda-panel-max-width);
@@ -80,11 +97,11 @@ input[type=number] {
 }
 
 .card .container {
-	margin-top: 0px!important;
+  margin-top: 0px !important;
 }
 
 .container {
-	background-color: white;
+  background-color: white;
 }
 
 .no-wrap {
@@ -92,14 +109,13 @@ input[type=number] {
 }
 
 .footer-warning {
-	color: #747373;
-	padding-right: 18px;
+  color: #747373;
+  padding-right: 18px;
   line-height: 16px;
 }
 
 .stream-link {
-	color: #747373;
-  font-family: "Black Ops One", system-ui;
+  color: #747373;
 }
 
 .footer-warning .stream-link {

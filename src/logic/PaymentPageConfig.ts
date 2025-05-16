@@ -1,4 +1,6 @@
+import { createContext } from "react";
 import { Amount } from "../types";
+import { makeAutoObservable } from "mobx";
 
 export interface Goal {
   id: string;
@@ -38,6 +40,7 @@ export class PaymentPageConfig {
   private _urls: Map<string, string> = new Map();
   private _streamerName: string = "";
   private _charLimit: CharLimit;
+  private _streamerDescription: string;
 
   constructor(json: any) {
     this.config = json;
@@ -65,13 +68,15 @@ export class PaymentPageConfig {
       value: 300,
     };
     const urls = new Map<string, string>();
-    json.value["url"].map((url: any) => {
+    json.value["url"]?.map((url: any) => {
       const key = Object.keys(url)[0];
       urls.set(key, url[key]);
     });
     this._urls = urls;
     this._streamerName = json.value["nickname"] ?? "";
+    this._streamerDescription = json.value["streamer.description"] ?? "";
     console.debug({ paymentPageConfig: this }, "loaded config");
+    makeAutoObservable(this);
   }
 
   public get email(): string {
@@ -175,7 +180,23 @@ export class PaymentPageConfig {
     return this._charLimit;
   }
 
+  public get streamerDescription(): string {
+    return this._streamerDescription;
+  }
+
   public set charLimit(value: CharLimit) {
     this._charLimit = this.charLimit;
   }
+
+  public selectGoal(id: string){
+    this._goals = this._goals.map((goal) => {
+      goal.selected = goal.id === id;
+      return goal;
+    })
+    console.debug({goals: this._goals}, "reselected goals");
+  }
 }
+
+export const PaymentPageConfigContext = createContext(
+  new PaymentPageConfig({ value: {}}),
+);

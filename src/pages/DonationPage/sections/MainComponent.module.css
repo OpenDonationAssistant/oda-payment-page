@@ -1,0 +1,140 @@
+.section {
+  background-color: var(--oda-panel-color);
+  border-radius: 6px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.messagesection {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainsection {
+  width: calc(100% - 18px);
+  margin: 9px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.message {
+  width: 100%;
+  font-size: 24px;
+  min-height: 160px;
+  border: none;
+  color: var(--oda-text-color);
+  background-color: var(--oda-panel-color);
+  outline: none;
+}
+
+.messagecontainer {
+  display: flex;
+  flex-grow: 1;
+}
+
+.iconcontainer {
+  padding-top: 6px;
+  margin-right: 6px;
+}
+
+.messagestats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #9b99a3;
+  font-size: 12px;
+}
+
+.nicknamecontainer {
+  display: flex;
+}
+
+.nickname {
+  border: none;
+  background-color: var(--oda-panel-color);
+  font-size: 24px;
+  width: 100%;
+  color: var(--oda-text-color);
+  outline: none;
+}
+
+.minimal {
+  color: var(--oda-text-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.minimaldescription {
+  width: 200px;
+  text-align: right;
+  margin-right: 4px;
+}
+
+.minimalamount {
+  color: var(--oda-control-color);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 4px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.anonymcontainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.anonymdescription {
+  min-width: 200px;
+  text-align: right;
+  margin-right: 4px;
+  transition: 1s;
+}
+
+.anonymdescriptionactive {
+  color: var(--oda-control-color);
+}
+
+.anonymdescriptionpassive {
+  color: var(--oda-disabled-color);
+}
+
+.switchcontainer {
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px;
+  transition: 1s;
+  &:hover {
+    cursor:pointer;
+  }
+}
+
+.switchactive {
+  background-color: var(--oda-control-color);
+  justify-content: flex-end;
+}
+
+.switchpassive {
+  justify-content: flex-start;
+  background-color: var(--oda-disabled-color);
+}
+
+.switch {
+  width: 18px;
+  height: 18px;
+  border-radius: 12px;
+  background-color: white;
+  z-index: 2;
+}

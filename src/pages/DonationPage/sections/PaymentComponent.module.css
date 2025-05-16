@@ -1,0 +1,54 @@
+/* TODO: копипаста */
+.payment {
+  width: calc(100%);
+  min-height: 80px;
+  margin-top: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: transparent;
+  border-radius: 6px;
+  padding: 16px;
+  /*theme*/
+  /*margin: 9px;*/
+  /*background-color: var(--oda-panel-color);*/
+}
+
+.paymentdescription {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--oda-text-color);
+}
+
+.line {
+  display: inline-block;
+  width: 250px;
+  margin-left: 12px;
+  margin-right: 18px;
+  border-bottom: 1px solid var(--oda-text-color);
+}
+
+.amountdescription {
+  padding-top: 10px;
+}
+
+.paybuttoncontainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.paybutton {
+  padding: 14px 24px 16px 24px;
+  border-radius: 110px;
+  border: none;
+  background-color: var(--oda-control-color);
+  color: var(--oda-page-color);
+  font-size: 32px;
+  margin-top: 6px;
+  &:hover,&:focus{
+    transform: translateY(-2px);
+  }
+}
