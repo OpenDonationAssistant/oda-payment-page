@@ -1,9 +1,12 @@
 FROM docker.io/library/node:latest AS build
 WORKDIR /build
+ARG gpr_token
 
 COPY package.json package.json
 COPY package-lock.json package-lock.json
 COPY tsconfig.json tsconfig.json
+COPY .npmrc .npmrc
+RUN echo "//npm.pkg.github.com/:_authToken=${gpr_token}" > ~/.npmrc
 RUN npm ci --legacy-peer-deps
 
 COPY .env .env
