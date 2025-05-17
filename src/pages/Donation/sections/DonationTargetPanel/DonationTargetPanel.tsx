@@ -3,6 +3,7 @@ import classes from "./DonationTargetPanel.module.css";
 import DonationTargetComponent from "./DonationTargetComponent";
 import { Goal } from "../../../../logic/PaymentPageConfig";
 import { PaymentController } from "../../../../logic/payment/PaymentController";
+import { toJS } from "mobx";
 
 export default function DonationTargetPanel({
   targets,
@@ -23,16 +24,14 @@ export default function DonationTargetPanel({
               key={target.id}
               target={target}
               selectHandler={(selected: boolean) => {
-                console.log({ oldGoals: goals });
                 const updatedGoals = goals.map((it, number) => {
                   if (number === index){
                       it.selected = true;
                       controller.goal = it.id;
                   }
                   it.selected = number === index ? selected : false;
-                  return structuredClone(it);
+                  return structuredClone(toJS(it));
                 });
-                console.log({ updatedGoals: updatedGoals });
                 setGoals([...updatedGoals]);
               }}
             />
