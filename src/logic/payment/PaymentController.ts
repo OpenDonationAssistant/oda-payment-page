@@ -18,6 +18,7 @@ export class PaymentController {
   private _mediaRequestCost: number;
   private _minimalPayment: number;
   private _goal: string | null = null;
+  private _apiUrl: string = "";
   private _fiatGateway: GatewayControllerGatewayData | null = null;
 
   constructor(
@@ -30,7 +31,12 @@ export class PaymentController {
     this._minimalPayment = minimalPayment;
     this.amount = minimalPayment;
     this.treshold = minimalPayment;
-    DefaultApiFactory(undefined, process.env.REACT_APP_API_ENDPOINT)
+    this._apiUrl = window.location.hostname.endsWith(
+      process.env.REACT_APP_DOMAIN ?? "localhost",
+    )
+      ? process.env.REACT_APP_API_ENDPOINT
+      : `https://${window.location.hostname}`;
+    DefaultApiFactory(undefined, this._apiUrl)
       .listGateways(recipientId)
       .then((gateways) => {
         this._fiatGateway =
@@ -84,12 +90,7 @@ export class PaymentController {
       return Promise.resolve({});
     }
     const attachmentIds = this.attachments.map((attach) => attach.id);
-    const apiUrl = window.location.hostname.endsWith(
-      process.env.REACT_APP_DOMAIN ?? "localhost",
-    )
-      ? process.env.REACT_APP_API_ENDPOINT
-      : `https://${window.location.hostname}`;
-    return axios.put(`${apiUrl}/payments/commands/create`, {
+    return axios.put(`${this._apiUrl}/payments/commands/create`, {
       id: uuidv7(),
       gatewayCredId: this._fiatGateway.id,
       nickname: this.nickname,
