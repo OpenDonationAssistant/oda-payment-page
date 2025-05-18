@@ -10,7 +10,7 @@ import {
   CharLimitTreshold,
   PaymentPageConfigContext,
 } from "../../../logic/PaymentPageConfig";
-import { toJS } from "mobx";
+import { reaction, toJS } from "mobx";
 
 const MessageComponent = observer(({}) => {
   const payment = useContext(PaymentStoreContext);
@@ -27,7 +27,7 @@ const MessageComponent = observer(({}) => {
       return pageConfig.charLimit.value as number;
     }
     const tresholds = pageConfig.charLimit.value as CharLimitTreshold[];
-    console.log({tresholds: tresholds}, "finding limits");
+    console.log({ tresholds: tresholds }, "finding limits");
     return (
       toJS(tresholds)
         .sort((a, b) => -(a.treshold - b.treshold))
@@ -41,6 +41,13 @@ const MessageComponent = observer(({}) => {
     setInputHeight(scrollHeight > 150 ? scrollHeight : 150);
     payment.text = newValue;
   }
+
+  reaction(
+    () => payment.amount,
+    () => {
+      setLimit(calcCharLimit());
+    },
+  );
 
   return (
     <>
