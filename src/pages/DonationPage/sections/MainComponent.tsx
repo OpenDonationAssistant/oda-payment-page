@@ -26,6 +26,7 @@ const MessageComponent = observer(({}) => {
       return pageConfig.charLimit.value as number;
     }
     const tresholds = pageConfig.charLimit.value as CharLimitTreshold[];
+    console.log({tresholds: tresholds}, "finding limits");
     return (
       tresholds
         .sort((a, b) => -(a.treshold - b.treshold))
