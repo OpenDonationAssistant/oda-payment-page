@@ -62,7 +62,9 @@ const MessageComponent = observer(({}) => {
             Минимальная сумма при данном количестве символов -{" "}
             <Amount amount={payment.minimalPayment} />
           </div>
-          <div>{payment.text.length} / {limit}</div>
+          <div>
+            {payment.text.length} / {limit}
+          </div>
         </div>
       </div>
     </>
@@ -79,7 +81,13 @@ const NicknameComponent = observer(({}) => {
           <span className={`${classes.iconcontainer}`}>
             <PersonIcon />
           </span>
-          <input className={`${classes.nickname}`} placeholder="Аноним" />
+          <input
+            className={`${classes.nickname}`}
+            placeholder="Аноним"
+            onChange={(e) => {
+              payment.nickname = e.target.value;
+            }}
+          />
           <div className={`${classes.anonymcontainer}`}>
             <div
               className={`${classes.anonymdescription} ${payment.isAnonym ? classes.anonymdescriptionactive : classes.anonymdescriptionpassive}`}
@@ -105,9 +113,13 @@ const AmountComponent = observer(({}) => {
   return (
     <>
       <div className={`${classes.section}`}>
-        <div className={`${classes.nicknamecontainer}`}>
+        <div
+          className={`${classes.nicknamecontainer}  ${payment.error ? classes.error : ""}`}
+        >
           <span className={`${classes.iconcontainer}`}>
-            <RubleIcon />
+            <RubleIcon
+              color={payment.error ? "var(--oda-invalid-color)" : undefined}
+            />
           </span>
           <input
             className={`${classes.nickname}`}

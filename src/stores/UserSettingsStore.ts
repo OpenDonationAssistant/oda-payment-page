@@ -8,7 +8,7 @@ export class UserSettingsStore {
   constructor() {
     console.log("local storage: " + localStorage.getItem("useOldTheme"));
     this._theme =
-      "dark" === (localStorage.getItem("theme") ?? "light") ? "dark" : "light";
+      "dark" === (localStorage.getItem("theme") ?? "dark") ? "dark" : "light";
     this._useOldTheme =
       "true" === (localStorage.getItem("useOldTheme") ?? "false");
     makeAutoObservable(this);

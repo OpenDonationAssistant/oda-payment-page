@@ -25,6 +25,7 @@ const DarkTheme = () => {
           --oda-selected-panel-color: #1D1D26;
           --oda-border-color: #28282E;
           --oda-alert-color: #231717;
+          --oda-invalid-color: var(--oda-attention-700);
         }`,
       }}
     />
@@ -46,6 +47,7 @@ const LightTheme = () => {
           --oda-selected-panel-color: #B2D4FB;
           --oda-border-color: white;
           --oda-alert-color: #FFEDED;
+          --oda-invalid-color: var(--oda-attention-500);
         }`,
       }}
     />

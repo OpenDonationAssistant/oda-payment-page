@@ -14,6 +14,10 @@
   /*background-color: var(--oda-panel-color);*/
 }
 
+.disabled {
+  background-color: var(--oda-disabled-color)!important;
+}
+
 .paymentdescription {
   display: flex;
   flex-direction: column;

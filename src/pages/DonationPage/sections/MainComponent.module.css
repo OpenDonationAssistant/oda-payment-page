@@ -49,6 +49,12 @@
   font-size: 12px;
 }
 
+.error {
+  & div, & input, & svg {
+    color: var(--oda-invalid-color)!important;
+  }
+}
+
 .nicknamecontainer {
   display: flex;
 }

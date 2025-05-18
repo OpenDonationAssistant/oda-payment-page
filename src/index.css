@@ -18,6 +18,30 @@ body {
   position: relative;
 }
 
+:root {
+  --oda-attention-0: #000000;
+  --oda-attention-50: #0A0000;
+  --oda-attention-100: #190000;
+  --oda-attention-150: #2E0000;
+  --oda-attention-200: #470000;
+  --oda-attention-250: #660000;
+  --oda-attention-300: #850000;
+  --oda-attention-350: #A30000;
+  --oda-attention-400: #C20000;
+  --oda-attention-450: #E00000;
+  --oda-attention-500: #FF0000;
+  --oda-attention-550: #FF1F1F;
+  --oda-attention-600: #FF3D3D;
+  --oda-attention-650: #FF5C5C;
+  --oda-attention-700: #FF7A7A;
+  --oda-attention-750: #FF9999;
+  --oda-attention-800: #FFB8B8;
+  --oda-attention-850: #FFD1D1;
+  --oda-attention-900: #FFE5E5;
+  --oda-attention-950: #FFF5F5;
+  --oda-attention-1000: #FFFFFF;
+}
+
 #root {
   font-family: "Mulish Variable";
 }

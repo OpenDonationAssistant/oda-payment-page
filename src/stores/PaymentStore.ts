@@ -1,3 +1,7 @@
+import {
+  DefaultApiFactory,
+  GatewayControllerGatewayData,
+} from "@opendonationassistant/oda-payment-service-client";
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { createContext } from "react";
@@ -14,6 +18,8 @@ export class PaymentStore {
   private _minimalPayment: number;
   private _attachments: any[] = [];
   private _error: string = "";
+  private _apiUrl: string = "";
+  private _gateways: GatewayControllerGatewayData[] = [];
 
   constructor({
     recipientId,
@@ -28,32 +34,41 @@ export class PaymentStore {
     this._mediaRequestCost = mediaRequestCost ?? 0;
     this._minimalPayment = minimalPayment ?? 0;
     this._amount = this._minimalPayment;
+    this._apiUrl = window.location.hostname.endsWith(
+      process.env.REACT_APP_DOMAIN ?? "localhost",
+    )
+      ? (process.env.REACT_APP_API_ENDPOINT ?? "localhost")
+      : `https://${window.location.hostname}`;
+    DefaultApiFactory(undefined, this._apiUrl)
+      .listGateways(recipientId ?? "")
+      .then((gateways) => {
+        this._gateways = gateways.data.filter((gateway) => gateway.enabled);
+      });
     makeAutoObservable(this);
   }
 
-  private checkAmount(size: number, amount: number) {
-    let paymentForAttachments = size * this._mediaRequestCost;
+  private checkAmount() {
+    let paymentForAttachments =
+      this._attachments.length * this._mediaRequestCost;
     let treshold =
       this._minimalPayment > paymentForAttachments
         ? this._minimalPayment
         : paymentForAttachments;
-    let isIncorrect = amount < treshold;
-    this._treshold = treshold;
-    return { treshold, isIncorrect };
-  }
-
-  private updateAmountError(treshold: number) {
-    const errorMessage = `Сумма доната должна быть больше минимальной: \u20BD${treshold}`;
-    this.error = errorMessage;
-  }
-
-  pay(type: string | null): Promise<any> {
-    let { treshold, isIncorrect } = this.checkAmount(
-      this.attachments.length,
-      this.amount,
+    console.log(
+      { amount: this._amount, treshold: treshold },
+      "checking amount",
     );
-    if (isIncorrect) {
-      this.updateAmountError(treshold);
+    this._treshold = treshold;
+    this._error =
+      this._amount < treshold
+        ? `Сумма доната должна быть больше минимальной: \u20BD${treshold}`
+        : "";
+    return { treshold };
+  }
+
+  pay({ method, type }: { method?: string; type: string }): Promise<any> {
+    this.checkAmount();
+    if (this._error) {
       return Promise.resolve({});
     }
     const attachmentIds = this.attachments.map((attach) => attach.id);
@@ -64,13 +79,16 @@ export class PaymentStore {
       : `https://${window.location.hostname}`;
     return axios.put(`${apiUrl}/payments/commands/create`, {
       id: uuidv7(),
-      nickname: this.nickname,
+      nickname: this.isAnonym ? "" : this.nickname,
+      gatewayCredId:
+        this._gateways.filter((gateway) => gateway.type === type).at(0)?.id ??
+        "",
       message: this.text,
       amount: {
         major: this.amount,
         currency: "RUB",
       },
-      method: type,
+      method: method,
       attachments: attachmentIds,
       recipientId: this._recipientId,
       //goal: this._goal,
@@ -99,6 +117,7 @@ export class PaymentStore {
 
   public set amount(value: number) {
     this._amount = value;
+    this.checkAmount();
   }
 
   public get treshold(): number {
@@ -131,6 +150,7 @@ export class PaymentStore {
 
   public set attachment(attachments: any[]) {
     this._attachments = attachments;
+    this.checkAmount();
   }
 
   public get error(): string {
