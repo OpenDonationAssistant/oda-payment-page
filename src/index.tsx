@@ -114,11 +114,10 @@ pageConfig.goals
 const userSettings = new UserSettingsStore();
 console.log("use old theme: " + userSettings.useOldTheme);
 
-//const requestsEnabled = config.value["media.requests.disabled.permanently"] === false && config.value["media.requests.enabled"] === true;
-//const hasGoals = pageConfig.goals.length > 0;
+const requestsEnabled = config.value["media.requests.disabled.permanently"] === false && config.value["media.requests.enabled"] === true;
+const hasGoals = pageConfig.goals.length > 0;
 
-const showNewVersion = recipientId === "tabularussia" &&
-  //!requestsEnabled && !hasGoals &&
+const showNewVersion = !requestsEnabled && !hasGoals &&
   window.screen.width > 1000 &&
   window.innerWidth > 1000 &&
   !userSettings.useOldTheme;
