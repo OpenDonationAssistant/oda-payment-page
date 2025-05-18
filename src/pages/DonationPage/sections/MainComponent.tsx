@@ -10,6 +10,7 @@ import {
   CharLimitTreshold,
   PaymentPageConfigContext,
 } from "../../../logic/PaymentPageConfig";
+import { toJS } from "mobx";
 
 const MessageComponent = observer(({}) => {
   const payment = useContext(PaymentStoreContext);
@@ -28,7 +29,7 @@ const MessageComponent = observer(({}) => {
     const tresholds = pageConfig.charLimit.value as CharLimitTreshold[];
     console.log({tresholds: tresholds}, "finding limits");
     return (
-      tresholds
+      toJS(tresholds)
         .sort((a, b) => -(a.treshold - b.treshold))
         .find((value) => value.treshold <= payment.amount)?.limit ?? 300
     );
