@@ -46,6 +46,7 @@ const MessageComponent = observer(({}) => {
     () => payment.amount,
     () => {
       setLimit(calcCharLimit());
+      handleMessage(payment.text);
     },
   );
 
