@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import classes from "./MainComponent.module.css";
 import CommentIcon from "../../../icons/CommentIcon";
 import PersonIcon from "../../../icons/PersonIcon";
@@ -11,6 +11,7 @@ import {
   PaymentPageConfigContext,
 } from "../../../logic/PaymentPageConfig";
 import { reaction, toJS } from "mobx";
+import { useSearchParams } from "react-router-dom";
 
 const MessageComponent = observer(({}) => {
   const payment = useContext(PaymentStoreContext);
@@ -83,6 +84,17 @@ const MessageComponent = observer(({}) => {
 
 const NicknameComponent = observer(({}) => {
   const payment = useContext(PaymentStoreContext);
+  const [params] = useSearchParams();
+
+  useEffect(() => {
+    const nickname = params.get("nickname");
+    if (nickname) {
+      payment.nickname = nickname || "";
+    } else {
+      const saved = localStorage.getItem("nickname");
+      payment.nickname = saved || "";
+    }
+  }, [params]);
 
   return (
     <>
@@ -96,6 +108,7 @@ const NicknameComponent = observer(({}) => {
             placeholder="Аноним"
             onChange={(e) => {
               payment.nickname = e.target.value;
+              localStorage.setItem("nickname", e.target.value);
             }}
           />
           <div className={`${classes.anonymcontainer}`}>
