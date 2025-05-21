@@ -19,6 +19,7 @@ export class PaymentController {
   private _minimalPayment: number;
   private _goal: string | null = null;
   private _apiUrl: string = "";
+  private _marker: string = "";
   private _fiatGateway: GatewayControllerGatewayData | null = null;
 
   constructor(
@@ -103,6 +104,7 @@ export class PaymentController {
       attachments: attachmentIds,
       recipientId: this._recipientId,
       goal: this._goal,
+      marker: this._marker
     });
   }
 
@@ -160,5 +162,8 @@ export class PaymentController {
   }
   public set goal(value: string | null) {
     this._goal = value;
+  }
+  public set marker(marker: string){
+    this._marker = marker;
   }
 }

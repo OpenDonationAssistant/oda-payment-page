@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "./sections/Footer/Footer";
 import "./Donation.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -16,6 +16,7 @@ import ODALogo from "../../components/ODALogo/ODALogo";
 import DonationTargetPanel from "./sections/DonationTargetPanel/DonationTargetPanel";
 import Feedback from "./sections/Feedback/Feedback";
 import { useSearchParams } from "react-router-dom";
+import { uuidv7 } from "uuidv7";
 
 export default function Donation({
   pageConfig,
@@ -32,6 +33,8 @@ export default function Donation({
   paymentController: PaymentController;
 }) {
   const [params] = useSearchParams();
+  const [ip, setIp] = useState<string>("");
+  const [marker, setMarker] = useState<string>("");
 
   const [useBeta, _] = useState(() => {
     const useBeta = params.get("beta");
@@ -40,6 +43,24 @@ export default function Donation({
     }
     return false;
   });
+
+  useEffect(() => {
+    const marker = localStorage.getItem("marker");
+    if (!marker) {
+      const newMarker = uuidv7();
+      localStorage.setItem("marker", newMarker);
+      setMarker(newMarker);
+      paymentController.marker = newMarker;
+    } else {
+      paymentController.marker = marker;
+    }
+  },[recipientId]);
+
+  useEffect(() => {
+    fetch('https://api.ipify.org?format=json')
+      .then(response => response.json())
+      .then(data => setIp(data.ip));
+  },[recipientId]);
 
   return (
     <>
