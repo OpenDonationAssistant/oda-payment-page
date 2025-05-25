@@ -83,6 +83,7 @@ export default function MediaInput({}: {}) {
     axios
       .put(`${apiUrl}/media/video`, {
         url: url,
+        recipientId: payment.recipientId,
       })
       .then((json) => {
         let updated = [...attachments, json.data];
