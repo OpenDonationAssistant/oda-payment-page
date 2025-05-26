@@ -41,6 +41,7 @@ export class PaymentPageConfig {
   private _streamerName: string = "";
   private _charLimit: CharLimit;
   private _streamerDescription: string;
+  private _requestAmount: number;
 
   constructor(json: any) {
     this.config = json;
@@ -62,11 +63,12 @@ export class PaymentPageConfig {
     this._payButtonText = json.value["payButtonText"] ?? "";
     this._customCss = json.value["customCss"] ?? null;
     this._gateway = json.value["gateway"] ?? null;
-    this._tooltip = json.value["tooltip"] ?? "";
+    this._tooltip = json.value["media.requests.tooltip"] ?? "";
     this._charLimit = json.value["limits.char"] ?? {
       type: "fixed",
       value: 300,
     };
+    this._requestAmount = json.value["media.requests.amount"] ?? 12;
     const urls = new Map<string, string>();
     json.value["url"]?.map((url: any) => {
       const key = Object.keys(url)[0];
@@ -77,6 +79,10 @@ export class PaymentPageConfig {
     this._streamerDescription = json.value["streamer.description"] ?? "";
     console.debug({ paymentPageConfig: this }, "loaded config");
     makeAutoObservable(this);
+  }
+
+  public get requestAmount() {
+    return this._requestAmount;
   }
 
   public get email(): string {

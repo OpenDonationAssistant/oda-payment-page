@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Tooltip } from "react-tooltip";
-import Media from "../../../../components/Media/Media";
 import { PaymentStoreContext } from "../../../../stores/PaymentStore";
 import { PaymentPageConfigContext } from "../../../../logic/PaymentPageConfig";
 import classes from "./Media.module.css";
@@ -133,7 +132,11 @@ export default function MediaInput({}: {}) {
                       <SearchIcon />
                       <input
                         data-tooltip-id="media-url-tooltip"
-                        hidden={attachments.length >= 12 ? true : false}
+                        hidden={
+                          attachments.length >= pageConfig.requestAmount
+                            ? true
+                            : false
+                        }
                         className={`${
                           incorrectMediaError ? "is-invalid" : ""
                         } ${classes.mediainput}`}
@@ -205,7 +208,7 @@ export default function MediaInput({}: {}) {
           </div>
         </div>
         <div className={`${classes.limit}`}>
-          Маскимальное количество - 12 треков
+          Маскимальное количество - {pageConfig.requestAmount} треков
         </div>
       </div>
     </>

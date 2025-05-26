@@ -14,12 +14,14 @@ export default function MediaInput({
   mediaRequestsEnabled,
   paymentController,
   tooltip,
+  maxAmount
 }: {
   recipientId: string;
   mediaRequestsDisabledPermanently: boolean;
   mediaRequestsEnabled: boolean;
   paymentController: PaymentController;
   tooltip: string;
+  maxAmount: number;
 }) {
   const [attachments, setAttachments] = useState([]);
   const [mediaSuggestions, setMediaSuggestions] = useState([]);
@@ -136,7 +138,7 @@ export default function MediaInput({
                 <input
                   id="media-url-input"
                   data-tooltip-id="media-url-tooltip"
-                  hidden={attachments.length >= 12 ? true : false}
+                  hidden={attachments.length >= maxAmount ? true : false}
                   className={
                     incorrectMediaError
                       ? "form-control is-invalid"
@@ -153,7 +155,7 @@ export default function MediaInput({
                   placeholder={
                     attachments.length === 0
                       ? "Название видео или ссылка на youtube или vk video"
-                      : "Можете добавить еще видео. Максимум 12 штук"
+                      : `Можете добавить еще видео. Максимум ${maxAmount} штук`
                   }
                 />
                 {showMediaAutocomplete && (

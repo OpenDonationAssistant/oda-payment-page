@@ -54,13 +54,13 @@ export default function Donation({
     } else {
       paymentController.marker = marker;
     }
-  },[recipientId]);
+  }, [recipientId]);
 
   useEffect(() => {
-    fetch('https://api.ipify.org?format=json')
-      .then(response => response.json())
-      .then(data => setIp(data.ip));
-  },[recipientId]);
+    fetch("https://api.ipify.org?format=json")
+      .then((response) => response.json())
+      .then((data) => setIp(data.ip));
+  }, [recipientId]);
 
   return (
     <>
@@ -99,6 +99,7 @@ export default function Donation({
             mediaRequestsEnabled={mediaRequestsEnabled}
             paymentController={paymentController}
             tooltip={pageConfig.tooltip}
+            maxAmount={pageConfig.requestAmount}
           />
           <PayButton
             paymentPageConfig={pageConfig}
