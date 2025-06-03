@@ -84,17 +84,6 @@ const MessageComponent = observer(({}) => {
 
 const NicknameComponent = observer(({}) => {
   const payment = useContext(PaymentStoreContext);
-  const [params] = useSearchParams();
-
-  useEffect(() => {
-    const nickname = params.get("nickname");
-    if (nickname) {
-      payment.nickname = nickname || "";
-    } else {
-      const saved = localStorage.getItem("nickname");
-      payment.nickname = saved || "";
-    }
-  }, [params]);
 
   return (
     <>
@@ -106,6 +95,7 @@ const NicknameComponent = observer(({}) => {
           <input
             className={`${classes.nickname}`}
             placeholder="Аноним"
+            value={payment.nickname}
             onChange={(e) => {
               payment.nickname = e.target.value;
               localStorage.setItem("nickname", e.target.value);

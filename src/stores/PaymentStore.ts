@@ -34,6 +34,7 @@ export class PaymentStore {
     this._mediaRequestCost = mediaRequestCost ?? 0;
     this._minimalPayment = minimalPayment ?? 0;
     this._amount = this._minimalPayment;
+    this._nickname = localStorage.getItem("nickname") ?? "";
     this._apiUrl = window.location.hostname.endsWith(
       process.env.REACT_APP_DOMAIN ?? "localhost",
     )
