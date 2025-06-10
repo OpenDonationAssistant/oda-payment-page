@@ -5,6 +5,7 @@ import Markdown from "react-markdown";
 import TwitchIcon from "../../../icons/TwitchIcon";
 import { PaymentPageConfigContext } from "../../../logic/PaymentPageConfig";
 import { PaymentStoreContext } from "../../../stores/PaymentStore";
+import VKVLIcon from "../../../icons/VKVLIcon";
 
 export const HeaderComponent = observer(({}) => {
   const pageConfig = useContext(PaymentPageConfigContext);
@@ -64,8 +65,18 @@ export const HeaderComponent = observer(({}) => {
           />
         </div>
         <div className={`${classes.streamersocial}`}>
-          <TwitchIcon />
-          <a href={pageConfig.urls.get("twitch")}>Twitch</a>
+          {pageConfig.urls.get("twitch") && (
+            <>
+              <TwitchIcon />
+              <a href={pageConfig.urls.get("twitch")}>Twitch</a>
+            </>
+          )}
+          {pageConfig.urls.get("vk") && (
+            <>
+              <VKVLIcon />
+              <a href={pageConfig.urls.get("vk")}>вконтакте</a>
+            </>
+          )}
         </div>
       </div>
     </div>
