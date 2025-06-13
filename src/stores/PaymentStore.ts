@@ -20,6 +20,7 @@ export class PaymentStore {
   private _error: string = "";
   private _apiUrl: string = "";
   private _gateways: GatewayControllerGatewayData[] = [];
+  private _marker: string;
 
   constructor({
     recipientId,
@@ -35,6 +36,13 @@ export class PaymentStore {
     this._minimalPayment = minimalPayment ?? 0;
     this._amount = this._minimalPayment;
     this._nickname = localStorage.getItem("nickname") ?? "";
+    const marker = localStorage.getItem("marker");
+    if (!marker) {
+      this._marker = uuidv7();
+      localStorage.setItem("marker", this._marker);
+    } else {
+      this._marker = marker;
+    }
     this._apiUrl = window.location.hostname.endsWith(
       process.env.REACT_APP_DOMAIN ?? "localhost",
     )
@@ -92,6 +100,7 @@ export class PaymentStore {
       method: method,
       attachments: attachmentIds,
       recipientId: this._recipientId,
+      marker: this._marker,
       //goal: this._goal,
     });
   }

@@ -12,6 +12,7 @@ import {
 } from "../../../logic/PaymentPageConfig";
 import { reaction, toJS } from "mobx";
 import { useSearchParams } from "react-router-dom";
+import { uuidv7 } from "uuidv7";
 
 const MessageComponent = observer(({}) => {
   const payment = useContext(PaymentStoreContext);
@@ -21,6 +22,19 @@ const MessageComponent = observer(({}) => {
 
   const [inputHeight, setInputHeight] = useState<number>(150);
   const [limit, setLimit] = useState<number>(calcCharLimit());
+  const [marker, setMarker] = useState<string>("");
+
+  useEffect(() => {
+    const marker = localStorage.getItem("marker");
+    if (!marker) {
+      const newMarker = uuidv7();
+      localStorage.setItem("marker", newMarker);
+      setMarker(newMarker);
+      payment.marker = newMarker;
+    } else {
+      payment.marker = marker;
+    }
+  }, [nickname]);
 
   // TODO: use reaction to paymentController.amount
   function calcCharLimit(): number {
