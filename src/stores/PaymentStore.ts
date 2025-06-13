@@ -173,7 +173,7 @@ export class PaymentStore {
     return this._marker;
   }
   public set marker(value: string) {
-    this._error = value;
+    this._marker = value;
   }
 }
 
