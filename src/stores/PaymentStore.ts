@@ -169,6 +169,12 @@ export class PaymentStore {
   public set error(value: string) {
     this._error = value;
   }
+  public get marker(): string {
+    return this._marker;
+  }
+  public set marker(value: string) {
+    this._error = value;
+  }
 }
 
 export const PaymentStoreContext = createContext(new PaymentStore({}));

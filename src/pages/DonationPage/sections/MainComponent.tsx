@@ -34,7 +34,7 @@ const MessageComponent = observer(({}) => {
     } else {
       payment.marker = marker;
     }
-  }, [nickname]);
+  }, [pageConfig]);
 
   // TODO: use reaction to paymentController.amount
   function calcCharLimit(): number {
