@@ -1,12 +1,16 @@
 import React, { useContext } from "react";
 import { UserSettingsStoreContext } from "../stores/UserSettingsStore";
 import { observer } from "mobx-react-lite";
+import classes from "./ODAIcon.module.css";
 
 const ODAIcon = observer(({}) => {
   const settings = useContext(UserSettingsStoreContext);
 
   return (
-    <>
+    <div
+      className={`${classes.icon}`}
+      onClick={() => window.open("https://oda.digital")}
+    >
       <svg
         width="108"
         height="24"
@@ -105,7 +109,7 @@ const ODAIcon = observer(({}) => {
           fill={settings.theme === "dark" ? "white" : "black"}
         />
       </svg>
-    </>
+    </div>
   );
 });
 

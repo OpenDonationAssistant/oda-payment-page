@@ -9,6 +9,7 @@ export default function NicknameInput({
   paymentController: PaymentController;
 }) {
   const [params] = useSearchParams();
+
   const [nickname, setNickname] = useState(() => {
     const nickname = params.get("nickname");
     if (nickname) {
@@ -18,6 +19,7 @@ export default function NicknameInput({
     paymentController.nickname = saved || "";
     return saved || "";
   });
+
 
   return (
     <>
