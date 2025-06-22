@@ -33,6 +33,10 @@ let recipientId = window.location.hostname.substring(
   window.location.hostname.indexOf("."),
 );
 
+if (recipientId === "bael-stream") {
+  recipientId = "baelstream";
+}
+
 if (!recipientId) {
   recipientId = "testuser";
 }
@@ -114,10 +118,14 @@ pageConfig.goals
 const userSettings = new UserSettingsStore();
 console.log("use old theme: " + userSettings.useOldTheme);
 
-const requestsEnabled = config.value["media.requests.disabled.permanently"] === false && config.value["media.requests.enabled"] === true;
+const requestsEnabled =
+  config.value["media.requests.disabled.permanently"] === false &&
+  config.value["media.requests.enabled"] === true;
 const hasGoals = pageConfig.goals.length > 0;
 
-const showNewVersion = !requestsEnabled && !hasGoals &&
+const showNewVersion =
+  !requestsEnabled &&
+  !hasGoals &&
   window.screen.width > 1000 &&
   window.innerWidth > 1000 &&
   !userSettings.useOldTheme;
