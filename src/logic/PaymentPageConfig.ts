@@ -9,7 +9,7 @@ export interface Goal {
   requiredAmount: Amount;
   accumulatedAmount: Amount;
   selected?: boolean;
-  default: boolean;
+  isDefault: boolean;
 }
 
 export interface CharLimitTreshold {
@@ -55,7 +55,7 @@ export class PaymentPageConfig {
     this.arbitraryText = json.value["arbitraryText"] ?? null;
     this._goals = json.value["goals"] ?? [];
     this._goals.map((goal) => {
-      if (goal.default) {
+      if (goal.isDefault) {
         goal.selected = true;
       }
       return goal;
