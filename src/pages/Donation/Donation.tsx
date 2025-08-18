@@ -56,12 +56,6 @@ export default function Donation({
     }
   }, [recipientId]);
 
-  useEffect(() => {
-    fetch("https://api.ipify.org?format=json")
-      .then((response) => response.json())
-      .then((data) => setIp(data.ip));
-  }, [recipientId]);
-
   return (
     <>
       {pageConfig.customCss && (

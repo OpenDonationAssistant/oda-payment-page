@@ -41,3 +41,32 @@
   font-size: 12px;
   color: var(--oda-disabled-color);
 }
+
+.suggectionitem {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--oda-border-color);
+  color: var(--oda-text-color);
+  text-align: left;
+  padding: 0px;
+  width:100%;
+  &:hover{
+    background-color: var(--oda-selected-panel-color);
+  }
+}
+
+.suggestiondescription{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 70px;
+  gap: 12px;
+  & img {
+    width: 124px;
+    height: 70px;
+    border: none;
+  }
+  & div {
+    max-width: 232px;
+  }
+}

@@ -4,9 +4,10 @@ import {
   Goal,
   PaymentPageConfigContext,
 } from "../../../../logic/PaymentPageConfig";
-import Amount from "../../../../components/Amount/Amount";
+import { Amount } from "../../../../components/Amount/Amount";
 import CheckIcon from "../../../../icons/CheckIcon";
 import { observer } from "mobx-react-lite";
+import { PaymentStoreContext } from "../../../../stores/PaymentStore";
 
 function percent(filled: number, required: number) {
   const percent = (filled / required) * 100;
@@ -18,13 +19,20 @@ function percent(filled: number, required: number) {
 
 const DonationGoalComponent = observer(({ goal }: { goal: Goal }) => {
   const pageConfig = useContext(PaymentPageConfigContext);
+  const payment = useContext(PaymentStoreContext);
 
   return (
     <>
       <div
         className={`${classes.goal} ${goal.selected ? classes.goalactive : classes.goalpassive}`}
         onClick={() => {
-          pageConfig.selectGoal(goal.id);
+          const wasSelected = payment.goal === goal.id;
+          payment.goal =  wasSelected ? null : goal.id;
+          if (!wasSelected) {
+            pageConfig.selectGoal(goal.id);
+          } else {
+            goal.selected = false;
+          }
         }}
       >
         <div className={`${classes.goaltitle}`}>

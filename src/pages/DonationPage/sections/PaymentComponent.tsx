@@ -4,23 +4,37 @@ import ODAIcon from "../../../icons/ODAIcon";
 import { PaymentStoreContext } from "../../../stores/PaymentStore";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
+import { PaymentPageConfigContext } from "../../../logic/PaymentPageConfig";
 
 const PaymentComponent = observer(({}) => {
+  const pageConfig = useContext(PaymentPageConfigContext);
   const payment = useContext(PaymentStoreContext);
   const navigate = useNavigate();
 
   return (
     <>
       <div className={`${classes.payment}`}>
-        {false && (
+        {pageConfig.useWidePage && (
           <div className={`${classes.paymentdescription}`}>
-            <div>Вы отправляете донат как Друг.</div>
+            <div>
+              Вы отправляете донат как{" "}
+              {payment.nickname && !payment.isAnonym
+                ? payment.nickname
+                : "Аноним"}
+              .
+            </div>
             <div className={`${classes.amountdescription}`}>
               <span>Сумма дарения</span>
               <span className={`${classes.line}`} />
-              <span>1150{` \u20BD`}</span>
+              <span>
+                {payment.amount}
+                {` \u20BD`}
+              </span>
             </div>
-            <div>Выбрано 3 трека. Можно добавить еще 9 треков.</div>
+            <div>
+              Выбрано треков:{" "}
+              {payment.attachments.length ? payment.attachments.length : 0} .
+            </div>
           </div>
         )}
         <div className={`${classes.paybuttoncontainer}`}>

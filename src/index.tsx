@@ -116,12 +116,6 @@ pageConfig.goals
   .forEach((goal) => (paymentController.goal = goal.id));
 
 const userSettings = new UserSettingsStore();
-console.log("use old theme: " + userSettings.useOldTheme);
-
-const requestsEnabled =
-  config.value["media.requests.disabled.permanently"] === false &&
-  config.value["media.requests.enabled"] === true;
-const hasGoals = pageConfig.goals.length > 0;
 
 const showNewVersion =
   window.screen.width > 1000 &&

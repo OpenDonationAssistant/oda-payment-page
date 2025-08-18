@@ -3,7 +3,7 @@ import classes from "./MainComponent.module.css";
 import CommentIcon from "../../../icons/CommentIcon";
 import PersonIcon from "../../../icons/PersonIcon";
 import RubleIcon from "../../../icons/RubleIcon";
-import Amount from "../../../components/Amount/Amount";
+import { Amount } from "../../../components/Amount/Amount";
 import { PaymentStoreContext } from "../../../stores/PaymentStore";
 import { observer } from "mobx-react-lite";
 import {
@@ -11,7 +11,6 @@ import {
   PaymentPageConfigContext,
 } from "../../../logic/PaymentPageConfig";
 import { reaction, toJS } from "mobx";
-import { useSearchParams } from "react-router-dom";
 import { uuidv7 } from "uuidv7";
 
 const MessageComponent = observer(({}) => {
@@ -20,7 +19,9 @@ const MessageComponent = observer(({}) => {
 
   const descriptionInputRef = useRef<HTMLTextAreaElement>(null);
 
-  const [inputHeight, setInputHeight] = useState<number>(150);
+  const [inputHeight, setInputHeight] = useState<number>(
+    pageConfig.useWidePage ? 270 : 150,
+  );
   const [limit, setLimit] = useState<number>(calcCharLimit());
   const [marker, setMarker] = useState<string>("");
 
@@ -85,7 +86,7 @@ const MessageComponent = observer(({}) => {
         <div className={`${classes.messagestats}`}>
           <div>
             Минимальная сумма при данном количестве символов -{" "}
-            <Amount amount={payment.minimalPayment} />
+            <Amount amount={payment.treshold} />
           </div>
           <div>
             {payment.text.length} / {limit}
@@ -168,10 +169,10 @@ const AmountComponent = observer(({}) => {
             <div
               className={`${classes.minimalamount}`}
               onClick={() => {
-                payment.amount = payment.minimalPayment;
+                payment.amount = payment.treshold;
               }}
             >
-              <Amount amount={payment.minimalPayment} />
+              <Amount amount={payment.treshold} />
             </div>
           </div>
         </div>

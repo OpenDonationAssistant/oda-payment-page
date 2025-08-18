@@ -23,6 +23,7 @@
   flex-direction: column;
   gap: 6px;
   color: var(--oda-text-color);
+  margin-bottom: 36px;
 }
 
 .line {

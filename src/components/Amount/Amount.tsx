@@ -1,5 +1,6 @@
+import { observer } from "mobx-react-lite";
 import React from "react";
 
-export default function Amount({ amount }: { amount: number }) {
+export const Amount = observer(({ amount }: { amount: number }) => {
   return <span>{`${amount}\u20BD`}</span>;
-}
+});

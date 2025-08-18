@@ -13,7 +13,7 @@ interface MediaData {
 
 interface MediaProps {
   data: MediaData;
-  deleteHandler: () => {};
+  deleteHandler: () => void;
 }
 
 function createVkIframeSrc(id: string) {
@@ -66,10 +66,10 @@ export default function MediaItemComponent({
               <iframe width="100%" src={createVkIframeSrc(data.originId)} />
             )}
           </div>}
-          {!collapsed && <div className={`${classes.timestamps}`}>
-            <TimestampComponent label="Начало" />
-            <TimestampComponent label="Конец" />
-          </div>}
+          {/* {!collapsed && <div className={`${classes.timestamps}`}> */}
+          {/*   <TimestampComponent label="Начало" /> */}
+          {/*   <TimestampComponent label="Конец" /> */}
+          {/* </div>} */}
         </div>
       </div>
     </>

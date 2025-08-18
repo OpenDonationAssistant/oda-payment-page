@@ -10,7 +10,7 @@ import { uuidv7 } from "uuidv7";
 export class PaymentStore {
   private _recipientId: string;
   private _isAnonym: boolean = false;
-  private _nickname: string = "Аноним";
+  private _nickname: string = "";
   private _text: string = "";
   private _amount: number = 0;
   private _treshold: number = 0;
@@ -21,6 +21,7 @@ export class PaymentStore {
   private _apiUrl: string = "";
   private _gateways: GatewayControllerGatewayData[] = [];
   private _marker: string;
+  private _goal: string | null = null;
 
   constructor({
     recipientId,
@@ -101,7 +102,7 @@ export class PaymentStore {
       attachments: attachmentIds,
       recipientId: this._recipientId,
       marker: this._marker,
-      //goal: this._goal,
+      goal: this._goal,
     });
   }
 
@@ -154,6 +155,11 @@ export class PaymentStore {
     return this._recipientId;
   }
 
+  public set attachments(attachments: any[]) {
+    this._attachments = attachments;
+    this.checkAmount();
+  }
+
   public get attachments() {
     return this._attachments;
   }
@@ -174,6 +180,14 @@ export class PaymentStore {
   }
   public set marker(value: string) {
     this._marker = value;
+  }
+
+  public set goal(id:string | null){
+    this._goal = id;
+  }
+
+  public get goal(): string | null {
+    return this._goal;
   }
 }
 

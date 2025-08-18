@@ -58,13 +58,21 @@ const DonationPage = observer(({}) => {
   const userSettings = useContext(UserSettingsStoreContext);
   const pageConfig = useContext(PaymentPageConfigContext);
 
+  const goalsEnabled = pageConfig.goals && pageConfig.goals.length > 0;
+  const mediaEnabled =
+    pageConfig.requestsEnabled && !pageConfig.requestsDisabledPermanently;
+
+  const showWide = goalsEnabled || mediaEnabled;
+
   return (
     <>
       {userSettings.theme === "dark" && <DarkTheme />}
       {userSettings.theme === "light" && <LightTheme />}
       <div className={`${classes.footerback}`} />
       <div className={`${classes.pagecontainer}`}>
-        <div className={`${classes.page}`}>
+        <div
+          className={`${classes.page} ${showWide ? classes.wide : classes.compact}`}
+        >
           <HeaderComponent />
           <div className={`${classes.centralsection}`}>
             <MainComponent />
@@ -102,7 +110,7 @@ const DonationPage = observer(({}) => {
             className={`${classes.theme}`}
             onClick={() => userSettings.switchTheme()}
           >
-            <NightIcon/>
+            <NightIcon />
             {userSettings.theme === "dark" ? "Светлая версия" : "Темная версия"}
           </button>
         </div>

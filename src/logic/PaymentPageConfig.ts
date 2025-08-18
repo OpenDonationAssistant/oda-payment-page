@@ -81,6 +81,14 @@ export class PaymentPageConfig {
     makeAutoObservable(this);
   }
 
+  public get useWidePage(){
+    const goalsEnabled = this.goals && this.goals.length > 0;
+    const mediaEnabled =
+      this.requestsEnabled && !this.requestsDisabledPermanently;
+
+    return goalsEnabled || mediaEnabled;
+  }
+
   public get requestAmount() {
     return this._requestAmount;
   }

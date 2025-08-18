@@ -88,7 +88,7 @@ export default function MediaInput({}: {}) {
         let updated = [...attachments, json.data];
         setAttachments(updated);
         setNewMedia("");
-        payment.attachments = updated;
+        payment.attachments = [...payment.attachments, json.data];
       })
       .catch(function (error) {
         const message = error.response.data;
@@ -97,7 +97,7 @@ export default function MediaInput({}: {}) {
           payment.error = message;
         } else {
           const errorMessage =
-            "Для добавления трека нужна корректная ссылка на Youtube видео";
+            "Для добавления трека нужна корректная ссылка или название";
           setIncorrectMediaError(errorMessage);
         }
       });
@@ -160,21 +160,16 @@ export default function MediaInput({}: {}) {
                           return (
                             <button
                               key={number}
-                              className="media-suggestions-item"
+                              className={`${classes.suggectionitem}`}
                               onClick={() =>
                                 addMedia(
                                   `https://youtube.com/watch?v=${data.id}`,
                                 )
                               }
                             >
-                              <img src={data.snippet.thumbnails.default.url} />
-                              <div className="media-suggestions-description">
-                                <div className="media-suggestions-title">
-                                  {data.snippet.title}
-                                </div>
-                                <div className="media-suggestions-channel">
-                                  {data.snippet.channelTitle}
-                                </div>
+                              <div className={`${classes.suggestiondescription}`}>
+                                <img src={data.snippet.thumbnails.default.url}/>
+                                <div>{data.snippet.title}</div>
                               </div>
                             </button>
                           );
@@ -188,7 +183,7 @@ export default function MediaInput({}: {}) {
           )}
           <div className="invalid-feedback">{incorrectMediaError}</div>
           <div className={`${classes.playlist}`}>
-            {attachments
+            {payment.attachments
               .filter((data) => data != null)
               .map((data, number) => {
                 return (
