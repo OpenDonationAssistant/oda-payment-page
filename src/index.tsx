@@ -124,8 +124,6 @@ const requestsEnabled =
 const hasGoals = pageConfig.goals.length > 0;
 
 const showNewVersion =
-  !requestsEnabled &&
-  !hasGoals &&
   window.screen.width > 1000 &&
   window.innerWidth > 1000 &&
   !userSettings.useOldTheme;
