@@ -133,7 +133,7 @@ export default function MediaInput({}: {}) {
                       <input
                         data-tooltip-id="media-url-tooltip"
                         hidden={
-                          attachments.length >= pageConfig.requestAmount
+                          payment.attachments.length >= pageConfig.requestAmount
                             ? true
                             : false
                         }
