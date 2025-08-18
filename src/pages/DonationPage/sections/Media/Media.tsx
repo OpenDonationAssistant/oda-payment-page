@@ -6,13 +6,13 @@ import { PaymentPageConfigContext } from "../../../../logic/PaymentPageConfig";
 import classes from "./Media.module.css";
 import SearchIcon from "../../../../icons/SearchIcon";
 import MediaItemComponent from "./MediaItemComponent";
+import { observer } from "mobx-react-lite";
 
 var expression =
   /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
 var urlRegex = new RegExp(expression);
 
-export default function MediaInput({}: {}) {
-  const [attachments, setAttachments] = useState([]);
+export const MediaInput = observer(({}: {}) => {
   const [mediaSuggestions, setMediaSuggestions] = useState([]);
   const [showMediaAutocomplete, setShowMediaAutocomplete] = useState(false);
   const mediaSuggestionsRef = useRef<HTMLDivElement>(null);
@@ -85,8 +85,6 @@ export default function MediaInput({}: {}) {
         recipientId: payment.recipientId,
       })
       .then((json) => {
-        let updated = [...attachments, json.data];
-        setAttachments(updated);
         setNewMedia("");
         payment.attachments = [...payment.attachments, json.data];
       })
@@ -167,8 +165,12 @@ export default function MediaInput({}: {}) {
                                 )
                               }
                             >
-                              <div className={`${classes.suggestiondescription}`}>
-                                <img src={data.snippet.thumbnails.default.url}/>
+                              <div
+                                className={`${classes.suggestiondescription}`}
+                              >
+                                <img
+                                  src={data.snippet.thumbnails.default.url}
+                                />
                                 <div>{data.snippet.title}</div>
                               </div>
                             </button>
@@ -191,11 +193,9 @@ export default function MediaInput({}: {}) {
                     key={number}
                     data={data}
                     deleteHandler={() => {
-                      let updated = attachments
+                      payment.attachments = payment.attachments
                         .slice(0, number)
-                        .concat(attachments.slice(number + 1));
-                      setAttachments(updated);
-                      payment.attachments = updated;
+                        .concat(payment.attachments.slice(number + 1));
                     }}
                   />
                 );
@@ -208,4 +208,4 @@ export default function MediaInput({}: {}) {
       </div>
     </>
   );
-}
+});

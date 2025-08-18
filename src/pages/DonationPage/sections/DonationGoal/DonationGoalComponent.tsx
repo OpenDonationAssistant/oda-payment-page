@@ -8,6 +8,7 @@ import { Amount } from "../../../../components/Amount/Amount";
 import CheckIcon from "../../../../icons/CheckIcon";
 import { observer } from "mobx-react-lite";
 import { PaymentStoreContext } from "../../../../stores/PaymentStore";
+import { reaction } from "mobx";
 
 function percent(filled: number, required: number) {
   const percent = (filled / required) * 100;
@@ -27,7 +28,7 @@ const DonationGoalComponent = observer(({ goal }: { goal: Goal }) => {
         className={`${classes.goal} ${goal.selected ? classes.goalactive : classes.goalpassive}`}
         onClick={() => {
           const wasSelected = payment.goal === goal.id;
-          payment.goal =  wasSelected ? null : goal.id;
+          payment.goal = wasSelected ? null : goal.id;
           if (!wasSelected) {
             pageConfig.selectGoal(goal.id);
           } else {

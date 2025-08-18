@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import classes from "./WidgetsComponent.module.css";
 import {
   Goal,
@@ -6,8 +6,9 @@ import {
 } from "../../../logic/PaymentPageConfig";
 import DonationGoalComponent from "./DonationGoal/DonationGoalComponent";
 import { observer } from "mobx-react-lite";
-import Media from "./Media/Media";
+import { MediaInput } from "./Media/Media";
 import { info } from "console";
+import { PaymentStoreContext } from "../../../stores/PaymentStore";
 
 const GoalWidget = observer(({ goals }: { goals: Goal[] }) => {
   return (
@@ -21,6 +22,7 @@ const GoalWidget = observer(({ goals }: { goals: Goal[] }) => {
 
 const WidgetsComponent = observer(({}) => {
   const pageConfig = useContext(PaymentPageConfigContext);
+  const payment = useContext(PaymentStoreContext);
 
   const goalsEnabled = pageConfig.goals && pageConfig.goals.length > 0;
   const mediaEnabled =
@@ -34,6 +36,15 @@ const WidgetsComponent = observer(({}) => {
       return "media";
     }
   });
+
+  useEffect(() => {
+    pageConfig.goals
+      .filter((g) => g.isDefault)
+      .forEach((g) => {
+        g.selected = true;
+        payment.goal = g.id;
+      });
+  }, [pageConfig.goals]);
 
   return (
     <>
@@ -60,7 +71,7 @@ const WidgetsComponent = observer(({}) => {
           </div>
           <div className={`${classes.tabcontent}`}>
             {selected === "goal" && <GoalWidget goals={pageConfig.goals} />}
-            {selected === "media" && <Media />}
+            {selected === "media" && <MediaInput />}
           </div>
         </div>
       )}
