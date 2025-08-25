@@ -45,6 +45,13 @@
   justify-content: space-between;
 }
 
+.paybuttons{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 6px;
+}
+
 .paybutton {
   padding: 14px 24px 16px 24px;
   border-radius: 110px;
