@@ -39,7 +39,7 @@ const PaymentComponent = observer(({}) => {
         )}
         <div className={`${classes.paybuttoncontainer}`}>
           <ODAIcon />
-          <button
+          {payment.hasFiatGateway && <button
             className={`${classes.paybutton} ${payment.error ? classes.disabled : ""}`}
             disabled={payment.error ? payment.error.length > 0 : false}
             onClick={() =>
@@ -54,7 +54,23 @@ const PaymentComponent = observer(({}) => {
             }
           >
             Поддержать на {`${payment.amount}\u20BD`}
-          </button>
+          </button>}
+          {payment.hasCryptoGateway && <button
+            className={`${classes.paybutton} ${payment.error ? classes.disabled : ""}`}
+            disabled={payment.error ? payment.error.length > 0 : false}
+            onClick={() =>
+              payment.pay({ type: "crypto" }).then((data) => {
+                const url = data.data.operationUrl as string;
+                if (url.startsWith("http")) {
+                  window.location.href = url;
+                } else {
+                  navigate(data.data.operationUrl);
+                }
+              })
+            }
+          >
+            Поддержать криптовалютой
+          </button>}
         </div>
       </div>
     </>

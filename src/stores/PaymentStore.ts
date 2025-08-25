@@ -77,6 +77,20 @@ export class PaymentStore {
     return { treshold };
   }
 
+  public get hasFiatGateway(): boolean {
+    return (
+      this._gateways.filter((gateway) => gateway.type === "fiat").at(0) !==
+      undefined
+    );
+  }
+
+  public get hasCryptoGateway(): boolean {
+    return (
+      this._gateways.filter((gateway) => gateway.type === "crypto").at(0) !==
+      undefined
+    );
+  }
+
   pay({ method, type }: { method?: string; type: string }): Promise<any> {
     this.checkAmount();
     if (this._error) {
@@ -183,7 +197,7 @@ export class PaymentStore {
     this._marker = value;
   }
 
-  public set goal(id:string | null){
+  public set goal(id: string | null) {
     this._goal = id;
   }
 
