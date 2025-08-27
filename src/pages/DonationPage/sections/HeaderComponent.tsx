@@ -74,7 +74,7 @@ export const HeaderComponent = observer(({}) => {
           {pageConfig.urls.get("vk") && (
             <div className={`${classes.url}`}>
               <VKVLIcon />
-              <a href={pageConfig.urls.get("vk")}>вконтакте</a>
+              <a href={pageConfig.urls.get("vk")}>ВКонтакте</a>
             </div>
           )}
           {pageConfig.urls.get("youtube") && (
