@@ -66,21 +66,21 @@ export const HeaderComponent = observer(({}) => {
         </div>
         <div className={`${classes.streamersocial}`}>
           {pageConfig.urls.get("twitch") && (
-            <>
+            <div className={`${classes.url}`}>
               <TwitchIcon />
               <a href={pageConfig.urls.get("twitch")}>Twitch</a>
-            </>
+            </div>
           )}
           {pageConfig.urls.get("vk") && (
-            <>
+            <div className={`${classes.url}`}>
               <VKVLIcon />
               <a href={pageConfig.urls.get("vk")}>вконтакте</a>
-            </>
+            </div>
           )}
           {pageConfig.urls.get("youtube") && (
-            <>
+            <div className={`${classes.url}`}>
               <a href={pageConfig.urls.get("youtube")}>YouTube</a>
-            </>
+            </div>
           )}
         </div>
       </div>
