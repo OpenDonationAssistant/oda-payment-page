@@ -9,7 +9,7 @@
 }
 @media(max-width: 1200px) {
   .widgetcontainer {
-    width: 100vw;
+    width: calc(100% - 18px);
     margin-top: 0px;
     margin-bottom: 0px;
     margin-right: 0px;
@@ -64,6 +64,6 @@
 
 @media(max-width: 1200px) {
   .tabcontent {
-    width: 100vw;
+    width: 100%;
   }
 }

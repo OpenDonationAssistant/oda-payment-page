@@ -73,6 +73,12 @@
   color: var(--oda-text-color);
 }
 
+@media (max-width: 1200px) {
+  .arbitrary {
+    min-height: unset;
+  }
+}
+
 .limited {
   max-height: 80px;
   overflow-y: hidden;
