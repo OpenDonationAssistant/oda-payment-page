@@ -92,7 +92,7 @@ const apiUrl = window.location.hostname.endsWith(
   : `https://${window.location.hostname}`;
 
 const config = await axios
-  .get(`${apiUrl}/config/paymentpage?ownerId=${recipientId}`)
+  .get(`${apiUrl}/config/paymentpage?url=${window.location.hostname}`)
   .then((json) => {
     return json.data;
   });
