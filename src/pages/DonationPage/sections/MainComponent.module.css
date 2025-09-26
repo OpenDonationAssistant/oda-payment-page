@@ -88,6 +88,12 @@
   margin-right: 4px;
 }
 
+@media (max-width: 1200px) {
+  .minimaldescription {
+    width: unset;
+  }
+}
+
 .minimalamount {
   color: var(--oda-control-color);
   text-decoration: underline;
