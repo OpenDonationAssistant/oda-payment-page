@@ -6,8 +6,6 @@ import "@fontsource/black-ops-one";
 import "@fontsource-variable/exo-2";
 import "@fontsource/material-symbols-sharp";
 
-import Donation from "./pages/Donation/Donation";
-
 import PaymentResult, {
   loader as paymentUpdater,
 } from "./pages/PaymentResult/PaymentResult";
@@ -28,63 +26,6 @@ import {
   UserSettingsStoreContext,
 } from "./stores/UserSettingsStore";
 
-let recipientId = window.location.hostname.substring(
-  0,
-  window.location.hostname.indexOf("."),
-);
-
-if (recipientId === "bael-stream") {
-  recipientId = "baelstream";
-}
-
-if (!recipientId) {
-  recipientId = "testuser";
-}
-const urlParams = new URLSearchParams(window.location.search);
-const myParam = urlParams.get("recipientId");
-if (myParam) {
-  recipientId = myParam;
-}
-
-var dynamicManifest = {
-  name: `${recipientId} - Donation`,
-  short_name: `${recipientId} - Donation`,
-  description: `${recipientId} - Donation`,
-  start_url: `${recipientId}.oda.digital`,
-  background_color: "#000000",
-  theme_color: "#674ea7",
-  icons: [
-    {
-      src: `${process.env.REACT_APP_CDN_ENDPOINT}/logo-${recipientId}.png`,
-      sizes: "300x300",
-      type: "image/png",
-    },
-  ],
-};
-
-const stringManifest = JSON.stringify(dynamicManifest);
-const blob = new Blob([stringManifest], { type: "application/json" });
-const manifestURL = URL.createObjectURL(blob);
-
-document
-  .querySelector("#my-manifest-placeholder")
-  ?.setAttribute("href", manifestURL);
-
-document.title = `${recipientId} - Donation`;
-
-String.prototype.hashCode = function () {
-  var hash = 0,
-    i,
-    chr;
-  if (this.length === 0) return hash;
-  for (i = 0; i < this.length; i++) {
-    chr = this.charCodeAt(i);
-    hash = (hash << 5) - hash + chr;
-    hash |= 0; // Convert to 32bit integer
-  }
-  return hash;
-};
-
 const apiUrl = window.location.hostname.endsWith(
   process.env.REACT_APP_DOMAIN ?? "localhost",
 )
@@ -99,14 +40,40 @@ const config = await axios
 
 const pageConfig = new PaymentPageConfig(config);
 
+var dynamicManifest = {
+  name: `${pageConfig.recipientId} - Donation`,
+  short_name: `${pageConfig.recipientId} - Donation`,
+  description: `${pageConfig.recipientId} - Donation`,
+  start_url: `${pageConfig.recipientId}.oda.digital`,
+  background_color: "#000000",
+  theme_color: "#674ea7",
+  icons: [
+    {
+      src: `${process.env.REACT_APP_CDN_ENDPOINT}/logo-${pageConfig.recipientId}.png`,
+      sizes: "300x300",
+      type: "image/png",
+    },
+  ],
+};
+
+const stringManifest = JSON.stringify(dynamicManifest);
+const blob = new Blob([stringManifest], { type: "application/json" });
+const manifestURL = URL.createObjectURL(blob);
+
+document
+  .querySelector("#my-manifest-placeholder")
+  ?.setAttribute("href", manifestURL);
+
+document.title = `${pageConfig.recipientId} - Donation`;
+
 const paymentController = new PaymentController(
-  recipientId,
+  pageConfig.recipientId,
   config.value["media.requests.cost"] ?? 100,
   config.value["minimalAmount"],
 );
 
 const paymentStore = new PaymentStore({
-  recipientId: recipientId,
+  recipientId: pageConfig.recipientId,
   mediaRequestCost: config.value["media.requests.cost"] ?? 100,
   minimalPayment: config.value["minimalAmount"],
 });
@@ -117,11 +84,6 @@ pageConfig.goals
 
 const userSettings = new UserSettingsStore();
 
-const showNewVersion =
-  window.screen.width > 1000 &&
-  window.innerWidth > 1000 &&
-  !userSettings.useOldTheme;
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -129,19 +91,7 @@ const router = createBrowserRouter([
       <PaymentStoreContext.Provider value={paymentStore}>
         <PaymentPageConfigContext.Provider value={pageConfig}>
           <UserSettingsStoreContext.Provider value={userSettings}>
-            {showNewVersion && <DonationPage />}
-            {!showNewVersion && (
-              <Donation
-                pageConfig={pageConfig}
-                recipientId={recipientId}
-                mediaRequestsEnabled={config.value["media.requests.enabled"]}
-                mediaRequestsDisabledPermanently={
-                  config.value["media.requests.disabled.permanently"]
-                }
-                streamerName={config.value.nickname}
-                paymentController={paymentController}
-              />
-            )}
+            <DonationPage />
           </UserSettingsStoreContext.Provider>
         </PaymentPageConfigContext.Provider>
       </PaymentStoreContext.Provider>
@@ -154,14 +104,14 @@ const router = createBrowserRouter([
   },
   {
     path: "/payment/:paymentId/result",
-    element: <PaymentResult recipientId={recipientId} />,
+    element: <PaymentResult recipientId={pageConfig.recipientId} />,
     loader: paymentUpdater,
   },
   {
     path: "/offer",
     element: (
       <Agreement
-        recipientId={recipientId}
+        recipientId={pageConfig.recipientId}
         nickname={config.value.nickname}
         fio={config.value.fio}
         inn={config.value.inn}
@@ -203,7 +153,7 @@ if (rootElement) {
   right: 0;
   z-index: -1;
   display: block;
-  background-image: url(${process.env.REACT_APP_CDN_ENDPOINT}/back-${recipientId}.jpg);
+  background-image: url(${process.env.REACT_APP_CDN_ENDPOINT}/back-${pageConfig.recipientId}.jpg);
   background-size: cover;
   width: 100%;
   height: 100%;

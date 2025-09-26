@@ -42,6 +42,7 @@ export class PaymentPageConfig {
   private _charLimit: CharLimit;
   private _streamerDescription: string;
   private _requestAmount: number;
+  private _recipientId: string;
 
   constructor(json: any) {
     this.config = json;
@@ -60,6 +61,7 @@ export class PaymentPageConfig {
       }
       return goal;
     });
+    this._recipientId = json["ownerId"] ?? "testuser";
     this._payButtonText = json.value["payButtonText"] ?? "";
     this._customCss = json.value["customCss"] ?? null;
     this._gateway = json.value["gateway"] ?? null;
@@ -196,6 +198,10 @@ export class PaymentPageConfig {
 
   public get streamerDescription(): string {
     return this._streamerDescription;
+  }
+
+  public get recipientId(): string {
+    return this._recipientId;
   }
 
   public set charLimit(value: CharLimit) {

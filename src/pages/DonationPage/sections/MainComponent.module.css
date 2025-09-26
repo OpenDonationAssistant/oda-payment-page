@@ -21,6 +21,12 @@
   gap: 3px;
 }
 
+@media (max-width: 1200px) {
+  .mainsection {
+    margin-bottom: 3px;
+  }
+}
+
 .message {
   width: 100%;
   font-size: 24px;
@@ -99,7 +105,6 @@
 }
 
 .anonymdescription {
-  min-width: 200px;
   text-align: right;
   margin-right: 4px;
   transition: 1s;
@@ -143,4 +148,21 @@
   border-radius: 12px;
   background-color: white;
   z-index: 2;
+}
+
+@media (max-width: 1200px) {
+  .pc {
+    display: none;
+  }
+  .mobile {
+    display: initial;
+  }
+}
+@media (min-width: 1200px) {
+  .pc {
+    display: initial;
+  }
+  .mobile {
+    display: none;
+  }
 }

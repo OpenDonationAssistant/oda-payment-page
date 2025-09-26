@@ -7,8 +7,8 @@ import {
 import DonationGoalComponent from "./DonationGoal/DonationGoalComponent";
 import { observer } from "mobx-react-lite";
 import { MediaInput } from "./Media/Media";
-import { info } from "console";
 import { PaymentStoreContext } from "../../../stores/PaymentStore";
+import { ActionsWidget } from "./ActionsWidget";
 
 const GoalWidget = observer(({ goals }: { goals: Goal[] }) => {
   return (
@@ -29,7 +29,7 @@ const WidgetsComponent = observer(({}) => {
     pageConfig.requestsEnabled && !pageConfig.requestsDisabledPermanently;
 
   const shouldRender = goalsEnabled || mediaEnabled;
-  const [selected, setSelected] = useState<"goal" | "media">(() => {
+  const [selected, setSelected] = useState<"goal" | "media" | "actions">(() => {
     if (goalsEnabled) {
       return "goal";
     } else {
@@ -51,6 +51,12 @@ const WidgetsComponent = observer(({}) => {
       {shouldRender && (
         <div className={`${classes.widgetcontainer}`}>
           <div className={`${classes.tabbar}`}>
+          {false && <div
+              className={`${classes.tab} ${selected === "actions" ? classes.tabactive : classes.tabpassive}`}
+              onClick={() => setSelected("actions")}
+            >
+              <div>Действия</div>
+            </div>}
             {pageConfig.goals && pageConfig.goals.length > 0 && (
               <div
                 className={`${classes.tab} ${selected === "goal" ? classes.tabactive : classes.tabpassive}`}
@@ -72,6 +78,7 @@ const WidgetsComponent = observer(({}) => {
           <div className={`${classes.tabcontent}`}>
             {selected === "goal" && <GoalWidget goals={pageConfig.goals} />}
             {selected === "media" && <MediaInput />}
+            {selected === "actions" && <ActionsWidget />}
           </div>
         </div>
       )}

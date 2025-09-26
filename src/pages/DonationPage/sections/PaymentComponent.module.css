@@ -26,6 +26,12 @@
   margin-bottom: 36px;
 }
 
+@media (max-width: 1200px) {
+  .paymentdescription {
+    display: none;
+  }
+}
+
 .line {
   display: inline-block;
   width: 250px;
@@ -45,11 +51,25 @@
   justify-content: space-between;
 }
 
+@media (max-width: 1200px) {
+  .paybuttoncontainer {
+    flex-direction: column-reverse;
+    gap: 9px;
+    align-items: center;
+  }
+}
+
 .paybuttons{
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   gap: 6px;
+}
+
+@media (max-width: 1200px) {
+  .paybuttons {
+    align-items: center;
+  }
 }
 
 .paybutton {

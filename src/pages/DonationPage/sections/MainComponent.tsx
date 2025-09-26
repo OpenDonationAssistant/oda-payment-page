@@ -120,7 +120,7 @@ const NicknameComponent = observer(({}) => {
             <div
               className={`${classes.anonymdescription} ${payment.isAnonym ? classes.anonymdescriptionactive : classes.anonymdescriptionpassive}`}
             >
-              Отправить анонимно
+              Анонимно
             </div>
             <div
               className={`${classes.switchcontainer} ${payment.isAnonym ? classes.switchactive : classes.switchpassive}`}
@@ -163,8 +163,11 @@ const AmountComponent = observer(({}) => {
             }}
           />
           <div className={`${classes.minimal}`}>
-            <div className={`${classes.minimaldescription}`}>
+            <div className={`${classes.minimaldescription} ${classes.pc}`}>
               Минимальная сумма
+            </div>
+            <div className={`${classes.minimaldescription} ${classes.mobile}`}>
+              Мин.
             </div>
             <div
               className={`${classes.minimalamount}`}

@@ -106,12 +106,15 @@ const DonationPage = observer(({}) => {
             </button>
           )}
           <button
-            style={{ marginLeft: "12px" }}
             className={`${classes.theme}`}
             onClick={() => userSettings.switchTheme()}
           >
             <NightIcon />
-            {userSettings.theme === "dark" ? "Светлая версия" : "Темная версия"}
+            <div className={`${classes.themename}`}>
+              {userSettings.theme === "dark"
+                ? "Светлая версия"
+                : "Темная версия"}
+            </div>
           </button>
         </div>
       </div>

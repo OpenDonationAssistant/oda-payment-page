@@ -7,6 +7,14 @@
   margin-bottom: 9px;
   margin-right: 9px;
 }
+@media(max-width: 1200px) {
+  .widgetcontainer {
+    width: 100vw;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+  }
+}
 
 .tabbar {
   height: 50px;
@@ -52,4 +60,10 @@
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
   padding: 16px 16px 8px 16px;
+}
+
+@media(max-width: 1200px) {
+  .tabcontent {
+    width: 100vw;
+  }
 }

@@ -7,6 +7,31 @@ import { PaymentPageConfigContext } from "../../../logic/PaymentPageConfig";
 import { PaymentStoreContext } from "../../../stores/PaymentStore";
 import VKVLIcon from "../../../icons/VKVLIcon";
 
+const StreamerSocials = observer(({ className }: { className?: string }) => {
+  const pageConfig = useContext(PaymentPageConfigContext);
+  return (
+    <div className={`${classes.streamersocial} ${className ? className : ""}`}>
+      {pageConfig.urls.get("twitch") && (
+        <div className={`${classes.url}`}>
+          <TwitchIcon />
+          <a href={pageConfig.urls.get("twitch")}>Twitch</a>
+        </div>
+      )}
+      {pageConfig.urls.get("vk") && (
+        <div className={`${classes.url}`}>
+          <VKVLIcon />
+          <a href={pageConfig.urls.get("vk")}>ВКонтакте</a>
+        </div>
+      )}
+      {pageConfig.urls.get("youtube") && (
+        <div className={`${classes.url}`}>
+          <a href={pageConfig.urls.get("youtube")}>YouTube</a>
+        </div>
+      )}
+    </div>
+  );
+});
+
 export const HeaderComponent = observer(({}) => {
   const pageConfig = useContext(PaymentPageConfigContext);
   const payment = useContext(PaymentStoreContext);
@@ -15,14 +40,6 @@ export const HeaderComponent = observer(({}) => {
   const [needToHide, setNeedToHide] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log(
-      {
-        scrollHeight: arbitraryRef.current?.scrollHeight,
-        clientHeight: arbitraryRef.current?.clientHeight,
-        offsetHeight: arbitraryRef.current?.offsetHeight,
-      },
-      "check overflow",
-    );
     setNeedToHide(
       (arbitraryRef.current?.scrollHeight ?? 0) >
         (arbitraryRef.current?.clientHeight ?? 0),
@@ -32,7 +49,7 @@ export const HeaderComponent = observer(({}) => {
   return (
     <div className={`${classes.header}`}>
       <div>
-        <div>
+        <div className={`${classes.titlecontainer}`}>
           <span className={`${classes.title}`}>Донат для </span>{" "}
           <span className={`${classes.streamer}`}>
             {pageConfig.streamerName}
@@ -56,6 +73,7 @@ export const HeaderComponent = observer(({}) => {
               {showDescription ? "Скрыть" : "Смотреть полное описание"}
             </div>
           )}
+          <StreamerSocials className={`${classes.mobilesocials}`} />
       </div>
       <div className={`${classes.avatarcontainer}`}>
         <div>
@@ -64,25 +82,7 @@ export const HeaderComponent = observer(({}) => {
             src={`https://api.oda.digital/public/logo-${payment.recipientId}.png`}
           />
         </div>
-        <div className={`${classes.streamersocial}`}>
-          {pageConfig.urls.get("twitch") && (
-            <div className={`${classes.url}`}>
-              <TwitchIcon />
-              <a href={pageConfig.urls.get("twitch")}>Twitch</a>
-            </div>
-          )}
-          {pageConfig.urls.get("vk") && (
-            <div className={`${classes.url}`}>
-              <VKVLIcon />
-              <a href={pageConfig.urls.get("vk")}>ВКонтакте</a>
-            </div>
-          )}
-          {pageConfig.urls.get("youtube") && (
-            <div className={`${classes.url}`}>
-              <a href={pageConfig.urls.get("youtube")}>YouTube</a>
-            </div>
-          )}
-        </div>
+        <StreamerSocials className={`${classes.pcsocials}`}/>
       </div>
     </div>
   );
