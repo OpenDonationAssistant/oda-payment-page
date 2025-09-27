@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   border-radius: 9px;
+  border: 1px solid var(--oda-inactive-color);
   padding: 15px;
   &:hover {
     cursor: pointer;
