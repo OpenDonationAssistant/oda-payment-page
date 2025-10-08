@@ -25,12 +25,15 @@ const WidgetsComponent = observer(({}) => {
   const payment = useContext(PaymentStoreContext);
 
   const goalsEnabled = pageConfig.goals && pageConfig.goals.length > 0;
+  const actionsEnabled = pageConfig.actions && pageConfig.actions.length > 0;
   const mediaEnabled =
     pageConfig.requestsEnabled && !pageConfig.requestsDisabledPermanently;
 
-  const shouldRender = goalsEnabled || mediaEnabled;
+  const shouldRender = goalsEnabled || mediaEnabled || actionsEnabled;
   const [selected, setSelected] = useState<"goal" | "media" | "actions">(() => {
-    if (goalsEnabled) {
+    if (actionsEnabled) {
+      return "actions";
+    } else if (goalsEnabled) {
       return "goal";
     } else {
       return "media";
@@ -51,12 +54,14 @@ const WidgetsComponent = observer(({}) => {
       {shouldRender && (
         <div className={`${classes.widgetcontainer}`}>
           <div className={`${classes.tabbar}`}>
-          {false && <div
-              className={`${classes.tab} ${selected === "actions" ? classes.tabactive : classes.tabpassive}`}
-              onClick={() => setSelected("actions")}
-            >
-              <div>Действия</div>
-            </div>}
+            {pageConfig.actions && pageConfig.actions.length > 0 && (
+              <div
+                className={`${classes.tab} ${selected === "actions" ? classes.tabactive : classes.tabpassive}`}
+                onClick={() => setSelected("actions")}
+              >
+                <div>Действия</div>
+              </div>
+            )}
             {pageConfig.goals && pageConfig.goals.length > 0 && (
               <div
                 className={`${classes.tab} ${selected === "goal" ? classes.tabactive : classes.tabpassive}`}

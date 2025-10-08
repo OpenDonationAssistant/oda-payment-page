@@ -9,6 +9,7 @@ import { UserSettingsStoreContext } from "../../stores/UserSettingsStore";
 import { observer } from "mobx-react-lite";
 import { PaymentPageConfigContext } from "../../logic/PaymentPageConfig";
 import NightIcon from "../../icons/NightIcon";
+import { toJS } from "mobx";
 
 const DarkTheme = () => {
   return (
@@ -59,10 +60,12 @@ const DonationPage = observer(({}) => {
   const pageConfig = useContext(PaymentPageConfigContext);
 
   const goalsEnabled = pageConfig.goals && pageConfig.goals.length > 0;
+  const actionsEnabled = pageConfig.actions && pageConfig.actions.length > 0;
   const mediaEnabled =
     pageConfig.requestsEnabled && !pageConfig.requestsDisabledPermanently;
 
-  const showWide = goalsEnabled || mediaEnabled;
+  const showWide = goalsEnabled || mediaEnabled || actionsEnabled;
+  console.log("actions", toJS(pageConfig.actions));
 
   return (
     <>

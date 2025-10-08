@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { Amount } from "../types";
 import { makeAutoObservable } from "mobx";
+import { ActionControllerActionDto } from "@opendonationassistant/oda-actions-service-client";
 
 export interface Goal {
   id: string;
@@ -33,6 +34,7 @@ export class PaymentPageConfig {
   private _requestCost = 100;
   private _arbitraryText: string | null = null;
   private _goals: Goal[] = [];
+  private _actions: ActionControllerActionDto[] = [];
   private _payButtonText: string | null = null;
   private _customCss: string | null = null;
   private _gateway: string | null = null;
@@ -55,6 +57,7 @@ export class PaymentPageConfig {
     this.inn = json.value["inn"] ?? "";
     this.arbitraryText = json.value["arbitraryText"] ?? null;
     this._goals = json.value["goals"] ?? [];
+    this._actions = json["actions"] ?? [];
     this._goals.map((goal) => {
       if (goal.isDefault) {
         goal.selected = true;
@@ -83,7 +86,7 @@ export class PaymentPageConfig {
     makeAutoObservable(this);
   }
 
-  public get useWidePage(){
+  public get useWidePage() {
     const goalsEnabled = this.goals && this.goals.length > 0;
     const mediaEnabled =
       this.requestsEnabled && !this.requestsDisabledPermanently;
@@ -155,6 +158,9 @@ export class PaymentPageConfig {
   public set goals(value: Goal[]) {
     this._goals = value;
   }
+  public get actions(): ActionControllerActionDto[] {
+    return this._actions;
+  }
   public get payButtonText(): string | null {
     return this._payButtonText;
   }
@@ -208,15 +214,15 @@ export class PaymentPageConfig {
     this._charLimit = this.charLimit;
   }
 
-  public selectGoal(id: string){
+  public selectGoal(id: string) {
     this._goals = this._goals.map((goal) => {
       goal.selected = goal.id === id;
       return goal;
-    })
-    console.debug({goals: this._goals}, "reselected goals");
+    });
+    console.debug({ goals: this._goals }, "reselected goals");
   }
 }
 
 export const PaymentPageConfigContext = createContext(
-  new PaymentPageConfig({ value: {}}),
+  new PaymentPageConfig({ value: {} }),
 );

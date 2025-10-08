@@ -73,7 +73,7 @@ export const HeaderComponent = observer(({}) => {
               {showDescription ? "Скрыть" : "Смотреть полное описание"}
             </div>
           )}
-          <StreamerSocials className={`${classes.mobilesocials}`} />
+        <StreamerSocials className={`${classes.mobilesocials}`} />
       </div>
       <div className={`${classes.avatarcontainer}`}>
         <div>
@@ -82,7 +82,7 @@ export const HeaderComponent = observer(({}) => {
             src={`https://api.oda.digital/public/logo-${payment.recipientId}.png`}
           />
         </div>
-        <StreamerSocials className={`${classes.pcsocials}`}/>
+        <StreamerSocials className={`${classes.pcsocials}`} />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
-import { ActionsStore } from "../../../stores/ActionsStore";
+import { Action, ActionsStore } from "../../../stores/ActionsStore";
 import classes from "./ActionsWidget.module.css";
 import {
   ModalState,
@@ -11,15 +11,19 @@ import {
 } from "../../../components/Overlay/Overlay";
 import SearchIcon from "../../../icons/SearchIcon";
 import CloseIcon from "../../../icons/CloseIcon";
+import { PaymentPageConfigContext } from "../../../logic/PaymentPageConfig";
 
-export const ActionsWidget = observer(({}) => {
-  const [actionStore] = useState<ActionsStore>(() => new ActionsStore());
+export const ActionsWidget = observer(({}: {}) => {
+  const pageConfig = useContext(PaymentPageConfigContext);
+  const [actionStore] = useState<ActionsStore>(
+    () => new ActionsStore(pageConfig),
+  );
   const parentModalState = useContext(ModalStateContext);
   const [modalState] = useState<ModalState>(
     () => new ModalState(parentModalState),
   );
   const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const [selectedAction, setSelectedAction] = useState<string>("");
+  const [selectedAction, setSelectedAction] = useState<Action | null>(null);
 
   return (
     <>
@@ -49,9 +53,12 @@ export const ActionsWidget = observer(({}) => {
               {actionStore.available
                 .find((category) => category.name === selectedCategory)
                 ?.actions.map((action) => (
-                  <div className={`${classes.action} ${selectedAction === action.id ? classes.actionactive : ""}`} onClick={() => {
-                    setSelectedAction(action.id);
-                  }}>
+                  <div
+                    className={`${classes.action} ${selectedAction === action ? classes.actionactive : ""}`}
+                    onClick={() => {
+                      setSelectedAction(action);
+                    }}
+                  >
                     <div>{action.name}</div>
                     <div>{`+ ${action.cost} RUB`}</div>
                   </div>
@@ -59,29 +66,43 @@ export const ActionsWidget = observer(({}) => {
             </div>
             <div className={`${classes.buttoncontainer}`}>
               <div className={`${classes.cancelbutton}`}>Отменить</div>
-              <div className={`${classes.addbutton}`}>Добавить</div>
+              <div
+                className={`${classes.addbutton}`}
+                onClick={() => {
+                  if (selectedAction) {
+                    actionStore.add(selectedAction);
+                  }
+                  setSelectedAction(null);
+                  modalState.show = false;
+                }}
+              >
+                Добавить
+              </div>
             </div>
           </Panel>
         </Overlay>
       </ModalStateContext.Provider>
-      <div className={`${classes.actionscontainer}`}>
-        {actionStore.added.map((category) => (
-          <div key={category.name} className={`${classes.action}`}>
-            <div>{category.name}</div>
-            <span className={`${classes.delete}`}>
-              <CloseIcon />
-            </span>
-          </div>
-        ))}
-        <div className={`${classes.action}`}>
+      {actionStore.available.length > 0 && (
+        <div className={`${classes.actionscontainer}`}>
+          {actionStore.added.map((added) => (
+            <div key={added.id} className={`${classes.action}`}>
+              <div>{actionStore.find(added)?.name}</div>
+              <span
+                className={`${classes.delete}`}
+                onClick={() => actionStore.delete(added)}
+              >
+                <CloseIcon />
+              </span>
+            </div>
+          ))}
           <div
-            className={`${classes.addbuttonlabel}`}
+            className={`${classes.action}`}
             onClick={() => (modalState.show = true)}
           >
-            Добавить
+            <div className={`${classes.addbuttonlabel}`}>Добавить</div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 });

@@ -1,4 +1,6 @@
 import { makeAutoObservable } from "mobx";
+import { PaymentPageConfig } from "../logic/PaymentPageConfig";
+import { uuidv7 } from "uuidv7";
 
 export interface ActionParameter {
   id: string;
@@ -14,102 +16,77 @@ export interface Action {
   cost: number;
 }
 
+export interface ActionReference {
+  id: string;
+  actionId: string;
+}
+
 export interface ActionCategory {
   name: string;
   actions: Action[];
 }
 
 export class ActionsStore {
-  constructor() {
+  private _available: ActionCategory[] = [];
+  private _added: ActionReference[] = [];
+  constructor(pageConfig: PaymentPageConfig) {
+    const actions = pageConfig.actions;
+    actions.forEach((action) => {
+      if (action.category) {
+        if (
+          !this._available.find((category) => category.name === action.category)
+        ) {
+          this._available.push({
+            name: action.category,
+            actions: [],
+          });
+        }
+      }
+    });
+    actions.map((action) => {
+      if (action.category) {
+        const category = this._available.find(
+          (category) => category.name === action.category,
+        );
+        if (category) {
+          category.actions.push({
+            id: action.id,
+            name: action.name,
+            description: action.name,
+            parameters: [],
+            cost: action.price.major,
+          });
+        }
+      }
+    });
     makeAutoObservable(this);
   }
 
-  public get available(): ActionCategory[] {
-    return [
-      {
-        name: "Инвентарь",
-        actions: [
-          {
-            id: "coin",
-            name: "Закинуть монету",
-            description: "Закинуть монеты",
-            parameters: [],
-            cost: 10,
-          },
-          {
-            id: "key",
-            name: "Подарить Ключ",
-            description: "Закинуть ключ",
-            parameters: [],
-            cost: 100,
-          },
-          {
-            id: "shoe",
-            name: "Подарить башмаки",
-            description: "Закинуть ключ",
-            parameters: [],
-            cost: 200,
-          },
-          {
-            id: "trash",
-            name: "Выбрать что-то случайным образом и выбросить",
-            description: "Закинуть ключ",
-            parameters: [],
-            cost: 2000,
-          },
-        ],
-      },
-      {
-        name: "Мобы",
-        actions: [
-          {
-            id: "coin",
-            name: "Монета",
-            description: "Закинуть монеты",
-            parameters: [],
-          },
-          {
-            id: "key",
-            name: "Ключ",
-            description: "Закинуть ключ",
-            parameters: [],
-          },
-        ],
-      },
-      {
-        name: "Погода",
-        actions: [
-          {
-            id: "coin",
-            name: "Монета",
-            description: "Закинуть монеты",
-            parameters: [],
-          },
-          {
-            id: "key",
-            name: "Ключ",
-            description: "Закинуть ключ",
-            parameters: [],
-          },
-        ],
-      },
-    ];
+  public find(ref: ActionReference) {
+    const category = this._available
+      .filter((category) =>
+        category.actions.find((action) => action.id === ref.actionId),
+      )
+      .at(0);
+    const action = category?.actions.find(
+      (action) => action.id === ref.actionId,
+    );
+    return action;
   }
 
-  public get added(): Action[] {
-    return [
-      {
-        id: "coin",
-        name: "Закинуть монеты",
-        description: "Закинуть монеты",
-        parameters: [],
-      },
-      {
-        id: "key",
-        name: "Подарить ключ",
-        description: "Закинуть ключ",
-        parameters: [],
-      },
-    ];
+  public get available(): ActionCategory[] {
+    return this._available;
+  }
+
+  public add(action: Action) {
+    this._added = this._added.concat({ id: uuidv7(), actionId: action.id });
+  }
+
+  public delete(ref: ActionReference) {
+    this._added = this._added.filter((action) => action.id !== ref.id);
+  }
+
+  public get added(): ActionReference[] {
+    return this._added;
   }
 }

@@ -7,6 +7,7 @@
     "@fontsource-variable/exo-2": "^5.0.20",
     "@fontsource/black-ops-one": "^5.0.14",
     "@fontsource/material-symbols-sharp": "^5.0.40",
+    "@opendonationassistant/oda-actions-service-client": "^0.0.2",
     "@opendonationassistant/oda-payment-service-client": "^0.1.4",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.1",
