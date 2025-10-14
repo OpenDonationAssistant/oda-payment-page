@@ -28,6 +28,11 @@ const StreamerSocials = observer(({ className }: { className?: string }) => {
           <a href={pageConfig.urls.get("youtube")}>YouTube</a>
         </div>
       )}
+      {pageConfig.urls.get("telegram") && (
+        <div className={`${classes.url}`}>
+          <a href={pageConfig.urls.get("telegram")}>Telegram</a>
+        </div>
+      )}
     </div>
   );
 });

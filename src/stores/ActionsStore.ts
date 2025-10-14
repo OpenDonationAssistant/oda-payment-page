@@ -1,6 +1,8 @@
 import { makeAutoObservable } from "mobx";
 import { PaymentPageConfig } from "../logic/PaymentPageConfig";
 import { uuidv7 } from "uuidv7";
+import MiniSearch from "minisearch";
+import { ActionControllerActionDto } from "@opendonationassistant/oda-actions-service-client";
 
 export interface ActionParameter {
   id: string;
@@ -27,11 +29,17 @@ export interface ActionCategory {
 }
 
 export class ActionsStore {
+  private _pageConfig: PaymentPageConfig;
   private _available: ActionCategory[] = [];
   private _added: ActionReference[] = [];
+  private _miniSearch = new MiniSearch({
+    fields: ["name"],
+    storeFields: ["id"],
+  });
+
   constructor(pageConfig: PaymentPageConfig) {
-    const actions = pageConfig.actions;
-    actions.forEach((action) => {
+    this._pageConfig = pageConfig;
+    this._pageConfig.actions.forEach((action) => {
       if (action.category) {
         if (
           !this._available.find((category) => category.name === action.category)
@@ -43,35 +51,50 @@ export class ActionsStore {
         }
       }
     });
-    actions.map((action) => {
+    this._pageConfig.actions.map((action) => {
       if (action.category) {
         const category = this._available.find(
           (category) => category.name === action.category,
         );
         if (category) {
-          category.actions.push({
-            id: action.id,
-            name: action.name,
-            description: action.name,
-            parameters: [],
-            cost: action.price.major,
-          });
+          category.actions.push(this.convert(action));
         }
       }
     });
     makeAutoObservable(this);
+    this._miniSearch.addAll(pageConfig.actions);
   }
 
-  public find(ref: ActionReference) {
-    const category = this._available
-      .filter((category) =>
-        category.actions.find((action) => action.id === ref.actionId),
-      )
+  private convert(action: ActionControllerActionDto): Action {
+    return {
+      id: action.id,
+      name: action.name,
+      description: action.name,
+      parameters: [],
+      cost: action.price.major,
+    };
+  }
+
+  public search(query: string): (Action | undefined)[] {
+    return this._miniSearch
+      .search(query, { fuzzy: 0.3 })
+      .map((result) => this.byId(result.id));
+  }
+
+  public suggest(query: string) {
+    return this._miniSearch
+      .autoSuggest(query, { fuzzy: 0.3 });
+  }
+
+  public byId(id: string) {
+    return this._pageConfig.actions
+      .filter((action) => action.id === id)
+      .map((action) => this.convert(action))
       .at(0);
-    const action = category?.actions.find(
-      (action) => action.id === ref.actionId,
-    );
-    return action;
+  }
+
+  public byRef(ref: ActionReference) {
+    return this.byId(ref.actionId);
   }
 
   public get available(): ActionCategory[] {

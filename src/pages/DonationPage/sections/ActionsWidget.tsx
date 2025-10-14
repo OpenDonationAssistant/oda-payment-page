@@ -12,18 +12,21 @@ import {
 import SearchIcon from "../../../icons/SearchIcon";
 import CloseIcon from "../../../icons/CloseIcon";
 import { PaymentPageConfigContext } from "../../../logic/PaymentPageConfig";
+import { PaymentStoreContext } from "../../../stores/PaymentStore";
 
 export const ActionsWidget = observer(({}: {}) => {
   const pageConfig = useContext(PaymentPageConfigContext);
   const [actionStore] = useState<ActionsStore>(
     () => new ActionsStore(pageConfig),
   );
+  const paymentStore = useContext(PaymentStoreContext);
   const parentModalState = useContext(ModalStateContext);
   const [modalState] = useState<ModalState>(
     () => new ModalState(parentModalState),
   );
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [selectedAction, setSelectedAction] = useState<Action | null>(null);
+  const [searched, setSearched] = useState<(Action | undefined)[] | null>(null);
 
   return (
     <>
@@ -35,20 +38,31 @@ export const ActionsWidget = observer(({}: {}) => {
             </Title>
             <div className={`${classes.searchcontainer}`}>
               <SearchIcon />
-              <input className={`${classes.search}`} onChange={(e) => {}} />
+              <input
+                className={`${classes.search}`}
+                onChange={(e) => {
+                  if (e.target.value) {
+                    setSearched(actionStore.search(e.target.value));
+                  } else {
+                    setSearched(null);
+                  }
+                }}
+              />
             </div>
-            <div className={`${classes.categorylist}`}>
-              {actionStore.available.map((category) => (
-                <div
-                  className={`${classes.category} ${selectedCategory === category.name ? classes.categoryactive : ""}`}
-                  onClick={() => setSelectedCategory(category.name)}
-                >
-                  <div className={`${classes.categoryname}`}>
-                    {category.name}
+            {!searched && (
+              <div className={`${classes.categorylist}`}>
+                {actionStore.available.map((category) => (
+                  <div
+                    className={`${classes.category} ${selectedCategory === category.name ? classes.categoryactive : ""}`}
+                    onClick={() => setSelectedCategory(category.name)}
+                  >
+                    <div className={`${classes.categoryname}`}>
+                      {category.name}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
             <div className={`${classes.actionlist}`}>
               {actionStore.available
                 .find((category) => category.name === selectedCategory)
@@ -65,19 +79,30 @@ export const ActionsWidget = observer(({}: {}) => {
                 ))}
             </div>
             <div className={`${classes.buttoncontainer}`}>
-              <div className={`${classes.cancelbutton}`}>Отменить</div>
               <div
+                className={`${classes.cancelbutton}`}
+                onClick={() => {
+                  setSelectedAction(null);
+                  setSearched(null);
+                  modalState.show = false;
+                }}
+              >
+                Отменить
+              </div>
+              <button
+                disabled={!selectedAction}
                 className={`${classes.addbutton}`}
                 onClick={() => {
                   if (selectedAction) {
                     actionStore.add(selectedAction);
                   }
                   setSelectedAction(null);
+                  setSearched(null);
                   modalState.show = false;
                 }}
               >
                 Добавить
-              </div>
+              </button>
             </div>
           </Panel>
         </Overlay>
@@ -86,7 +111,7 @@ export const ActionsWidget = observer(({}: {}) => {
         <div className={`${classes.actionscontainer}`}>
           {actionStore.added.map((added) => (
             <div key={added.id} className={`${classes.action}`}>
-              <div>{actionStore.find(added)?.name}</div>
+              <div>{actionStore.byRef(added)?.name}</div>
               <span
                 className={`${classes.delete}`}
                 onClick={() => actionStore.delete(added)}
