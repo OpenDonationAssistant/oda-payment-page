@@ -2,10 +2,10 @@ import {
   DefaultApiFactory,
   GatewayControllerGatewayData,
 } from "@opendonationassistant/oda-payment-service-client";
-import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { createContext } from "react";
 import { uuidv7 } from "uuidv7";
+import { ActionsStore } from "./ActionsStore";
 
 export class PaymentStore {
   private _recipientId: string;
@@ -22,16 +22,20 @@ export class PaymentStore {
   private _gateways: GatewayControllerGatewayData[] = [];
   private _marker: string;
   private _goal: string | null = null;
+  private _actionStore: ActionsStore;
 
   constructor({
     recipientId,
     mediaRequestCost,
     minimalPayment,
+    actionStore,
   }: {
     recipientId?: string;
     mediaRequestCost?: number;
     minimalPayment?: number;
+    actionStore: ActionsStore;
   }) {
+    this._actionStore = actionStore;
     this._recipientId = recipientId ?? "";
     this._mediaRequestCost = mediaRequestCost ?? 0;
     this._minimalPayment = minimalPayment ?? 0;
@@ -58,23 +62,17 @@ export class PaymentStore {
     makeAutoObservable(this);
   }
 
-  private checkAmount() {
-    let paymentForAttachments =
-      this._attachments.length * this._mediaRequestCost;
-    let treshold =
-      this._minimalPayment > paymentForAttachments
-        ? this._minimalPayment
-        : paymentForAttachments;
-    console.log(
-      { amount: this._amount, treshold: treshold },
-      "checking amount",
-    );
-    this._treshold = treshold;
+  public checkAmount() {
+    let costs =
+      this._attachments.length * this._mediaRequestCost +
+      this._actionStore.cost;
+    console.log("costs", costs);
+    this._treshold =
+      this._minimalPayment > costs ? this._minimalPayment : costs;
     this._error =
-      this._amount < treshold
-        ? `Сумма доната должна быть больше минимальной: \u20BD${treshold}`
+      this._amount < this._treshold
+        ? `Сумма доната должна быть больше минимальной: \u20BD${this._treshold}`
         : "";
-    return { treshold };
   }
 
   public get hasFiatGateway(): boolean {
@@ -96,13 +94,14 @@ export class PaymentStore {
     if (this._error) {
       return Promise.resolve({});
     }
-    const attachmentIds = this.attachments.map((attach) => attach.id);
-    const apiUrl = window.location.hostname.endsWith(
-      process.env.REACT_APP_DOMAIN ?? "localhost",
-    )
-      ? process.env.REACT_APP_API_ENDPOINT
-      : `https://${window.location.hostname}`;
-    return axios.put(`${apiUrl}/payments/commands/create`, {
+    const parameters = this._actionStore.added.map((added) => {
+      let parameters: any = {};
+      added.parameters.map((parameter) => {
+        parameters[parameter.id] = parameter.value;
+      });
+      return { id: added.id, actionId: added.actionId, parameters: parameters};
+    });
+    return DefaultApiFactory(undefined, this._apiUrl).createDraft({
       id: uuidv7(),
       nickname: this.isAnonym ? "" : this.nickname,
       gatewayCredId:
@@ -111,13 +110,15 @@ export class PaymentStore {
       message: this.text,
       amount: {
         major: this.amount,
+        minor: 0,
         currency: "RUB",
       },
-      method: method,
-      attachments: attachmentIds,
+      method: method ?? "",
+      attachments: this.attachments.map((attach) => attach.id),
       recipientId: this._recipientId,
-      marker: this._marker,
-      goal: this._goal,
+      goal: this._goal ?? "",
+      auction: {item:"", isNew: false},
+      actions: parameters
     });
   }
 
@@ -206,4 +207,4 @@ export class PaymentStore {
   }
 }
 
-export const PaymentStoreContext = createContext(new PaymentStore({}));
+export const PaymentStoreContext = createContext<PaymentStore | null>(null);

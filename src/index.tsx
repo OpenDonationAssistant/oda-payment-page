@@ -25,6 +25,7 @@ import {
   UserSettingsStore,
   UserSettingsStoreContext,
 } from "./stores/UserSettingsStore";
+import { ActionsStore, ActionsStoreContext } from "./stores/ActionsStore";
 
 const apiUrl = window.location.hostname.endsWith(
   process.env.REACT_APP_DOMAIN ?? "localhost",
@@ -66,21 +67,14 @@ document
 
 document.title = `${pageConfig.recipientId} - Donation`;
 
-const paymentController = new PaymentController(
-  pageConfig.recipientId,
-  config.value["media.requests.cost"] ?? 100,
-  config.value["minimalAmount"],
-);
+const actionStore = new ActionsStore(pageConfig);
 
 const paymentStore = new PaymentStore({
   recipientId: pageConfig.recipientId,
   mediaRequestCost: config.value["media.requests.cost"] ?? 100,
   minimalPayment: config.value["minimalAmount"],
+  actionStore: actionStore,
 });
-
-pageConfig.goals
-  .filter((goal) => goal.selected)
-  .forEach((goal) => (paymentController.goal = goal.id));
 
 const userSettings = new UserSettingsStore();
 
@@ -91,7 +85,9 @@ const router = createBrowserRouter([
       <PaymentStoreContext.Provider value={paymentStore}>
         <PaymentPageConfigContext.Provider value={pageConfig}>
           <UserSettingsStoreContext.Provider value={userSettings}>
-            <DonationPage />
+            <ActionsStoreContext.Provider value={actionStore}>
+              <DonationPage />
+            </ActionsStoreContext.Provider>
           </UserSettingsStoreContext.Provider>
         </PaymentPageConfigContext.Provider>
       </PaymentStoreContext.Provider>

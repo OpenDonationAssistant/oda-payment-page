@@ -3,6 +3,7 @@ import { PaymentPageConfig } from "../logic/PaymentPageConfig";
 import { uuidv7 } from "uuidv7";
 import MiniSearch from "minisearch";
 import { ActionControllerActionDto } from "@opendonationassistant/oda-actions-service-client";
+import { createContext } from "react";
 
 export interface ActionParameter {
   id: string;
@@ -18,9 +19,15 @@ export interface Action {
   cost: number;
 }
 
+export interface ActionReferenceParameter {
+  id: string;
+  value: any;
+}
+
 export interface ActionReference {
   id: string;
   actionId: string;
+  parameters: ActionReferenceParameter[];
 }
 
 export interface ActionCategory {
@@ -82,8 +89,7 @@ export class ActionsStore {
   }
 
   public suggest(query: string) {
-    return this._miniSearch
-      .autoSuggest(query, { fuzzy: 0.3 });
+    return this._miniSearch.autoSuggest(query, { fuzzy: 0.3 });
   }
 
   public byId(id: string) {
@@ -101,8 +107,14 @@ export class ActionsStore {
     return this._available;
   }
 
+  public get cost() {
+    return this._added
+      .map((added) => this.byRef(added)!.cost)
+      .reduce((a, b) => a + b, 0);
+  }
+
   public add(action: Action) {
-    this._added = this._added.concat({ id: uuidv7(), actionId: action.id });
+    this._added.push({ id: uuidv7(), actionId: action.id, parameters: [] });
   }
 
   public delete(ref: ActionReference) {
@@ -113,3 +125,5 @@ export class ActionsStore {
     return this._added;
   }
 }
+
+export const ActionsStoreContext = createContext<ActionsStore | null>(null);

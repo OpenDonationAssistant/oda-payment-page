@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
-import { Action, ActionsStore } from "../../../stores/ActionsStore";
+import { Action, ActionsStore, ActionsStoreContext } from "../../../stores/ActionsStore";
 import classes from "./ActionsWidget.module.css";
 import {
   ModalState,
@@ -16,10 +16,8 @@ import { PaymentStoreContext } from "../../../stores/PaymentStore";
 
 export const ActionsWidget = observer(({}: {}) => {
   const pageConfig = useContext(PaymentPageConfigContext);
-  const [actionStore] = useState<ActionsStore>(
-    () => new ActionsStore(pageConfig),
-  );
   const paymentStore = useContext(PaymentStoreContext);
+  const actionStore = useContext(ActionsStoreContext);
   const parentModalState = useContext(ModalStateContext);
   const [modalState] = useState<ModalState>(
     () => new ModalState(parentModalState),
@@ -94,11 +92,12 @@ export const ActionsWidget = observer(({}: {}) => {
                 className={`${classes.addbutton}`}
                 onClick={() => {
                   if (selectedAction) {
-                    actionStore.add(selectedAction);
+                    actionStore?.add(selectedAction);
                   }
                   setSelectedAction(null);
                   setSearched(null);
                   modalState.show = false;
+                  paymentStore?.checkAmount();
                 }}
               >
                 Добавить
@@ -107,7 +106,7 @@ export const ActionsWidget = observer(({}: {}) => {
           </Panel>
         </Overlay>
       </ModalStateContext.Provider>
-      {actionStore.available.length > 0 && (
+      {actionStore && actionStore.available.length > 0 && (
         <div className={`${classes.actionscontainer}`}>
           {actionStore.added.map((added) => (
             <div key={added.id} className={`${classes.action}`}>
