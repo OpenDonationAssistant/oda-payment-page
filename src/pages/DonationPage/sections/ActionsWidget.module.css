@@ -17,8 +17,38 @@
   border-radius: 9px;
   padding: 12px;
   padding-left: 18px;
-  &:hover {
-    cursor: pointer;
+}
+
+.actioncost {
+  display: flex;
+  flex-direction: row;
+  align-items: space-between;
+  gap: 36px;
+}
+
+.actioncount {
+  display: flex;
+  flex-direction: row;
+  align-items: space-between;
+  & div {
+    width: 36px;
+    color: var(--oda-control-color);
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 36px;
+    line-height: 18px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  & input {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid var(--oda-control-color);
+    width: 100px;
+    text-align: center;
+    color: var(--oda-control-color);
   }
 }
 

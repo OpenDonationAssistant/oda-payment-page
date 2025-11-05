@@ -15,6 +15,7 @@ export interface Action {
   id: string;
   name: string;
   description: string;
+  category?: string;
   parameters: ActionParameter[];
   cost: number;
 }
@@ -26,13 +27,14 @@ export interface ActionReferenceParameter {
 
 export interface ActionReference {
   id: string;
-  actionId: string;
+  amount: number;
+  action: Action;
   parameters: ActionReferenceParameter[];
 }
 
 export interface ActionCategory {
   name: string;
-  actions: Action[];
+  actions: ActionReference[];
 }
 
 export class ActionsStore {
@@ -59,12 +61,13 @@ export class ActionsStore {
       }
     });
     this._pageConfig.actions.map((action) => {
+      const converted = this.convert(action);
       if (action.category) {
         const category = this._available.find(
           (category) => category.name === action.category,
         );
         if (category) {
-          category.actions.push(this.convert(action));
+          category.actions.push({ id: uuidv7(), amount: 0, action: converted, parameters: [] });
         }
       }
     });
@@ -77,9 +80,20 @@ export class ActionsStore {
       id: action.id,
       name: action.name,
       description: action.name,
+      category: action.category,
       parameters: [],
       cost: action.price.major,
     };
+  }
+
+  public get available(): ActionCategory[] {
+    return this._available;
+  }
+
+  public get selected(): ActionReference[] {
+    return this._available
+      .flatMap((category) => category.actions)
+      .filter((action) => action.amount > 0);
   }
 
   public search(query: string): (Action | undefined)[] {
@@ -89,7 +103,7 @@ export class ActionsStore {
   }
 
   public suggest(query: string) {
-    return this._miniSearch.autoSuggest(query, { fuzzy: 0.3 });
+    return this._miniSearch.autoSuggest(query, { fuzzy: 0.2 });
   }
 
   public byId(id: string) {
@@ -99,30 +113,44 @@ export class ActionsStore {
       .at(0);
   }
 
-  public byRef(ref: ActionReference) {
-    return this.byId(ref.actionId);
+  public clearSelection(){
+    this._available
+      .flatMap((category) => category.actions)
+      .forEach((action) => action.amount = 0);
   }
 
-  public get available(): ActionCategory[] {
-    return this._available;
-  }
-
-  public get cost() {
-    return this._added
-      .map((added) => this.byRef(added)!.cost)
-      .reduce((a, b) => a + b, 0);
-  }
-
-  public add(action: Action) {
-    this._added.push({ id: uuidv7(), actionId: action.id, parameters: [] });
-  }
-
-  public delete(ref: ActionReference) {
-    this._added = this._added.filter((action) => action.id !== ref.id);
+  public saveSelection() {
+    this._available.flatMap((category) => category.actions)
+    .filter((action) => action.amount > 0)
+    .forEach((action) => {
+      const existed = this._added.find((added) => added.id === action.id);
+      if (existed){
+        existed.amount = existed.amount + action.amount;
+      } else {
+        this._added.push({
+          id: action.id,
+          amount: action.amount,
+          action: action.action,
+          parameters: action.parameters
+        });
+      }
+      action.amount = 0;
+    })
   }
 
   public get added(): ActionReference[] {
     return this._added;
+  }
+
+  public get cost() {
+    return this._added
+      .map((added) => added.action.cost * added.amount)
+      .reduce((a, b) => a + b, 0);
+  }
+
+  public delete(action: ActionReference) {
+    action.amount = 0;
+    this._added = this._added.filter((added) => added.id !== action.id);
   }
 }
 

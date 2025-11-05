@@ -94,12 +94,12 @@ export class PaymentStore {
     if (this._error) {
       return Promise.resolve({});
     }
-    const parameters = this._actionStore.added.map((added) => {
+    const actions = this._actionStore.added.map((added) => {
       let parameters: any = {};
       added.parameters.map((parameter) => {
         parameters[parameter.id] = parameter.value;
       });
-      return { id: added.id, actionId: added.actionId, parameters: parameters};
+      return { id: added.id, actionId: added.action.id, parameters: parameters};
     });
     return DefaultApiFactory(undefined, this._apiUrl).createDraft({
       id: uuidv7(),
@@ -118,7 +118,7 @@ export class PaymentStore {
       recipientId: this._recipientId,
       goal: this._goal ?? "",
       auction: {item:"", isNew: false},
-      actions: parameters
+      actions: actions
     });
   }
 

@@ -1,6 +1,11 @@
 import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
-import { Action, ActionsStore, ActionsStoreContext } from "../../../stores/ActionsStore";
+import {
+  Action,
+  ActionCategory,
+  ActionReference,
+  ActionsStoreContext,
+} from "../../../stores/ActionsStore";
 import classes from "./ActionsWidget.module.css";
 import {
   ModalState,
@@ -11,18 +16,44 @@ import {
 } from "../../../components/Overlay/Overlay";
 import SearchIcon from "../../../icons/SearchIcon";
 import CloseIcon from "../../../icons/CloseIcon";
-import { PaymentPageConfigContext } from "../../../logic/PaymentPageConfig";
 import { PaymentStoreContext } from "../../../stores/PaymentStore";
 
+const SelectActionComponent = observer(
+  ({ action }: { action: ActionReference }) => {
+    console.debug({ ref: action }, "rendering action");
+    return (
+      <div
+        className={`${classes.action} ${action.amount > 0 ? classes.actionactive : ""}`}
+      >
+        <div>{action.action.name}</div>
+        <div className={`${classes.actioncost}`}>
+          <div>{`+ ${action.action.cost} RUB`}</div>
+          <div className={`${classes.actioncount}`}>
+            <div onClick={() => action.amount--}>-</div>
+            <input
+              type="number"
+              value={action.amount}
+              onChange={(e) => {
+                action.amount = parseInt(e.target.value);
+              }}
+            />
+            <div onClick={() => action.amount++}>+</div>
+          </div>
+        </div>
+      </div>
+    );
+  },
+);
+
 export const ActionsWidget = observer(({}: {}) => {
-  const pageConfig = useContext(PaymentPageConfigContext);
   const paymentStore = useContext(PaymentStoreContext);
   const actionStore = useContext(ActionsStoreContext);
   const parentModalState = useContext(ModalStateContext);
   const [modalState] = useState<ModalState>(
     () => new ModalState(parentModalState),
   );
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] =
+    useState<ActionCategory | null>(null);
   const [selectedAction, setSelectedAction] = useState<Action | null>(null);
   const [searched, setSearched] = useState<(Action | undefined)[] | null>(null);
 
@@ -40,7 +71,7 @@ export const ActionsWidget = observer(({}: {}) => {
                 className={`${classes.search}`}
                 onChange={(e) => {
                   if (e.target.value) {
-                    setSearched(actionStore.search(e.target.value));
+                    setSearched(actionStore?.search(e.target.value) ?? null);
                   } else {
                     setSearched(null);
                   }
@@ -49,10 +80,10 @@ export const ActionsWidget = observer(({}: {}) => {
             </div>
             {!searched && (
               <div className={`${classes.categorylist}`}>
-                {actionStore.available.map((category) => (
+                {actionStore?.available.map((category) => (
                   <div
-                    className={`${classes.category} ${selectedCategory === category.name ? classes.categoryactive : ""}`}
-                    onClick={() => setSelectedCategory(category.name)}
+                    className={`${classes.category} ${selectedCategory?.name === category.name ? classes.categoryactive : ""}`}
+                    onClick={() => setSelectedCategory(category)}
                   >
                     <div className={`${classes.categoryname}`}>
                       {category.name}
@@ -62,25 +93,14 @@ export const ActionsWidget = observer(({}: {}) => {
               </div>
             )}
             <div className={`${classes.actionlist}`}>
-              {actionStore.available
-                .find((category) => category.name === selectedCategory)
-                ?.actions.map((action) => (
-                  <div
-                    className={`${classes.action} ${selectedAction === action ? classes.actionactive : ""}`}
-                    onClick={() => {
-                      setSelectedAction(action);
-                    }}
-                  >
-                    <div>{action.name}</div>
-                    <div>{`+ ${action.cost} RUB`}</div>
-                  </div>
-                ))}
+              {selectedCategory?.actions.map((action) => (
+                <SelectActionComponent action={action} />
+              ))}
             </div>
             <div className={`${classes.buttoncontainer}`}>
               <div
                 className={`${classes.cancelbutton}`}
                 onClick={() => {
-                  setSelectedAction(null);
                   setSearched(null);
                   modalState.show = false;
                 }}
@@ -88,13 +108,10 @@ export const ActionsWidget = observer(({}: {}) => {
                 Отменить
               </div>
               <button
-                disabled={!selectedAction}
+                disabled={actionStore?.selected.length === 0}
                 className={`${classes.addbutton}`}
                 onClick={() => {
-                  if (selectedAction) {
-                    actionStore?.add(selectedAction);
-                  }
-                  setSelectedAction(null);
+                  actionStore?.saveSelection();
                   setSearched(null);
                   modalState.show = false;
                   paymentStore?.checkAmount();
@@ -110,10 +127,14 @@ export const ActionsWidget = observer(({}: {}) => {
         <div className={`${classes.actionscontainer}`}>
           {actionStore.added.map((added) => (
             <div key={added.id} className={`${classes.action}`}>
-              <div>{actionStore.byRef(added)?.name}</div>
+              <div>{added.amount}x</div>
+              <div>{added.action.name}</div>
               <span
                 className={`${classes.delete}`}
-                onClick={() => actionStore.delete(added)}
+                onClick={() => {
+                  actionStore.delete(added);
+                  paymentStore?.checkAmount();
+                }}
               >
                 <CloseIcon />
               </span>
