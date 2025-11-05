@@ -67,7 +67,12 @@ export class ActionsStore {
           (category) => category.name === action.category,
         );
         if (category) {
-          category.actions.push({ id: uuidv7(), amount: 0, action: converted, parameters: [] });
+          category.actions.push({
+            id: uuidv7(),
+            amount: 0,
+            action: converted,
+            parameters: [],
+          });
         }
       }
     });
@@ -113,29 +118,25 @@ export class ActionsStore {
       .at(0);
   }
 
-  public clearSelection(){
+  public clearSelection() {
     this._available
       .flatMap((category) => category.actions)
-      .forEach((action) => action.amount = 0);
+      .forEach((action) => (action.amount = 0));
   }
 
   public saveSelection() {
-    this._available.flatMap((category) => category.actions)
-    .filter((action) => action.amount > 0)
-    .forEach((action) => {
-      const existed = this._added.find((added) => added.id === action.id);
-      if (existed){
-        existed.amount = existed.amount + action.amount;
-      } else {
+    this._available
+      .flatMap((category) => category.actions)
+      .filter((action) => action.amount > 0)
+      .forEach((action) => {
         this._added.push({
           id: action.id,
           amount: action.amount,
           action: action.action,
-          parameters: action.parameters
+          parameters: action.parameters,
         });
-      }
-      action.amount = 0;
-    })
+        action.amount = 0;
+      });
   }
 
   public get added(): ActionReference[] {
