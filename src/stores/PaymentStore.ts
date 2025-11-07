@@ -99,7 +99,7 @@ export class PaymentStore {
       added.parameters.map((parameter) => {
         parameters[parameter.id] = parameter.value;
       });
-      return { id: added.id, actionId: added.action.id, parameters: parameters};
+      return { id: added.id, amount: added.amount, actionId: added.action.id, parameters: parameters};
     });
     return DefaultApiFactory(undefined, this._apiUrl).createDraft({
       id: uuidv7(),
