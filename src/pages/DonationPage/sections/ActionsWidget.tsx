@@ -54,7 +54,6 @@ export const ActionsWidget = observer(({}: {}) => {
   );
   const [selectedCategory, setSelectedCategory] =
     useState<ActionCategory | null>(null);
-  const [selectedAction, setSelectedAction] = useState<Action | null>(null);
   const [searched, setSearched] = useState<(Action | undefined)[] | null>(null);
 
   return (

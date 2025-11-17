@@ -130,7 +130,7 @@ export class ActionsStore {
       .filter((action) => action.amount > 0)
       .forEach((action) => {
         this._added.push({
-          id: action.id,
+          id: uuidv7(),
           amount: action.amount,
           action: action.action,
           parameters: action.parameters,
