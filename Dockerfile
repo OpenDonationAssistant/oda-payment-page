@@ -1,4 +1,4 @@
-FROM docker.io/library/node:latest AS build
+FROM docker.io/library/node:24.11 AS build
 WORKDIR /build
 ARG gpr_token
 
