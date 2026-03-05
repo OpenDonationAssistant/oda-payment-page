@@ -33,6 +33,11 @@ const StreamerSocials = observer(({ className }: { className?: string }) => {
           <a href={pageConfig.urls.get("telegram")}>Telegram</a>
         </div>
       )}
+      {pageConfig.urls.get("trovo") && (
+        <div className={`${classes.url}`}>
+          <a href={pageConfig.urls.get("trovo")}>Trovo</a>
+        </div>
+      )}
     </div>
   );
 });
