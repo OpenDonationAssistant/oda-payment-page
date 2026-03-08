@@ -28,6 +28,7 @@
 .tabcontent {
   display: flex;
   height: 100%;
+  position: relative;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -68,5 +69,19 @@
   }
   & div {
     max-width: 232px;
+  }
+}
+
+.mediaerror {
+  background-color: var(--oda-attention-800);
+  padding: 12px;
+  border-radius: 12px;
+  color: "black";
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: space-between;
+  & .close {
+    cursor: pointer;
   }
 }

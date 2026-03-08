@@ -7,6 +7,7 @@ import classes from "./Media.module.css";
 import SearchIcon from "../../../../icons/SearchIcon";
 import MediaItemComponent from "./MediaItemComponent";
 import { observer } from "mobx-react-lite";
+import CloseIcon from "../../../../icons/CloseIcon";
 
 var expression =
   /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
@@ -21,7 +22,7 @@ export const MediaInput = observer(({}: {}) => {
     null,
   );
 
-  const payment = useContext(PaymentStoreContext);
+  const payment = useContext(PaymentStoreContext)!;
   const pageConfig = useContext(PaymentPageConfigContext);
 
   useEffect(() => {
@@ -90,13 +91,10 @@ export const MediaInput = observer(({}: {}) => {
       })
       .catch(function (error) {
         const message = error.response.data;
-        if (Object.prototype.toString.call(message) == "[object String]") {
-          setIncorrectMediaError(message);
-          payment.error = message;
+        if (message.title === "Incorrect media") {
+          setIncorrectMediaError(message.detail);
         } else {
-          const errorMessage =
-            "Для добавления трека нужна корректная ссылка или название";
-          setIncorrectMediaError(errorMessage);
+          setIncorrectMediaError("Не получается распознать ссылку");
         }
       });
   }
@@ -183,7 +181,17 @@ export const MediaInput = observer(({}: {}) => {
               )}
             </>
           )}
-          <div className="invalid-feedback">{incorrectMediaError}</div>
+          {incorrectMediaError && (
+            <div className={`${classes.mediaerror}`}>
+              <div>{incorrectMediaError}</div>
+              <div
+                className={`${classes.close}`}
+                onClick={() => setIncorrectMediaError(null)}
+              >
+                <CloseIcon color="black" />
+              </div>
+            </div>
+          )}
           <div className={`${classes.playlist}`}>
             {payment.attachments
               .filter((data) => data != null)

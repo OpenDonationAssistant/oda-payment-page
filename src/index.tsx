@@ -14,7 +14,6 @@ import Agreement from "./pages/Agreement/Agreement";
 import Payment, { loader as paymentLoader } from "./pages/Payment/Payment";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import axios from "axios";
-import { PaymentController } from "./logic/payment/PaymentController";
 import {
   PaymentPageConfig,
   PaymentPageConfigContext,
