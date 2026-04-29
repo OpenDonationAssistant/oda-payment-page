@@ -55,17 +55,19 @@ export default function MediaItemComponent({
               </span>
             </div>
           </div>
-          {!collapsed && <div className={`${classes.preview}`}>
-            {data.provider === "youtube" && (
-              <iframe
-                width="100%"
-                src={`https://www.youtube.com/embed/${data.originId}?autoplay=0`}
-              />
-            )}
-            {data.provider === "vk" && (
-              <iframe width="100%" src={createVkIframeSrc(data.originId)} />
-            )}
-          </div>}
+          {!collapsed && (
+            <div className={`${classes.preview}`}>
+              {data.provider === "youtube" && (
+                <iframe
+                  width="100%"
+                  src={`https://www.youtube.com/embed/${data.originId}?autoplay=0`}
+                />
+              )}
+              {data.provider === "vk" && (
+                <iframe width="100%" src={createVkIframeSrc(data.originId)} />
+              )}
+            </div>
+          )}
           {/* {!collapsed && <div className={`${classes.timestamps}`}> */}
           {/*   <TimestampComponent label="Начало" /> */}
           {/*   <TimestampComponent label="Конец" /> */}

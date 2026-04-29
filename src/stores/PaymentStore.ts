@@ -64,7 +64,7 @@ export class PaymentStore {
 
   public checkAmount() {
     let costs =
-      this._attachments.length * this._mediaRequestCost +
+      this._attachments.reduce((sum, media) => sum + media.cost, 0) +
       this._actionStore.cost;
     console.log("costs", costs);
     this._treshold =
